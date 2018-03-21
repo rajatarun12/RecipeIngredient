@@ -1,0 +1,3 @@
+[submodule "RecipeIngredient"]
+	path = RecipeIngredient
+	url = https://github.com/sanjana17/RecipeIngredient
