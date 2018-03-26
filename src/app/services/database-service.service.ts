@@ -32,15 +32,5 @@ import { AngularFireDatabase } from 'angularfire2/database';
     });
   }
 
-    // var ref =firebase.database().ref('/users/'+userEmail.split('@')[0]+'/favoriteRecipe');
-    // firebase.database().ref('/users/'+userEmail.split('@')[0]+'/favoriteRecipe').on('value', snapshot => {
-    //   snapshot.forEach(childSnapshot => {
-    //     const key = childSnapshot.key();
-    //     ref.child('items').child(key).once('value', function(itemSnapshot) {
-    //       console.log(itemSnapshot.val());
-    //     });
-    //   });
-    // })
   }
 
-}
