@@ -6,6 +6,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import {AppGlobal} from "../Content/AppGlobal";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
+import {UserModel} from "../Models/UserModel";
 
 @Component({
   selector: 'app-recipe-search',
@@ -17,6 +18,7 @@ export class RecipeSearchComponent implements OnInit {
   public recipe: RecipeModel;
   hideHeader: Boolean = false;
   opened: Boolean;
+  user: UserModel;
   hideBadges: Boolean = false;
   constructor(private recipeService: RecipeService,
               @Inject(DOCUMENT) private document: Document,
@@ -36,6 +38,9 @@ export class RecipeSearchComponent implements OnInit {
     else {
       this.hideBadges = false;
     }
+  }
+  setUserInfo(user){
+    this.user = user;
   }
   sendRecipes(result) {
     this.recipe = result;

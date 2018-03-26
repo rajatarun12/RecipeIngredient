@@ -24,6 +24,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {AngularFirestoreModule} from "angularfire2/firestore";
+import { FavoriteRecipeComponentComponent } from './favorite-recipe-component/favorite-recipe-component.component';
 
 const appRoutes = [
   {path: '', redirectTo: 'recipeSearch/en', pathMatch: 'full'},
@@ -34,7 +35,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent
+    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -67,9 +68,10 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule
   ],
   exports: [ViewRecipeComponent, SearchComponent, MatSidenavModule, MatInputModule, MatDialogModule,MatCardModule],
-  entryComponents: [NutrientDialogTemplate, SettingsComponent, LoginComponent],
+  entryComponents: [NutrientDialogTemplate,FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class AppModule {}

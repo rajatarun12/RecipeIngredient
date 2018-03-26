@@ -10,7 +10,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import {FirebaseOperation} from "angularfire2/database/interfaces";
 import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
 import {Observable} from "rxjs/Observable";
-
+import {UserModel} from "../Models/UserModel";
 
 @Component({
   selector: 'app-view-recipe',
@@ -21,6 +21,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class ViewRecipeComponent implements OnInit {
   @Input() recipes: RecipeModel;
+  @Input() user: UserModel;
   ingredient = '';
   recipeCollection: AngularFirestoreCollection<RecipeModel>;
   recipeList: Observable<any>;
@@ -62,7 +63,7 @@ export class ViewRecipeComponent implements OnInit {
   }
   addToFav(obj){
     this.db.database.ref('favoriteRecipes/'+ obj.title).set(obj).then(res => {
-      console.log(res);
+      this.db.database.ref('users/'+ (this.user['email']).split('@')[0]+'/favoriteRecipe').push([{name:obj.title}]);
     }).catch(err => {
       console.log(err);
     });
