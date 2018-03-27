@@ -25,11 +25,15 @@ export class AuthService {
   }
   signInWithGoogle(){
     var provider = new firebase.auth.GoogleAuthProvider();
-    return this._firebaseAuth.auth.signInWithPopup(provider)
+    return this._firebaseAuth.auth.signInWithRedirect(provider).then(function(){
+      return firebase.auth().getRedirectResult();
+    });
   }
   signInWithFacebook(){
     var provider = new firebase.auth.FacebookAuthProvider();
-    return this._firebaseAuth.auth.signInWithPopup(provider)
+    return this._firebaseAuth.auth.signInWithRedirect(provider).then(function(){
+      return firebase.auth().getRedirectResult();
+    });
   }
   checkiIfObjectIsThere(email){
     var ref = firebase.database().ref('/users');

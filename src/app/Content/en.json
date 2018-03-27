@@ -11,5 +11,15 @@
 	"SeeMoreRecipesLabel": "See more Recipes",
 	"FilterLabel": "Filter",
 	"SortLabel": "Sort",
-  "StoreAvailableLabel": "Available in Play Store and App Store"
+	"StoreAvailableLabel": "Available in Play Store and App Store",
+	"CloseLabel": "Close",
+	"FeatureUnAvailableMessage": "Feature Not Available",
+	"GoogleLoginLabel": "Login With Google",
+	"FacebookLoginLabel": "Login With Facebook",
+	"LoginLabel": "Login",
+	"PasswordLabel": "Password",
+	"registerLabel": "Register",
+	"signOutLabel": "Sign out",
+	"FavoriteRecipeLabel": "Favorite Recipes",
+	"settingsLabel": "Settings"
 }

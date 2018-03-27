@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import * as crypto from 'crypto-js';
 import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
@@ -8,24 +7,65 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AngularFireDatabase } from 'angularfire2/database';
 import {UserModel} from "../Models/UserModel";
 import {FavoriteRecipeComponentComponent} from "../favorite-recipe-component/favorite-recipe-component.component";
+import * as firebase from "firebase/app";
+import {TranslateService} from "@ngx-translate/core";
+import {AppGlobal} from "../Content/AppGlobal";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css'],
-  providers: [AuthService]
+  providers: [AuthService, TranslateService, AppGlobal]
 })
 export class SideNavComponent implements OnInit {
   userEmail: String;
   loginActive: Boolean;
   displayName: String;
+  language;
+  @Input() user;
   @Output() userInfo = new EventEmitter<UserModel>();
-  constructor(public  translate: TranslateService, public dialog: MatDialog, private auth: AuthService, private spinnerService :Ng4LoadingSpinnerService) {
+  constructor(public  translate: TranslateService,
+              public dialog: MatDialog,
+              private auth: AuthService,
+              private spinnerService :Ng4LoadingSpinnerService,
+              private appGlobal:AppGlobal,
+              private route: ActivatedRoute) {
+
+    this.route.params.forEach(param => {
+      this.language = param['language']
+    });
+    this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
     console.log(this.translate.getLangs());
   }
 
   ngOnInit() {
 
+    firebase.auth().getRedirectResult().then(result => {
+      let user;
+      if (result.credential) {
+        user = result.user;
+      }
+      if(user){
+        const resultObj = {
+          login: true,
+          email: result.user.email,
+          displayName: result.user.displayName,
+          name: result.user.displayName,
+          uid: result.user.uid
+        };
+
+        const user = new UserModel(resultObj);
+        this.userInfo.emit(resultObj);
+        this.userEmail = resultObj.email;
+        this.displayName = resultObj.displayName;
+        this.loginActive = true;
+      }
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
   }
 
   signOut(){
@@ -42,7 +82,8 @@ export class SideNavComponent implements OnInit {
     let dialogRef = this.dialog.open(LoginComponent, {
       width: '30em',
       data: {
-        authLabel: 'Login'
+        authLabel: 'LoginLabel',
+        language: this.language
       }
     });
 
@@ -68,7 +109,8 @@ export class SideNavComponent implements OnInit {
     let dialogRef = this.dialog.open(LoginComponent, {
       width: '30em',
       data: {
-        authLabel: 'Register'
+        authLabel: 'registerLabel',
+        language: this.language
       }
     });
 
@@ -94,6 +136,7 @@ export class SideNavComponent implements OnInit {
 @Component({
   selector: 'app-settings',
   templateUrl: 'app-settings.html',
+  providers: [TranslateService]
 })
 export class SettingsComponent {
 
@@ -111,7 +154,7 @@ export class SettingsComponent {
   selector: 'app-login',
   templateUrl: 'login.html',
   styleUrls: ['./side-nav.component.css'],
-  providers: [AuthService]
+  providers: [AuthService, TranslateService, AppGlobal]
 })
 export class LoginComponent implements OnInit{
   myForm: FormGroup;
@@ -124,10 +167,15 @@ export class LoginComponent implements OnInit{
     private fb: FormBuilder,
     private authService:AuthService,
     private spinnerService :Ng4LoadingSpinnerService,
-    private db: AngularFireDatabase) {
+    private db: AngularFireDatabase,
+    public translate: TranslateService,
+    private route: ActivatedRoute,
+    private appGlobal:AppGlobal) {
     this.authLabel = data.authLabel;
   }
   ngOnInit(){
+
+    this.translate.setDefaultLang(this.data.language || this.appGlobal.defaultContent);
     this.myForm =  this.fb.group({
       'login': ['', Validators.compose([Validators.email, Validators.required])],
       'password': ['', Validators.required]
@@ -227,7 +275,7 @@ export class LoginComponent implements OnInit{
     const loginPassword = this.myForm.value.login +"-"+ this.myForm.value.password;
     let auth;
     let error: String;
-    if(authLabel === 'Login'){
+    if(authLabel === 'LoginLabel'){
      auth = this.authService.loginWithEmail(this.myForm.value.login,this.myForm.value.password).then(res => {
         localStorage.setItem('token',res);
        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res.uid});

@@ -4,6 +4,9 @@
   margin-left:1em;
   padding: 1em;
 }
+.width-full{
+  width: 100%;
+}
 .media.row{
   margin-bottom: 1em;
 }

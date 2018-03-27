@@ -1,6 +1,7 @@
+<div class="width-full">
 <mat-sidenav-container [ngClass]="{'jumbotron': (!recipe) }">
   <mat-sidenav #sidenav mode="push" [(opened)]="opened" >
-    <app-side-nav (userInfo)="setUserInfo($event)"></app-side-nav>
+    <app-side-nav (userInfo)="setUserInfo($event)" [user]="user"></app-side-nav>
   </mat-sidenav>
   <mat-sidenav-content>
     <div [ngClass]="{'pad-top' : true,'jumbotron': (!!recipe),'fullHeight': !recipe }">
@@ -25,3 +26,4 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</div>

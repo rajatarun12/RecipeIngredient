@@ -2,11 +2,11 @@
   <div class="list-container">
     <h6>{{displayName}}</h6>
     <p>{{userEmail}}</p>
-    <button mat-raised-button class="mar-bottom" *ngIf="!loginActive" color="link" type="button" class="width-full" (click)="login()">Login</button>
-    <button mat-raised-button class="mar-bottom" *ngIf="!loginActive" color="link" type="button" class="width-full" (click)="register()">Register</button>
-    <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="warn" type="button" class="width-full" (click)="signOut()">SignOut</button>
+    <button mat-raised-button class="mar-bottom" *ngIf="!loginActive" color="link" type="button" class="width-full" (click)="login()" [innerHTML]="'LoginLabel' | translate"></button>
+    <button mat-raised-button class="mar-bottom" *ngIf="!loginActive" color="link" type="button" class="width-full" (click)="register()" [innerHTML]="'registerLabel' | translate"></button>
+    <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="warn" type="button" class="width-full" (click)="signOut()" [innerHTML]="'signOutLabel' | translate"></button>
     <hr />
-    <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFavRecipes()">Favorite Recipes</button>
-    <button mat-raised-button color="primary" [hidden]="!loginActive"  type="button" class="width-full" (click)="openDialog()">Settings</button>
+    <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFavRecipes()" [innerHTML]="'FavoriteRecipeLabel' | translate"></button>
+    <button mat-raised-button color="primary" [hidden]="!loginActive"  type="button" class="width-full" (click)="openDialog()" [innerHTML]="'settingsLabel' | translate"></button>
   </div>
 </div>

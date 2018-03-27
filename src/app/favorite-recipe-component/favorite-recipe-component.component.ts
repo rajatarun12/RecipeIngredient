@@ -29,6 +29,9 @@ export class FavoriteRecipeComponentComponent implements OnInit{
   detailViewToggle(){
     this.detailView = !this.detailView;
   }
+  handleUrlChange(url){
+    window.open(url,'_blank')
+  }
   getRecipeDetails(recipe){
     this.db.getRecipe(recipe).then(res => {
         this.recipeDetails = res;

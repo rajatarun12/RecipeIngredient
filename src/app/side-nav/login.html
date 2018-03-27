@@ -1,36 +1,36 @@
 <div class="text-center mar-bottom">
-<h2>Login</h2></div>
+<h2 [innerHTML]="'LoginLabel' | translate"></h2></div>
 
 <form class="container" [formGroup]="myForm" novalidate>
   <div class="row mar-bottom">
     <div class="col-md-6  authButtonAlign">
-      <button mat-raised-button color="warn" (click)="loginWithGoogle()">Login With Google</button>
+      <button mat-raised-button color="warn" (click)="loginWithGoogle()" [innerHTML]="'GoogleLoginLabel' | translate"></button>
     </div>
     <div class="col-md-6 authButtonAlign">
-      <button mat-raised-button color="primary" (click)="loginWithFaceBook()">Login With Facebook</button>
+      <button mat-raised-button color="primary" (click)="loginWithFaceBook()" [innerHTML]="'FacebookLoginLabel' | translate"></button>
     </div>
   </div>
   <div class="row text-center">
     <div class="col-md-12 width-full">
     <mat-input-container>
-        <input matInput class="width-full" type="text" placeholder="Login" formControlName="login"/>
+        <input matInput class="width-full" type="text" placeholder="{{'LoginLabel' | translate}}" formControlName="login"/>
     </mat-input-container>
     </div>
   </div>
   <div class="row text-center">
   <div class="col-md-12 ">
     <mat-input-container>
-        <input matInput class="width-full" type="password" placeholder="Password" formControlName="password"/>
+        <input matInput class="width-full" type="password" placeholder="{{'PasswordLabel' | translate}}" formControlName="password"/>
     </mat-input-container>
   </div>
   </div>
   <div class="row">
 
     <div class="col-md-6 authButtonAlign">
-      <button mat-raised-button color="link" (click)="onNoClick()">Cancel</button>
+      <button mat-raised-button color="link" (click)="onNoClick()" [innerHTML]="'CloseLabel' | translate"></button>
     </div>
     <div class="col-md-6 authButtonAlign">
-      <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onLoginClick(authLabel)">{{authLabel}}</button>
+      <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onLoginClick(authLabel)" [innerHTML]="authLabel | translate"></button>
     </div>
   </div>
 </form>
