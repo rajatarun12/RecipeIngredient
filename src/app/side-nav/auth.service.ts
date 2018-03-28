@@ -29,21 +29,45 @@ export class AuthService {
       return firebase.auth().getRedirectResult();
     });
   }
+
+  updateUserDetails(formData){
+    const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd);
+    return ref.update(formData);
+  }
+
   signInWithFacebook(){
     var provider = new firebase.auth.FacebookAuthProvider();
     return this._firebaseAuth.auth.signInWithRedirect(provider).then(function(){
       return firebase.auth().getRedirectResult();
     });
   }
+  checkAndReturnUser(){
+    const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd);
+
+    return new Promise(res => {
+      ref.once("value",snapshot => {
+        const userData = snapshot.val();
+        if (userData){
+          res(userData);
+        }
+        res(false);
+      });
+    });
+  }
   checkiIfObjectIsThere(email){
     var ref = firebase.database().ref('/users');
 
     return new Promise(res => {
+      const email = this._firebaseAuth.auth.currentUser.email;
       var emailAd = email.split('@')[0];
       ref.once("value",snapshot => {
         const userData = snapshot.val();
         if (Object.keys(userData).indexOf(emailAd) > -1){
-          res(true);
+          res(userData);
         }
         res(false);
       });

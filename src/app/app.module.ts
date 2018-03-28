@@ -16,8 +16,11 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { IngredientCheckDirective } from './directives/validators/ingredient-check.directive';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {MatSidenavModule, MatInputModule, MatDialogModule, MatCardModule} from "@angular/material";
-import { SideNavComponent, SettingsComponent, LoginComponent } from './side-nav/side-nav.component';
+import {
+  MatSidenavModule, MatInputModule, MatDialogModule, MatCardModule, MatSnackBarModule, MatExpansionModule,
+  MatDatepickerModule, MatNativeDateModule
+} from '@angular/material';
+import { SideNavComponent, LoginComponent } from './side-nav/side-nav.component';
 import {NutrientDialogTemplate, NutrientDialogComponent} from './nutrient-dialog/nutrient-dialog.component';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { AngularFireModule } from 'angularfire2';
@@ -25,6 +28,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {AngularFirestoreModule} from "angularfire2/firestore";
 import { FavoriteRecipeComponentComponent } from './favorite-recipe-component/favorite-recipe-component.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import {SettingsComponent} from './settings/settings.component';
+
 
 const appRoutes = [
   {path: '', redirectTo: 'recipeSearch/en', pathMatch: 'full'},
@@ -35,7 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent
+    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,10 @@ export function createTranslateLoader(http: HttpClient) {
     MatCardModule,
     MatTooltipModule,
     MatButtonModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AngularFirestoreModule,
     MatDialogModule,
     BrowserAnimationsModule,

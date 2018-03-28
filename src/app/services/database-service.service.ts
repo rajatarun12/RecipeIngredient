@@ -22,6 +22,26 @@ import { AngularFireDatabase } from 'angularfire2/database';
     });
 
   }
+  addToFav(obj,email){
+    let updateObj;
+    return this.getRecipe(obj.title).then(res => {
+      if(res){
+        res['likes']? (res['likes'] += 1) : (res['likes'] = 1);
+        updateObj = res;
+      }
+      else{
+        obj['likes'] = 1;
+        updateObj = obj;
+      }
+    }).then(() => {
+      return this.db.database.ref('favoriteRecipes/'+ obj.title).update(updateObj).then(res => {
+        this.db.database.ref('users/'+ (email).split('@')[0]+'/favoriteRecipe').push([{name:obj.title}]);
+      }).catch(err => {
+        console.log(err);
+      });
+    });
+
+  }
   getRecipe(recipe) {
     var ref = firebase.database().ref('/favoriteRecipes/'+recipe);
     let childPromises = [];

@@ -11,6 +11,7 @@ import * as firebase from "firebase/app";
 import {TranslateService} from "@ngx-translate/core";
 import {AppGlobal} from "../Content/AppGlobal";
 import {ActivatedRoute} from "@angular/router";
+import {SettingsComponent} from '../settings/settings.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -133,23 +134,6 @@ export class SideNavComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'app-settings',
-  templateUrl: 'app-settings.html',
-  providers: [TranslateService]
-})
-export class SettingsComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<SettingsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
 @Component({
   selector: 'app-login',
   templateUrl: 'login.html',

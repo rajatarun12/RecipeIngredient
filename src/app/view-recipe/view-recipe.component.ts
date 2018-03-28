@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../recipe.service';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {Inject, HostListener } from '@angular/core';
@@ -11,17 +11,21 @@ import {FirebaseOperation} from "angularfire2/database/interfaces";
 import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
 import {Observable} from "rxjs/Observable";
 import {UserModel} from "../Models/UserModel";
+import {DatabaseServiceService} from "../services/database-service.service";
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-view-recipe',
   templateUrl: './view-recipe.component.html',
   styleUrls: ['./view-recipe.component.css'],
   host: {'(window:scroll)' : 'onWindowScroll()'},
-  providers: [RecipeService, NgbTooltipConfig, AppGlobal]
+  providers: [RecipeService, NgbTooltipConfig, AppGlobal, DatabaseServiceService]
 })
 export class ViewRecipeComponent implements OnInit {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
+  @ViewChild(SnackBarComponent)
+    snackBarRef: SnackBarComponent;
   ingredient = '';
   recipeCollection: AngularFirestoreCollection<RecipeModel>;
   recipeList: Observable<any>;
@@ -32,7 +36,8 @@ export class ViewRecipeComponent implements OnInit {
               @Inject(DOCUMENT) private document: Document,
               private appGlobal:AppGlobal,
               public translate: TranslateService,
-              private db: AngularFireDatabase) { }
+              private db: AngularFireDatabase,
+              private foodDb: DatabaseServiceService) { }
 
   ngOnInit() {
     this.recipes = new RecipeModel({
@@ -62,10 +67,8 @@ export class ViewRecipeComponent implements OnInit {
     this.recipes.getFilteredItem(filterType);
   }
   addToFav(obj){
-    this.db.database.ref('favoriteRecipes/'+ obj.title).set(obj).then(res => {
-      this.db.database.ref('users/'+ (this.user['email']).split('@')[0]+'/favoriteRecipe').push([{name:obj.title}]);
-    }).catch(err => {
-      console.log(err);
+    this.foodDb.addToFav(obj,this.user['email']).then(res => {
+      this.snackBarRef.openSnackBar('Recipe added to favorites');
     });
   }
   getSortResults(sortType) {

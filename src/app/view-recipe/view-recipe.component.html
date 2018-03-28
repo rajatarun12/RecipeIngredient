@@ -53,7 +53,7 @@
     <button mat-raised-button color="primary" class="btn btn-default" (click)="recipes.pollRecipeData()" [innerHTML]=" 'SeeMoreRecipesLabel' | translate"></button>
   </div>
 </div>
-
+<app-snack-bar></app-snack-bar>
   <!--Scroll to top-->
   <div class="scroll-to-top" [ngClass]="{'show-scroll': navIsFixed}">
     <button mat-mini-fab color="primary" (click)="scrollToTop()">

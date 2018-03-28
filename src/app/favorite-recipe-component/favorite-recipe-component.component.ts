@@ -21,8 +21,12 @@ export class FavoriteRecipeComponentComponent implements OnInit{
   }
   ngOnInit(){
       this.db.getFavoriteRecipes(this.data.user).then(res => {
+        let recipes = [];
         Object.keys(res).forEach(key => {
-          this.recipes.push(res[key][0]['name']);
+          recipes.push(res[key][0]['name']);
+        });
+        this.recipes = recipes.filter((recipe, index, self) => {
+            return self.indexOf(recipe) === index;
         })
       })
   }

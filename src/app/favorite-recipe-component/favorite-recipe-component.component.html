@@ -18,8 +18,10 @@
           <div class="row">
             <a (click)="handleUrlChange(recipeDetails.recipieUrl)">
               <button mat-raised-button color="accent" class="btn btn-success"><i class="material-icons">visibility</i></button></a>
+            <span class="likeButton"><i class="fas fa-heart"></i>{{recipeDetails.likes}}</span>
           </div>
         </div>
+
         <div class="media-row">
           <ul>
             <li *ngFor="let ingredient of recipeDetails.ingredients| slice:0:5; let i=index">
