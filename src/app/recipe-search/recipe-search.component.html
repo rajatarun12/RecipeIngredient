@@ -5,9 +5,10 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div [ngClass]="{'pad-top' : true,'jumbotron': (!!recipe),'fullHeight': !recipe }">
-      <div class="row">
-        <div class="col-sm-1 pad-top">
+      <div class="row ">
+        <div class="col-sm-1 pad-top deep-purple">
         <a (click)="sidenav.toggle()" ><i class="fas fa-bars fa-2x"></i></a>
+          <app-notification-menu [notifications] = "notifications"></app-notification-menu>
         </div>
         <div class="col-xl-9 col-md-8 col-lg-9 text-right mar-left pad-top" *ngIf="!hideBadges">
         <a class="badge" href='https://play.google.com/store/apps/details?id=io.search.recipesearch&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width="120px"   height="40px" src='../../assets/images/badgeFooter.jpg'/></a>

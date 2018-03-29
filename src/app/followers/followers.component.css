@@ -1,0 +1,17 @@
+.pull-right{
+  text-align: right;
+}
+.width-full{
+  width: 100%;
+}
+mat-input-container{
+  width: 100%;
+}
+.search-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mar-bottom{
+  margin-bottom: 1em;
+}

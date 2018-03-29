@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AuthService} from '../side-nav/auth.service';
+import { AuthService} from '../services/auth.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {UserSettingsModel} from '../Models/UserSettingsModel';
 

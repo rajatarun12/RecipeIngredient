@@ -7,12 +7,14 @@ import {AppGlobal} from "../Content/AppGlobal";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
 import {UserModel} from "../Models/UserModel";
+import {AuthService} from '../services/auth.service';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-recipe-search',
   templateUrl: './recipe-search.component.html',
   styleUrls: ['./recipe-search.component.css'],
-  providers: [RecipeService, AppGlobal]
+  providers: [RecipeService, AppGlobal, AuthService]
 })
 export class RecipeSearchComponent implements OnInit {
   public recipe: RecipeModel;
@@ -20,11 +22,13 @@ export class RecipeSearchComponent implements OnInit {
   opened: Boolean;
   user: UserModel;
   hideBadges: Boolean = false;
+  notifications: any;
   constructor(private recipeService: RecipeService,
               @Inject(DOCUMENT) private document: Document,
               public appGlobal:AppGlobal,
               private translate: TranslateService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit() {
     let language = '';
@@ -38,11 +42,19 @@ export class RecipeSearchComponent implements OnInit {
     else {
       this.hideBadges = false;
     }
+    firebase.auth().getRedirectResult().then(result => {
+      this.authService.getUserNotifications().then(notifications => {
+        if(!notifications){
+          this.notifications = [{title: "You have 0 Notifications"}];
+        }
+        this.notifications = notifications;
+      });
+    });
   }
   setUserInfo(user){
     this.user = user;
   }
-  sendRecipes(result) {
+  sendRecipes(result){
     this.recipe = result;
   }
 }

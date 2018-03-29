@@ -1,0 +1,55 @@
+
+/* Custom, iPhone Retina */
+@media (min-width : 320px) {
+  .authButtonAlign{
+    text-align: left !important;
+    width: 100% !important;
+  }
+  .authButtonAlign > button{
+    width: 100% !important;
+    margin-bottom: 1em;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media (min-width : 480px) {
+  .authButtonAlign{
+    text-align: left !important;
+
+  }
+  .authButtonAlign > button{
+    width: 100% !important;
+    margin-bottom: 1em;
+  }
+}
+
+/* Small Devices, Tablets */
+@media  (min-width : 768px) {
+  .authButtonAlign{
+    text-align: left !important;
+    width: 100% !important;
+  }
+  .authButtonAlign > button{
+    width: 100% !important;
+    margin-bottom: 1em;
+  }
+}
+@media (min-width: 768px) {
+  .authButtonAlign{
+    text-align: right;
+  }
+}
+.authButtonAlign{
+  text-align: right;
+}
+.width-full {
+  width: 100%;
+}
+.mat-form-field{
+  width: 100%;
+}
+
+.mar-bottom{
+  margin-bottom: 1em;
+}
+

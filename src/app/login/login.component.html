@@ -1,5 +1,5 @@
 <div class="text-center mar-bottom">
-<h2 [innerHTML]="'LoginLabel' | translate"></h2></div>
+  <h2 [innerHTML]="'LoginLabel' | translate"></h2></div>
 
 <form class="container" [formGroup]="myForm" novalidate>
   <div class="row mar-bottom">
@@ -12,17 +12,17 @@
   </div>
   <div class="row text-center">
     <div class="col-md-12 width-full">
-    <mat-input-container>
+      <mat-input-container>
         <input matInput class="width-full" type="text" placeholder="{{'LoginLabel' | translate}}" formControlName="login"/>
-    </mat-input-container>
+      </mat-input-container>
     </div>
   </div>
   <div class="row text-center">
-  <div class="col-md-12 ">
-    <mat-input-container>
+    <div class="col-md-12 ">
+      <mat-input-container>
         <input matInput class="width-full" type="password" placeholder="{{'PasswordLabel' | translate}}" formControlName="password"/>
-    </mat-input-container>
-  </div>
+      </mat-input-container>
+    </div>
   </div>
   <div class="row">
 

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="followers-header row" *ngIf="viewContactView">
+    <div class="header-title col-xs-10 col-sm-10 col-md-10">
+      <h4>Follow</h4>
+    </div>
+    <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
+      <a (click)="switchView()"><i class="fas fa-user-plus fa-2x"></i></a>
+    </div>
+  </div>
+  <div *ngIf="!viewContactView">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2">
+      <button mat-icon-button (click)="switchView()"><i class="fas fa-arrow-left fa-2x"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2 col-md-2"></div>
+    <form [formGroup]="searchForm" class="col-xs-8 col-md-8">
+      <mat-input-container>
+        <input matInput type="text" formControlName="search" class="width-full" placeholder="Enter email ID" />
+      </mat-input-container>
+    </form>
+  </div>
+  <div class="row text-center search-row">
+    <button mat-raised-button color="warn" (click)="searchUser()">Search</button>
+  </div>
+  </div>
+  <div class="followers-body" *ngIf="viewContactView">
+    <div class="row mar-bottom" *ngFor="let follower of followers">
+      <button mat-raised-button color="link">{{follower.name || follower.email}}</button>
+    </div>
+  </div>
+  <div class="followers-body" *ngIf="!viewContactView">
+      <div *ngIf="foundUser" class="row">
+        <div class="col-xs-10 col-md-10">
+          <mat-card>
+            <mat-card-header>
+              <h4>{{foundUser.name}}</h4>
+            </mat-card-header>
+            <mat-card-subtitle>
+              <p>{{foundUser.email}}</p>
+            </mat-card-subtitle>
+          </mat-card>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <button *ngIf="!userAdded" mat-icon-button color="primary" (click)="saveFavorite()"><i class="fas fa-plus-circle fa-2x"></i></button>
+          <button *ngIf="userAdded" mat-icon-button color="link"><i class="fas fa-check-circle fa-2x"></i></button>
+        </div>
+      </div>
+    <div *ngIf="!foundUser">
+        "User not found"
+    </div>
+  </div>
+</div>

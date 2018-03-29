@@ -6,3 +6,13 @@ margin: 0;
   padding: 0;
   overflow-y: scroll;
 }
+.cdk-overlay-pane{
+  margin-top: 1.5em;
+  width: 30em;
+}
+.mat-expansion-panel-body{
+  padding: 10px 0.5em 0.5em !important;
+}
+.mat-expansion-panel-body > button{
+  margin-bottom: 1em !important;
+}

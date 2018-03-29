@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="recipes-header row" *ngIf="viewRecipeView">
+    <div class="header-title col-xs-10 col-sm-10 col-md-10">
+      <h4>My Recipes</h4>
+    </div>
+    <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
+      <a (click)="switchView()"><i class="fas fa-user-plus fa-2x"></i></a>
+    </div>
+  </div>
+  <div class="recipes-body" *ngIf="viewRecipeView">
+    <div class="row mar-bottom" *ngFor="let recipe of myRecipes">
+      <button mat-raised-button color="link">{{recipe.title}}</button>
+    </div>
+  </div>
+
+  <div class="recipes-header row" *ngIf="!viewRecipeView">
+    <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
+      <a (click)="switchView()"><i class="fas fa-arrow-left fa-2x"></i></a>
+    </div>
+  </div>
+  <div class="recipes-body row" *ngIf="!viewRecipeView">
+    <div class="col-xs-2 col-md-2"></div>
+    <div class="col-xs-8 col-md-8">
+    <form [formGroup]="myRecipeForm" novalidate>
+      <div class="row mar-bottom">
+          <mat-input-container>
+            <input matInput type="text" formControlName="title" placeholder="Title" />
+          </mat-input-container>
+      </div>
+      <div class="row mar-bottom" >
+        <mat-input-container>
+          <input matInput type="text" formControlName="recipeUrl" placeholder="Recipe Url" />
+        </mat-input-container>
+      </div>
+      <div class="row mar-bottom">
+        <mat-form-field class="demo-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let label of dietLabels" [selectable]="selectable"
+                      [removable]="removable" (remove)="removeDietLabel(label)">
+              {{label}}
+              <mat-icon matChipRemove *ngIf="removable"><i class="far fa-times-circle"></i></mat-icon>
+            </mat-chip>
+            <input placeholder="Diet labels"
+                   [matChipInputFor]="chipList" formControlName="dietLabels"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   (matChipInputTokenEnd)="addDietLabel($event)" />
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+      <div class="row mar-bottom">
+        <mat-input-container>
+          <textarea matInput formControlName="ingredients" matTextareaAutosize matAutosizeMinRows="2"
+                    matAutosizeMaxRows="20" placeholder="Ingredients"  ></textarea>
+        </mat-input-container>
+      </div>
+      <div class="row mar-bottom">
+        <mat-input-container>
+          <textarea matInput type="text" matTextareaAutosize matAutosizeMinRows="2"
+                    matAutosizeMaxRows="20" formControlName="instructions" placeholder="Instructions" ></textarea>
+        </mat-input-container>
+      </div>
+
+    </form>
+      <div class="row mar-bottom">
+        <button mat-raised-button color="primary" (click)="saveRecipe()">Save</button>
+      </div>
+    </div>
+  </div>
+  <app-snack-bar></app-snack-bar>
+</div>
+

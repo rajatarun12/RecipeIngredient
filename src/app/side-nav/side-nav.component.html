@@ -2,11 +2,40 @@
   <div class="list-container">
     <h6>{{displayName}}</h6>
     <p>{{userEmail}}</p>
-    <button mat-raised-button class="mar-bottom" *ngIf="!loginActive" color="link" type="button" class="width-full" (click)="login()" [innerHTML]="'LoginLabel' | translate"></button>
-    <button mat-raised-button class="mar-bottom" *ngIf="!loginActive" color="link" type="button" class="width-full" (click)="register()" [innerHTML]="'registerLabel' | translate"></button>
-    <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="warn" type="button" class="width-full" (click)="signOut()" [innerHTML]="'signOutLabel' | translate"></button>
-    <hr />
-    <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFavRecipes()" [innerHTML]="'FavoriteRecipeLabel' | translate"></button>
-    <button mat-raised-button color="primary" [hidden]="!loginActive"  type="button" class="width-full" (click)="openDialog()" [innerHTML]="'settingsLabel' | translate"></button>
+    <form novalidate>
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              User
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-raised-button class="mar-bottom width-full" *ngIf="!loginActive" color="primary" type="button" class="width-full" (click)="login()" [innerHTML]="'LoginLabel' | translate"></button>
+          <button mat-raised-button class="mar-bottom width-full"  *ngIf="!loginActive" color="primary" type="button" class="width-full" (click)="register()" [innerHTML]="'registerLabel' | translate"></button>
+          <button mat-raised-button  class="mar-bottom width-full" [hidden]="!loginActive" color="warn" type="button" class="width-full" (click)="signOut()" [innerHTML]="'signOutLabel' | translate"></button>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="step === 1" [hidden]="!loginActive" (opened)="setStep(1)" hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Features
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFollowers()">Follow</button>
+
+          <button mat-raised-button color="primary" [hidden]="!loginActive"  type="button" class="width-full" (click)="openDialog()" [innerHTML]="'settingsLabel' | translate"></button>
+        </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 3" [hidden]="!loginActive" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Recipes
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFavRecipes()" [innerHTML]="'FavoriteRecipeLabel' | translate"></button>
+        <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleMyRecipies()">My Recipes</button>
+      </mat-expansion-panel>
+      </mat-accordion>
+    </form>
   </div>
 </div>
+
+<app-snack-bar></app-snack-bar>

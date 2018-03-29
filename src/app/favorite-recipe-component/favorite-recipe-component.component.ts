@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {LoginComponent} from "../side-nav/side-nav.component";
+
 import {DatabaseServiceService} from "../services/database-service.service";
 
 @Component({
@@ -14,8 +14,6 @@ export class FavoriteRecipeComponentComponent implements OnInit{
   recipeDetails: any = {};
   recipes = [];
   constructor(
-    public dialogRef: MatDialogRef<LoginComponent>,
-    public registerRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private db: DatabaseServiceService) {
   }

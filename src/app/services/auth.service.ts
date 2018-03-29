@@ -43,8 +43,22 @@ export class AuthService {
       return firebase.auth().getRedirectResult();
     });
   }
-  checkAndReturnUser(){
+  getUserNotifications(){
     const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd+'/notifications');
+    return new Promise(res => {
+      ref.once("value", snapshot => {
+        const notificationData = snapshot.val();
+        if (notificationData){
+          res(notificationData);
+        }
+        res(false);
+      })
+    })
+  }
+  checkAndReturnUser(userEmail ?: String){
+    const email = userEmail || this._firebaseAuth.auth.currentUser.email;
     var emailAd = email.split('@')[0];
     var ref = firebase.database().ref('/users/'+emailAd);
 
@@ -72,5 +86,57 @@ export class AuthService {
         res(false);
       });
     });
+  }
+
+  getFollowersDetails() {
+    const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd+'/followers');
+    return new Promise(res => {
+      ref.once("value", snapshot => {
+        const followersData = snapshot.val();
+        if (followersData){
+          res(followersData);
+        }
+        res(false);
+      })
+    })
+  }
+
+  addFollower(foundUser: any) {
+    const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd+'/followers');
+    return new Promise(res => {
+      ref.push(foundUser).then(snapshot => {
+       res(snapshot);
+      })
+    })
+  }
+
+  getMyRecipeDetails() {
+    const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd+'/myRecipes');
+    return new Promise(res => {
+      ref.once("value", snapshot => {
+        const recipesData = snapshot.val();
+        if (recipesData){
+          res(recipesData);
+        }
+        res(false);
+      });
+    });
+  }
+
+  saveMyRecipe(rawValue: any) {
+    const email = this._firebaseAuth.auth.currentUser.email;
+    var emailAd = email.split('@')[0];
+    var ref = firebase.database().ref('/users/'+emailAd+'/myRecipes');
+    return new Promise(res => {
+      ref.push(rawValue).then(snapshot => {
+        res(snapshot);
+      })
+    })
   }
 }

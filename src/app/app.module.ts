@@ -18,9 +18,9 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {
   MatSidenavModule, MatInputModule, MatDialogModule, MatCardModule, MatSnackBarModule, MatExpansionModule,
-  MatDatepickerModule, MatNativeDateModule
+  MatDatepickerModule, MatNativeDateModule, MatMenuModule, MatChipsModule
 } from '@angular/material';
-import { SideNavComponent, LoginComponent } from './side-nav/side-nav.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
 import {NutrientDialogTemplate, NutrientDialogComponent} from './nutrient-dialog/nutrient-dialog.component';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { AngularFireModule } from 'angularfire2';
@@ -30,6 +30,10 @@ import {AngularFirestoreModule} from "angularfire2/firestore";
 import { FavoriteRecipeComponentComponent } from './favorite-recipe-component/favorite-recipe-component.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import {SettingsComponent} from './settings/settings.component';
+import { NotificationMenuComponent } from './notification-menu/notification-menu.component';
+import {LoginComponent} from './login/login.component';
+import { FollowersComponent } from './followers/followers.component';
+import { MyRecipesComponent } from './my-recipes/my-recipes.component';
 
 
 const appRoutes = [
@@ -41,7 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent
+    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatSnackBarModule,
     MatExpansionModule,
     MatDatepickerModule,
+    MatMenuModule,
+    MatChipsModule,
     MatNativeDateModule,
     AngularFirestoreModule,
     MatDialogModule,
@@ -78,7 +84,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule
   ],
   exports: [ViewRecipeComponent, SearchComponent, MatSidenavModule, MatInputModule, MatDialogModule,MatCardModule],
-  entryComponents: [NutrientDialogTemplate,FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent],
+  entryComponents: [NutrientDialogTemplate,FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent, FollowersComponent, MyRecipesComponent],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
