@@ -9,7 +9,37 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "RecipeSearch",
+      "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-plugin-buildinfo": {
+      "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-universal-links-plugin": {
+      "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-media": {
+      "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO",
+      "PACKAGE_NAME": "RecipeSearch"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "io.search.recipesearch"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "RecipeSearch"
+    }
+  }
 }
