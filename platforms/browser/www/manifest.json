@@ -1,0 +1,17 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Recipe Search",
+  "short_name": "Recipe Search",
+  "version": "io.search.recipesearch",
+  "description": "Search Recipes from ingredients",
+  "author": "Tarun Raja, Navya Sanjana Koukuntla",
+  "icons": [
+    {
+      "src": "res/icon/android/icon-48-mdpi.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "start_url": "index.html"
+}
