@@ -24,7 +24,7 @@
 
           <button mat-raised-button color="primary" [hidden]="!loginActive"  type="button" class="width-full" (click)="openDialog()" [innerHTML]="'settingsLabel' | translate"></button>
         </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="step === 3" [hidden]="!loginActive" (opened)="setStep(1)" hideToggle="true">
+      <mat-expansion-panel [expanded]="step === 2" [hidden]="!loginActive" (opened)="setStep(2)" hideToggle="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Recipes

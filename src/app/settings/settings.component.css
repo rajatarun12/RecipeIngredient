@@ -12,3 +12,6 @@
     display: none;
   }
 }
+.mat-expansion-panel-header[aria-disabled=true]{
+  color: black !important;
+}

@@ -4,12 +4,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService} from '../services/auth.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {UserSettingsModel} from '../Models/UserSettingsModel';
+import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
-  providers: [AuthService]
+  providers: [AuthService, NgbTooltipConfig]
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
@@ -23,18 +24,22 @@ export class SettingsComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  saveDetails(){
-    let formDetails = this.settingsForm.getRawValue();
+  saveDetails() {
+    const formDetails = this.settingsForm.getRawValue();
     this.authService.updateUserDetails(formDetails).then(() => {
       this.snackBarRef.openSnackBar('saved');
-    })
+      this.dialogRef.close();
+    });
   }
   ngOnInit() {
     this.settingsForm =  this.fb.group({
-      name: ['', Validators.compose([Validators.pattern(/[a-zA-Z ]/g),Validators.required])],
+      name: ['', Validators.compose([Validators.pattern(/[a-zA-Z ]/g), Validators.required])],
       age: ['', Validators.compose([Validators.required, Validators.maxLength(2)])],
-      country: ['', Validators.compose([Validators.pattern(/[a-zA-Z ]/g),Validators.required])],
-      language: ['']
+      country: ['', Validators.compose([Validators.pattern(/[a-zA-Z ]/g), Validators.required])],
+      language: [''],
+      personalShare: [false],
+      countryShare: [false],
+      languageShare: [false]
     });
     this.authService.checkAndReturnUser().then(res => {
       if(res){

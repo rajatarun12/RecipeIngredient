@@ -4,3 +4,9 @@ mat-input-container {
 mat-form-field{
   width: 100%;
 }
+.pull-right{
+  text-align: right;
+}
+.header-title {
+  margin-bottom: 1em;
+}

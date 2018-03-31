@@ -1,25 +1,42 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {FormGroup, FormControl, FormBuilder, Validators, FormArray, FormGroupDirective, NgForm} from '@angular/forms';
 import {RecipeService} from '../recipe.service';
 import {RecipeModel} from '../Models/recipeModel';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {IngredientCheckDirective} from '../directives/validators/ingredient-check.directive';
 import {AppGlobal} from "../Content/AppGlobal";
 import {TranslateService} from "@ngx-translate/core";
+import {GoogleCloudVisionService} from '../google-cloud-vision.service';
+import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
+import {ErrorStateMatcher} from '@angular/material/core';
+import {environment} from '../../environments/environment';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return !!(control && control.invalid);
+  }
+}
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  providers: [AppGlobal]
+  providers: [AppGlobal, NgbTooltipConfig, GoogleCloudVisionService]
 })
 export class SearchComponent implements OnInit {
   @Output() sendRecipes = new EventEmitter<RecipeModel>();
-
+@ViewChild('imageElement')
+ie: ElementRef;
+matcher: MyErrorStateMatcher;
+  imageSearchData: any = [];
   recipes: RecipeModel = new RecipeModel({
     RecipeObject:[]
   });
+  selectable: Boolean = true;
+  voiceStarted: Boolean = false;
+  removable: Boolean = true;
   inputs: String[]= ['0'];
   ingredients: String;
   public myForm: FormGroup;
@@ -30,7 +47,8 @@ export class SearchComponent implements OnInit {
               private recipeService: RecipeService,
               private spinnerService: Ng4LoadingSpinnerService,
               public appGlobal:AppGlobal,
-              public translate: TranslateService) { }
+              public translate: TranslateService,
+              private vision: GoogleCloudVisionService) { }
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -48,10 +66,43 @@ export class SearchComponent implements OnInit {
       this.inputs.push((lastIndex + 1).toString());
     }
   }
-
+  searchPhoto(){
+    // this.spinnerService.show();
+    // navigator['camera'].getPicture((data) => {
+    //   this.vision.getLabels(data).subscribe(resp => {
+    //           this.imageSearchData =  resp.responses[0].labelAnnotations;
+    //           this.spinnerService.hide();
+    //         });
+    // }, () => {}, {
+    //   // @ts-ignore
+    //   destinationType: Camera.DestinationType.DATA_URL,
+    // });
+    this.spinnerService.show();
+    const fileCount: number = this.ie.nativeElement.files.length;
+    const formData = new FormData();
+    if (fileCount > 0) {
+      const base64 = new FileReader();
+      let res;
+      base64.readAsBinaryString(this.ie.nativeElement.files[0]);
+      setTimeout(() => {
+        const str = base64.result;
+        res = btoa(str);
+        this.vision.getLabels(res).subscribe(resp => {
+          this.imageSearchData =  resp.responses[0].labelAnnotations;
+          this.spinnerService.hide();
+        });
+      }, 5000);
+    }
+  }
+  addIngredient(description) {
+    this.itemsGroup = this.myForm.get('search') as FormArray;
+    let descript =  this.itemsGroup.value[0].name;
+    descript += description + ',';
+    this.itemsGroup.controls[0].setValue({'name': descript});
+  }
   private createItem() {
     return this.fb.group({
-      name: ['', Validators.compose([IngredientCheckDirective(/[^a-zA-Z ]/g)])]
+      name: ['', Validators.compose([IngredientCheckDirective(/[^a-zA-Z, ]/g)])]
     });
   }
   search() {
@@ -65,6 +116,7 @@ export class SearchComponent implements OnInit {
     this.recipeService.getRecipe(ingredients).subscribe(result => {
       this.spinnerService.hide();
       const count = result['count'] || 0;
+      this.imageSearchData = [];
       const recipes = this.recipes.getRecipes(result['hits']);
       this.sendRecipes.emit(new RecipeModel({
         RecipeObject: recipes,
@@ -79,12 +131,91 @@ export class SearchComponent implements OnInit {
       this.itemsGroup = this.myForm.get('search') as FormArray;
       this.itemsGroup.removeAt(index);
       this.inputs.pop();
-      if(this.itemsGroup.length < 5 && this.collapsed){
+      if(this.itemsGroup.length < 5 && this.collapsed) {
         this.collapsed = false;
       }
     }
   }
   toggleCollapse() {
     this.collapsed = !this.collapsed;
+  }
+
+  clearSearchBoxes() {
+    this.itemsGroup = this.myForm.get('search') as FormArray;
+    for (let i = this.itemsGroup.length  ; i > 0; i--) {
+       this.itemsGroup.removeAt(i);
+    }
+    this.itemsGroup.controls[0].setValue({'name': ''});
+  }
+  getMobileOperatingSystem() {
+    const userAgent = navigator.userAgent || navigator.vendor || window['opera'];
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+      return 'Windows Phone';
+    }
+
+    if (/android/i.test(userAgent)) {
+      return 'Android';
+    }
+
+    // @ts-ignore
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      return 'iOS';
+    }
+
+    return 'unknown';
+  }
+  enableSpeech() {
+    const flag = environment.production;
+    if (flag) {
+      const url = environment.fileUrl[this.getMobileOperatingSystem()];
+      // @ts-ignore
+      const my_media = new Media(url,
+        // success callback
+        function () {
+          console.log(' playAudio():Audio Success');
+        },
+        // error callback
+        function (err) {
+          console.log('playAudio():Audio Error: ' + err);
+        }
+      );
+      my_media.startRecord();
+      this.voiceStarted = true;
+      setTimeout(() => {
+        this.voiceStarted = false;
+        my_media.stopRecord();
+      }, 3000);
+    } else {
+      const synth = window.speechSynthesis;
+      const voices = synth.getVoices();
+
+      const utterThis = new SpeechSynthesisUtterance('please say the ingredient');
+      utterThis.voice = voices[10];
+      synth.speak(utterThis);
+      utterThis.onend = (evt) => {
+        const recognition = new (window['SpeechRecognition'] || window['webkitSpeechRecognition'] || window['mozSpeechRecognition'] || window['msSpeechRecognition'])();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 5;
+        recognition.start();
+        this.voiceStarted = true;
+
+        recognition.onresult = function (event) {
+          const transcript = event.results[0][0].transcript;
+          if (transcript) {
+            transcript.split(' ').forEach(elem => {
+              this.imageSearchData.push({description: elem, score: 100});
+              this.voiceStarted = false;
+            });
+          }
+          else {
+            this.voiceStarted = false;
+          }
+        }.bind(this);
+      };
+    }
   }
 }

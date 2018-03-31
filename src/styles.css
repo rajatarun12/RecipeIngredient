@@ -16,3 +16,6 @@ margin: 0;
 .mat-expansion-panel-body > button{
   margin-bottom: 1em !important;
 }
+.recipeCard > mat-card {
+  margin-right: 1em;
+}

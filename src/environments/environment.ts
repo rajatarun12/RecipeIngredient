@@ -14,8 +14,15 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "1041313927441"
   },
+  fileUrl: {
+    'Windows Phone': '',
+    'Android': 'myRec.aac',
+    'iOS': 'documents://myRec.m4a'
+  },
   googleCreds: {
     key: "1041313927441-2u9bt6ndo4drnv3hnghsubd3qna3rrvb.apps.googleusercontent.com",
     secret: "AmCBW-pOpsEZa_JMnhMKEP2T"
-  }
+  },
+  googleCloudVisionAPIKey: "AIzaSyCUiiGFM9vbof_TTe9bcN1sCKUQ6mnGJv4",
+  appleImagePath: '../../assets/images/badgeFooter.jpg'
 };

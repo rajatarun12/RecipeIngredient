@@ -66,9 +66,11 @@ export class ViewRecipeComponent implements OnInit {
     this.filterValue = filterType;
     this.recipes.getFilteredItem(filterType);
   }
-  addToFav(obj){
-    this.foodDb.addToFav(obj,this.user['email']).then(res => {
+  addToFav(obj, evt) {
+    this.foodDb.addToFav(obj, this.user['email']).then(res => {
       this.snackBarRef.openSnackBar('Recipe added to favorites');
+      evt.srcElement.dataset.prefix = 'fas';
+      console.log(evt);
     });
   }
   getSortResults(sortType) {
@@ -97,5 +99,9 @@ export class ViewRecipeComponent implements OnInit {
         window.scrollTo(0, currentScroll - (currentScroll / 5));
     }
   })();
+  }
+
+  clearResults() {
+    this.recipes.clearRecipes();
   }
 }

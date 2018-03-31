@@ -1,0 +1,54 @@
+<div *ngIf="recipesLoaded | async">
+  <div *ngIf="!detailView && !isXs" class="row hide-devices center-flex">
+    <div class="list-group" *ngIf="recipes.length > 0">
+      <button href="#" *ngFor="let i of recipes" class="list-group-item list-group-item-action">{{i.title}}</button>
+    </div>
+    <div *ngIf="recipes.length === 0">
+      <h4>No added Recipes</h4>
+    </div>
+  </div>
+  <div *ngIf="isXs" class="row center-flex mar-bottom">
+    <mat-icon [hidden]="hideLeft" (click)="moveLeft()"><i class="fas fa-chevron-up fa-2x"></i></mat-icon>
+  </div>
+  <div  class="row" *ngIf="detailView">
+    <div *ngIf="!isXs" class="col-xs-1 col-sm-1 col-md-1 center-flex">
+      <mat-icon [hidden]="hideLeft" (click)="moveLeft()"><i class="fas fa-chevron-left fa-2x"></i></mat-icon>
+    </div>
+    <div [ngClass]="{'col-xs-10':!isXs, 'col-sm-10':!isXs, 'col-md-10':!isXs, 'center-flex':true, 'col-xs-12': isXs}">
+      <!--<button mat-icon-button (click)="detailViewToggle()"><i class="fas fa-arrow-left fa-2x"></i> </button>-->
+      <!--[ngStyle]="{'z-index' : recipes.length - imgInd , 'margin-top': (imgInd > 0) && '-16em' }"-->
+      <mat-card >
+        <div class="media row">
+          <div class="media-left col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <img *ngIf="recipeDetails.image" class="media-object" src="{{recipeDetails.image}}" width="150px" height="150px" alt="...">
+            <span *ngIf="!recipeDetails.image"><i class="far fa-image fa-6x"></i></span>
+          </div>
+          <div class="media-body col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <h4 class="media-heading">{{recipeDetails.title}}</h4>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-lg-12 mar-left mar-top mar-right">
+            <div class="row">
+              <a (click)="handleUrlChange(recipeDetails.recipieUrl)">
+                <button mat-raised-button color="accent" class="btn btn-success"><i class="material-icons">visibility</i></button></a>
+              <span class="likeButton"><i class="fas fa-heart"></i>{{recipeDetails.likes}}</span>
+            </div>
+          </div>
+
+          <div class="media-row">
+            <ul>
+              <li *ngFor="let ingredient of recipeDetails.ingredients| slice:0:5; let ind=index">
+                {{ingredient}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div *ngIf="!isXs" class="col-xs-1 col-sm-1 col-md-1 center-flex">
+      <mat-icon  [hidden]="hideRight" (click)="moveRight()"><i class="fas fa-chevron-right fa-2x"></i></mat-icon>
+    </div>
+  </div>
+  <div *ngIf="isXs" class="row center-flex mar-top">
+    <mat-icon [hidden]="hideRight" (click)="moveRight()"><i class="fas fa-chevron-down fa-2x"></i></mat-icon>
+  </div>
+</div>

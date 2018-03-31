@@ -16,7 +16,17 @@
 .mar-top{
   margin-top: 1em;
 }
-
+.align-right{
+  text-align: right;
+}
+mat-icon.icon-clear > svg {
+  margin-right: 0.5em;
+}
+.icon-clear{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .label-centered{
   margin: auto;

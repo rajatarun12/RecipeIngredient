@@ -26,29 +26,36 @@
   </div>
   </div>
   <div class="followers-body" *ngIf="viewContactView">
-    <div class="row mar-bottom" *ngFor="let follower of followers">
-      <button mat-raised-button color="link">{{follower.name || follower.email}}</button>
-    </div>
+      <mat-list>
+        <mat-list-item (click)="viewFollowerDetails(follower)" *ngFor="let follower of followers">
+          <span *ngIf="!!follower.img">
+          <img matListAvatar src="..." alt=".."></span>
+          <span *ngIf="!follower.img"><i class="fas fa-user"></i></span>
+          <h3 matLine> {{follower.name}} </h3>
+          <p matLine>
+            <span> {{follower.email}} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
   </div>
   <div class="followers-body" *ngIf="!viewContactView">
       <div *ngIf="foundUser" class="row">
+        <div class="col-xs-1 col-md-1"></div>
         <div class="col-xs-10 col-md-10">
-          <mat-card>
-            <mat-card-header>
-              <h4>{{foundUser.name}}</h4>
-            </mat-card-header>
-            <mat-card-subtitle>
-              <p>{{foundUser.email}}</p>
-            </mat-card-subtitle>
-          </mat-card>
-        </div>
-        <div class="col-xs-2 col-md-2">
-          <button *ngIf="!userAdded" mat-icon-button color="primary" (click)="saveFavorite()"><i class="fas fa-plus-circle fa-2x"></i></button>
-          <button *ngIf="userAdded" mat-icon-button color="link"><i class="fas fa-check-circle fa-2x"></i></button>
+          <mat-list>
+            <mat-list-item>
+              <mat-icon *ngIf="!userAdded"><a  (click)="saveFavorite()"><i class="fas fa-plus-circle fa-2x"></i></a></mat-icon>
+              <mat-icon *ngIf="userAdded"><a ><i class="fas fa-check-circle fa-2x"></i></a></mat-icon>
+              <h3 matLine> {{foundUser.name}} </h3>
+              <p matLine>
+                <span> {{foundUser.email}} </span>
+              </p>
+            </mat-list-item>
+          </mat-list>
         </div>
       </div>
     <div *ngIf="!foundUser">
-        "User not found"
+        {{message}}
     </div>
   </div>
 </div>

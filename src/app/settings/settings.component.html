@@ -1,13 +1,13 @@
 <form [formGroup]="settingsForm" novalidate>
 <mat-accordion class="example-headers-align">
-  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true" [disabled]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Personal data
       </mat-panel-title>
       <mat-panel-description>
         <p class="hide-devices">Type your name and age</p>
-        <span><i class="fas fa-user"></i></span>
+        <span><mat-slide-toggle formControlName="personalShare" ngbTooltip="Share"></mat-slide-toggle></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -24,14 +24,14 @@
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true" [disabled]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Country
       </mat-panel-title>
       <mat-panel-description >
         <p class="hide-devices">Type the country name</p>
-        <span><i class="fas fa-map-marker-alt"></i></span>
+        <span><mat-slide-toggle formControlName="countryShare" ngbTooltip="Share"></mat-slide-toggle></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -45,14 +45,14 @@
     </mat-action-row>
   </mat-expansion-panel>
 
-  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true" [disabled]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Language Settings
       </mat-panel-title>
       <mat-panel-description >
         <p class="hide-devices">Enter your default language</p>
-        <span><i class="fas fa-language"></i></span>
+        <span><mat-slide-toggle formControlName="languageShare" ngbTooltip="Share"></mat-slide-toggle></span>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -62,7 +62,7 @@
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
-      <button mat-button color="primary" (click)="saveDetails()">Save</button>
+      <button mat-button [disabled]="!settingsForm.valid && !settingsForm.dirty" color="primary" (click)="saveDetails()">Save</button>
     </mat-action-row>
   </mat-expansion-panel>
 

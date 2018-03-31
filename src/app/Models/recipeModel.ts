@@ -125,4 +125,9 @@ export class RecipeModel {
       this.RecipeObject = tempData.slice(0,this.currentIndex);
       this.currentIndex += 10;
   }
+
+  clearRecipes() {
+    this.RecipeObject = [];
+    this.originalList = [];
+  }
 }

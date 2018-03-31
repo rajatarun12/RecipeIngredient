@@ -146,7 +146,7 @@ export class SideNavComponent implements OnInit {
 
   handleMyRecipies() {
     let dialogRef = this.dialog.open(MyRecipesComponent, {
-      width: '50em'
+      width: '30em'
     });
 
     dialogRef.afterClosed().subscribe(result => {

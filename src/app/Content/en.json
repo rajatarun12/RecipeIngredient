@@ -17,6 +17,7 @@
 	"GoogleLoginLabel": "Login With Google",
 	"FacebookLoginLabel": "Login With Facebook",
 	"LoginLabel": "Login",
+  "EmailLabel": "Email",
 	"PasswordLabel": "Password",
 	"registerLabel": "Register",
 	"signOutLabel": "Sign out",

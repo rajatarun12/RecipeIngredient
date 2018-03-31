@@ -1,18 +1,15 @@
 <div class="container">
   <div class="recipes-header row" *ngIf="viewRecipeView">
-    <div class="header-title col-xs-10 col-sm-10 col-md-10">
-      <h4>My Recipes</h4>
-    </div>
+      <div class="col-xs-6 col-sm-6 col-md-6"><h4>My Recipes</h4></div>
+      <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 pull-right"><mat-icon (click)="toggleExpand(true)"><i class="fas fa-expand fa-2x"></i></mat-icon></div>
+      <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 pull-right"><mat-icon (click)="toggleExpand(false)"><i class="fas fa-compress fa-2x "></i></mat-icon></div>
     <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
-      <a (click)="switchView()"><i class="fas fa-user-plus fa-2x"></i></a>
+      <mat-icon (click)="switchView()"><i class="fas fa-plus-circle fa-2x"></i></mat-icon>
     </div>
   </div>
   <div class="recipes-body" *ngIf="viewRecipeView">
-    <div class="row mar-bottom" *ngFor="let recipe of myRecipes">
-      <button mat-raised-button color="link">{{recipe.title}}</button>
-    </div>
+    <app-recipe-slider [recipes]="myRecipes" [detailView]="detailView"></app-recipe-slider>
   </div>
-
   <div class="recipes-header row" *ngIf="!viewRecipeView">
     <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
       <a (click)="switchView()"><i class="fas fa-arrow-left fa-2x"></i></a>
@@ -62,7 +59,7 @@
 
     </form>
       <div class="row mar-bottom">
-        <button mat-raised-button color="primary" (click)="saveRecipe()">Save</button>
+        <button mat-raised-button color="primary" [disabled]="!myRecipeForm.valid" (click)="saveRecipe()">Save</button>
       </div>
     </div>
   </div>

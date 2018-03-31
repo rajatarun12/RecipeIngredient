@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 import {UserModel} from "../Models/UserModel";
 import {AuthService} from '../services/auth.service';
 import * as firebase from 'firebase/app';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-recipe-search',
@@ -19,6 +20,7 @@ import * as firebase from 'firebase/app';
 export class RecipeSearchComponent implements OnInit {
   public recipe: RecipeModel;
   hideHeader: Boolean = false;
+  appleImagePath: String =  environment.appleImagePath;
   opened: Boolean;
   user: UserModel;
   hideBadges: Boolean = false;

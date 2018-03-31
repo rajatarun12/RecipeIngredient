@@ -1,35 +1,6 @@
-<div>
-  <div *ngIf="!detailView">
-    <div class="list-group">
-      <button href="#" *ngFor="let i of recipes" class="list-group-item list-group-item-action" (click)="getRecipeDetails(i)">{{i}}</button>
-    </div>
-  </div>
-  <div *ngIf="detailView">
-    <button mat-icon-button (click)="detailViewToggle()"><i class="fas fa-arrow-left fa-2x"></i> </button>
-    <mat-card>
-      <div class="media row">
-        <div class="media-left col-xs-12 col-sm-12 col-md-12 col-lg-4">
-          <img class="media-object" src="{{recipeDetails.image}}" width="150px" height="150px" alt="...">
-        </div>
-        <div class="media-body col-xs-12 col-sm-12 col-md-12 col-lg-5">
-          <h4 class="media-heading">{{recipeDetails.title}}</h4>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-lg-12 mar-left mar-top mar-right">
-          <div class="row">
-            <a (click)="handleUrlChange(recipeDetails.recipieUrl)">
-              <button mat-raised-button color="accent" class="btn btn-success"><i class="material-icons">visibility</i></button></a>
-            <span class="likeButton"><i class="fas fa-heart"></i>{{recipeDetails.likes}}</span>
-          </div>
-        </div>
-
-        <div class="media-row">
-          <ul>
-            <li *ngFor="let ingredient of recipeDetails.ingredients| slice:0:5; let i=index">
-              {{ingredient}}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </mat-card>
-  </div>
+<div class="row">
+  <div class="col-xs-8 col-sm-8 col-md-8"><h4>Favorites</h4></div>
+  <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 align-right"><mat-icon (click)="toggleExpand(true)"><i class="fas fa-expand fa-2x"></i></mat-icon></div>
+  <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2"><mat-icon (click)="toggleExpand(false)"><i class="fas fa-compress fa-2x "></i></mat-icon></div>
 </div>
+<app-recipe-slider [recipes]="recipes" [detailView]="detailView"></app-recipe-slider>

@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import * as firebasefunctions from 'firebase/functions';
@@ -14,17 +14,17 @@ export class AuthService {
     this.user = _firebaseAuth.authState;
   }
 
-  loginWithEmail(email,password){
-    return this._firebaseAuth.auth.signInWithEmailAndPassword(email,password);
+  loginWithEmail(email, password){
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
   }
-  registerWithEmail(email,password){
-    return this._firebaseAuth.auth.createUserWithEmailAndPassword(email,password);
+  registerWithEmail(email, password){
+    return this._firebaseAuth.auth.createUserWithEmailAndPassword(email, password);
   }
   signOut(){
     return this._firebaseAuth.auth.signOut();
   }
   signInWithGoogle(){
-    var provider = new firebase.auth.GoogleAuthProvider();
+    let provider = new firebase.auth.GoogleAuthProvider();
     return this._firebaseAuth.auth.signInWithRedirect(provider).then(function(){
       return firebase.auth().getRedirectResult();
     });
@@ -32,38 +32,38 @@ export class AuthService {
 
   updateUserDetails(formData){
     const email = this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd);
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd);
     return ref.update(formData);
   }
 
   signInWithFacebook(){
-    var provider = new firebase.auth.FacebookAuthProvider();
+    let provider = new firebase.auth.FacebookAuthProvider();
     return this._firebaseAuth.auth.signInWithRedirect(provider).then(function(){
       return firebase.auth().getRedirectResult();
     });
   }
   getUserNotifications(){
     const email = this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd+'/notifications');
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd + '/notifications');
     return new Promise(res => {
-      ref.once("value", snapshot => {
+      ref.once('value', snapshot => {
         const notificationData = snapshot.val();
         if (notificationData){
           res(notificationData);
         }
         res(false);
-      })
-    })
+      });
+    });
   }
   checkAndReturnUser(userEmail ?: String){
     const email = userEmail || this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd);
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd);
 
     return new Promise(res => {
-      ref.once("value",snapshot => {
+      ref.once('value', snapshot => {
         const userData = snapshot.val();
         if (userData){
           res(userData);
@@ -73,12 +73,12 @@ export class AuthService {
     });
   }
   checkiIfObjectIsThere(email){
-    var ref = firebase.database().ref('/users');
+    let ref = firebase.database().ref('/users');
 
     return new Promise(res => {
       const email = this._firebaseAuth.auth.currentUser.email;
-      var emailAd = email.split('@')[0];
-      ref.once("value",snapshot => {
+      let emailAd = email.split('@')[0];
+      ref.once('value', snapshot => {
         const userData = snapshot.val();
         if (Object.keys(userData).indexOf(emailAd) > -1){
           res(userData);
@@ -90,36 +90,36 @@ export class AuthService {
 
   getFollowersDetails() {
     const email = this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd+'/followers');
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd + '/followers');
     return new Promise(res => {
-      ref.once("value", snapshot => {
+      ref.once('value', snapshot => {
         const followersData = snapshot.val();
         if (followersData){
           res(followersData);
         }
         res(false);
-      })
-    })
+      });
+    });
   }
 
   addFollower(foundUser: any) {
     const email = this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd+'/followers');
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd + '/followers');
     return new Promise(res => {
       ref.push(foundUser).then(snapshot => {
        res(snapshot);
-      })
-    })
+      });
+    });
   }
 
   getMyRecipeDetails() {
     const email = this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd+'/myRecipes');
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd + '/myRecipes');
     return new Promise(res => {
-      ref.once("value", snapshot => {
+      ref.once('value', snapshot => {
         const recipesData = snapshot.val();
         if (recipesData){
           res(recipesData);
@@ -131,12 +131,22 @@ export class AuthService {
 
   saveMyRecipe(rawValue: any) {
     const email = this._firebaseAuth.auth.currentUser.email;
-    var emailAd = email.split('@')[0];
-    var ref = firebase.database().ref('/users/'+emailAd+'/myRecipes');
+    let emailAd = email.split('@')[0];
+    let ref = firebase.database().ref('/users/' + emailAd + '/myRecipes');
     return new Promise(res => {
       ref.push(rawValue).then(snapshot => {
         res(snapshot);
-      })
-    })
+      });
+    });
+  }
+
+  getUserDetails(email) {
+    const emailAd = email.split('@')[0];
+    const ref = firebase.database().ref('/users/' + emailAd);
+    return new Promise(res => {
+      ref.once('value', snapshot => {
+        res(snapshot.val());
+      });
+    });
   }
 }
