@@ -25,6 +25,7 @@
 }
 .fullHeight {
   height: 100vh;
+  overflow-x: hidden;
 }
 .badge{
   text-align: right;
