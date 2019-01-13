@@ -16,8 +16,9 @@
 }
 .jumbotron {
   padding: 1rem 2rem 1rem 1rem !important;
-  background-image: url('../../assets/images/header.svg');
-  background-blend-mode: overlay;
+  background: url('../../assets/images/header.png');
+  background-size: 100%;
+
 }
 .mat-drawer{
   left: 0 !important;
@@ -50,4 +51,7 @@
   .mar-left{
     margin-left: 2em;
   }
+}
+.hide-header{
+  opacity: 0;
 }

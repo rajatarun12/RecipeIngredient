@@ -4,50 +4,47 @@
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel [expanded]="step === 0" *ngIf="data.personalShare" (opened)="setStep(0)" hideToggle="true">
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Personal data
+            <mat-panel-title [innerHTML]="'personalDataLabel' | translate">
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <p>Name</p>
+          <p [innerHTML]="'nameLabel' | translate"></p>
           <h6>{{data.name}}</h6>
 
-          <p>Age</p>
+          <p [innerHTML]="'ageLabel' | translate"></p>
           <h6>{{data.age}}</h6>
 
           <mat-action-row>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
+            <button mat-button color="primary" (click)="nextStep()" [innerHTML]="'nextLabel' | translate"></button>
           </mat-action-row>
         </mat-expansion-panel>
 
         <mat-expansion-panel [expanded]="step === 1" *ngIf="data.countryShare" (opened)="setStep(1)" hideToggle="true">
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Country
+            <mat-panel-title [innerHTML]="'countryLabel' | translate">
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <p>Country</p>
+          <p [innerHTML]="'countryLabel' | translate"></p>
           <h6>{{data.country}}</h6>
 
           <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
+            <button mat-button color="warn" (click)="prevStep()" [innerHTML]="'previousLabel' | translate">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()" [innerHTML]="'nextLabel' | translate">Next</button>
           </mat-action-row>
         </mat-expansion-panel>
 
         <mat-expansion-panel [expanded]="step === 2" *ngIf="data.languageShare" (opened)="setStep(2)" hideToggle="true">
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Language
+            <mat-panel-title [innerHTML]="'languageLabel' | translate">
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <p>Language</p>
+          <p [innerHTML]="'languageLabel' | translate"></p>
           <h6>{{data.language}}</h6>
 
           <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="warn" (click)="prevStep()" [innerHTML]="'previousLabel' | translate"></button>
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>
@@ -60,5 +57,5 @@
   </mat-tab>
 </mat-tab-group>
 <div class="row">
-  <button mat-button color="primary" (click)="close()">Close</button>
+  <button mat-button color="primary" (click)="close()" [innerHTML]="'closeLabel' | translate"></button>
 </div>

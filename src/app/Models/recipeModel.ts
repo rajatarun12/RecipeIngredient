@@ -4,6 +4,7 @@ export class RecipeModel {
   originalList?: any;
   previousList?: Object[] = []
   currentIndex = 10;
+  currentSearchQuery = '';
 
   constructor(private recipes) {
     if (recipes) {
@@ -11,6 +12,7 @@ export class RecipeModel {
       this.pollRecipeData();
       this.count = recipes.count;
       this.originalList = recipes.originalList;
+      this.currentSearchQuery = recipes.currentSearchQuery;
     }
   }
 
@@ -81,15 +83,19 @@ export class RecipeModel {
   getRecipes(recipes) {
     let recipesList = recipes.reduce((recipesList, recipe) => {
       let tempRecipe = {};
+      const dailyNutrients = this.getNutrients(recipe.recipe.totalDaily);
+      const totalNutrients = this.getNutrients(recipe.recipe.totalNutrients);
       tempRecipe['ingredients'] = recipe.recipe.ingredientLines;
       tempRecipe['calories'] = recipe.recipe.calories;
-      tempRecipe['nutrients'] = this.getNutrients(recipe.recipe.totalNutrients);
+      tempRecipe['nutrients'] = totalNutrients[0];
       tempRecipe['majorNutrients'] = this.majorNutrients(recipe.recipe.totalNutrients);
-      tempRecipe['dailyNutrients'] = this.getNutrients(recipe.recipe.totalDaily);
+      tempRecipe['dailyNutrients'] = dailyNutrients[0];
+      tempRecipe['percentDaily'] = [totalNutrients[1], dailyNutrients[1]];
       tempRecipe['image'] = recipe.recipe.image;
       tempRecipe['title'] = recipe.recipe.label;
       tempRecipe['recipieUrl'] = recipe.recipe.url;
       tempRecipe['dietLabels'] = recipe.recipe.dietLabels;
+      tempRecipe['healthLabels'] = recipe.recipe.healthLabels;
       tempRecipe['fav'] = false;
       recipesList.push(tempRecipe);
       return recipesList;
@@ -111,14 +117,16 @@ export class RecipeModel {
 
   getNutrients(nutrients) {
     const nutrientsList = [];
+    const nutrientsDict = {};
     Object.keys(nutrients).forEach(nutrientObj => {
       const tempObj = [];
       const nutrient = nutrients[nutrientObj];
       tempObj.push(nutrient['label']);
+      nutrientsDict[nutrient['label']] = Number(nutrient['quantity'].toString()).toFixed(2);
       tempObj.push(Number(nutrient['quantity'].toString()).toFixed(2) + ' ' + nutrient['unit']);
       nutrientsList.push(tempObj);
     });
-    return nutrientsList;
+    return [nutrientsList, nutrientsDict];
   }
   pollRecipeData(){
     var tempData = this.previousList;
@@ -129,5 +137,9 @@ export class RecipeModel {
   clearRecipes() {
     this.RecipeObject = [];
     this.originalList = [];
+  }
+
+  getCurrentSearchQuery() {
+    return this.currentSearchQuery;
   }
 }

@@ -1,18 +1,22 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../recipe.service';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import {Inject, HostListener } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import {RecipeModel} from "../Models/recipeModel";
-import {AppGlobal} from "../Content/AppGlobal";
-import {TranslateService} from "@ngx-translate/core";
+import {RecipeModel} from '../Models/recipeModel';
+import {AppGlobal} from '../Content/AppGlobal';
+import {TranslateService} from '@ngx-translate/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import {FirebaseOperation} from "angularfire2/database/interfaces";
-import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
-import {Observable} from "rxjs/Observable";
-import {UserModel} from "../Models/UserModel";
-import {DatabaseServiceService} from "../services/database-service.service";
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {FirebaseOperation} from 'angularfire2/database/interfaces';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {Observable} from 'rxjs/Observable';
+import {UserModel} from '../Models/UserModel';
+import {DatabaseServiceService} from '../services/database-service.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import {NutrientDialogTemplate} from '../nutrient-dialog/nutrient-dialog.component';
+import {GooglemapsComponent} from '../googlemaps/googlemaps.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-view-recipe',
@@ -21,20 +25,23 @@ import {SnackBarComponent} from '../snack-bar/snack-bar.component';
   host: {'(window:scroll)' : 'onWindowScroll()'},
   providers: [RecipeService, NgbTooltipConfig, AppGlobal, DatabaseServiceService]
 })
-export class ViewRecipeComponent implements OnInit {
+export class ViewRecipeComponent implements OnInit,OnChanges {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
   @ViewChild(SnackBarComponent)
     snackBarRef: SnackBarComponent;
   ingredient = '';
+  showResults: Boolean = true;
   recipeCollection: AngularFirestoreCollection<RecipeModel>;
   recipeList: Observable<any>;
   navIsFixed: boolean;
   filterValue: String;
   sortValue: String;
   constructor(private recipeService: RecipeService,
+              public dialog: MatDialog,
               @Inject(DOCUMENT) private document: Document,
-              private appGlobal:AppGlobal,
+              private appGlobal: AppGlobal,
+              private spinnerService: Ng4LoadingSpinnerService,
               public translate: TranslateService,
               private db: AngularFireDatabase,
               private foodDb: DatabaseServiceService) { }
@@ -54,12 +61,14 @@ export class ViewRecipeComponent implements OnInit {
 
 
   }
-
+  ngOnChanges() {
+      this.showResults = true;
+  }
   getFilterList() {
     return this.recipes.getFilterList();
   }
   handleUrlChange(url){
-    window.open(url,'_blank');
+    window.open(url, '_blank');
   }
 
   getFilterResults(filterType){
@@ -100,8 +109,24 @@ export class ViewRecipeComponent implements OnInit {
     }
   })();
   }
-
+  handleNearby(title){
+    const dialogRef = this.dialog.open(GooglemapsComponent, {
+      width: '200em',
+      data: {title: title}
+    });
+  }
   clearResults() {
-    this.recipes.clearRecipes();
+    this.showResults = false;
+  }
+  addDietLabelToSearch(query){
+    let ingredients = this.recipes.getCurrentSearchQuery();
+    ingredients = ingredients.toString().replace(/,/g,'');
+    ingredients += (',' + query);
+    this.spinnerService.show();
+    this.recipeService.getRecipe(ingredients).subscribe(result => {
+      this.spinnerService.hide();
+      const recipes = this.recipes.getRecipes(result['hits']);
+      this.recipes.RecipeObject = recipes;
+    });
   }
 }

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-8 col-sm-8 col-md-8"><h4>Favorites</h4></div>
+  <div class="col-xs-8 col-sm-8 col-md-8"><h4 [innerHTML]="'FavoritesLabel' | translate"></h4></div>
   <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 align-right"><mat-icon (click)="toggleExpand(true)"><i class="fas fa-expand fa-2x"></i></mat-icon></div>
   <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2"><mat-icon (click)="toggleExpand(false)"><i class="fas fa-compress fa-2x "></i></mat-icon></div>
 </div>

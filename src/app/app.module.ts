@@ -38,6 +38,10 @@ import {HttpModule} from '@angular/http';
 import { RecipeSliderComponent } from './recipe-slider/recipe-slider.component';
 import { RecipeInfoComponent } from './recipe-info/recipe-info.component';
 import { FollowerInfoComponent } from './follower-info/follower-info.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { SafePipe } from './safe.pipe';
+import {Ng2GoogleChartsModule} from 'ng2-google-charts';
+import { GooglemapsComponent } from './googlemaps/googlemaps.component';
 
 
 const appRoutes = [
@@ -49,7 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent
+    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatExpansionModule,
     MatTabsModule,
     MatSlideToggleModule,
+    Ng2GoogleChartsModule,
     MatListModule,
     HttpModule,
     HttpClientModule,
@@ -93,7 +98,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule
   ],
   exports: [ViewRecipeComponent, SearchComponent, MatSidenavModule, MatInputModule, MatDialogModule,MatCardModule],
-  entryComponents: [NutrientDialogTemplate, FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent, FollowersComponent, MyRecipesComponent],
+  entryComponents: [NutrientDialogTemplate, GooglemapsComponent, PrivacyPolicyComponent,FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent, FollowersComponent, MyRecipesComponent],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

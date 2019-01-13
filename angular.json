@@ -1,0 +1,188 @@
+//{
+//  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+//  "project": {
+//    "name": "ingredient-recipe"
+//  },
+//  "apps": [
+//    {
+//      "root": "src",
+//      "outDir": "../www",
+//      "assets": [
+//        "assets",
+//        "favicon.ico"
+//      ],
+//      "index": "index.html",
+//      "main": "main.ts",
+//      "polyfills": "polyfills.ts",
+//      "test": "test.ts",
+//      "tsconfig": "tsconfig.app.json",
+//      "testTsconfig": "tsconfig.spec.json",
+//      "prefix": "app",
+//      "styles": [
+//        "styles.css"
+//      ],
+//      "scripts": [],
+//      "environmentSource": "environments/environment.ts",
+//      "environments": {
+//        "dev": "environments/environment.ts",
+//        "prod": "environments/environment.prod.ts"
+//      }
+//    }
+//  ],
+//  "e2e": {
+//    "protractor": {
+//      "config": "./protractor.conf.js"
+//    }
+//  },
+//  "lint": [
+//    {
+//      "project": "src/tsconfig.app.json",
+//      "exclude": "**/node_modules/**"
+//    },
+//    {
+//      "project": "src/tsconfig.spec.json",
+//      "exclude": "**/node_modules/**"
+//    },
+//    {
+//      "project": "e2e/tsconfig.e2e.json",
+//      "exclude": "**/node_modules/**"
+//    }
+//  ],
+//  "test": {
+//    "karma": {
+//      "config": "./karma.conf.js"
+//    }
+//  },
+//  "defaults": {
+//    "styleExt": "css",
+//    "component": {}
+//  }
+//}
+
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ingredient-recipe": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ingredient-recipe",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ingredient-recipe:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ingredient-recipe:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ingredient-recipe:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ingredient-recipe-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "ingredient-recipe:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ingredient-recipe:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ingredient-recipe"
+}

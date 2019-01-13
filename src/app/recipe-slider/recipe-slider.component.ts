@@ -1,17 +1,11 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import { breakpointsProvider, BreakpointsService, BreakpointEvent, BreakpointConfig } from 'angular-breakpoints';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
-const defaultBreakpoints: BreakpointConfig = {
-  xs: { max: 768 },
-  sm: { min: 768, max: 992 },
-  md: { min: 992, max: 1200 },
-  lg: { min: 1200 }
-};
 @Component({
   selector: 'app-recipe-slider',
   templateUrl: './recipe-slider.component.html',
   styleUrls: ['./recipe-slider.component.css'],
-  providers: [breakpointsProvider(defaultBreakpoints)]
+  providers: [BreakpointObserver]
 })
 export class RecipeSliderComponent implements OnInit, OnChanges {
   @Input()
@@ -25,9 +19,9 @@ export class RecipeSliderComponent implements OnInit, OnChanges {
   hideLeft: Boolean = true;
   hideRight: Boolean = false;
 
-  constructor(private breakpointsService: BreakpointsService) {
-    this.breakpointsService.changes.subscribe((event: BreakpointEvent) => {
-      if (event.name === 'xs'){
+  constructor(private breakpointsService: BreakpointObserver) {
+    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
+      if (result.matches) {
         this.isXs = true;
       } else {
         this.isXs = false;

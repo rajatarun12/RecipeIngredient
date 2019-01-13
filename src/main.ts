@@ -10,10 +10,10 @@ if (environment.production) {
 
 let app = function(){
   // Application Constructor
-    this.initialize =  function() {
-      document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+    const initialize =  function() {
+      document.addEventListener('deviceready', onDeviceReady.bind(this), false);
       if (environment.dev) {
-        this.receivedEvent('deviceready');
+        receivedEvent('deviceready');
       }
     };
 
@@ -21,22 +21,21 @@ let app = function(){
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    this.onDeviceReady = function() {
+    const onDeviceReady = function() {
       delete window.open;
       // @ts-ignore
       window.open = cordova.InAppBrowser.open;
-      this.receivedEvent('deviceready');
+      receivedEvent('deviceready');
     };
-
     // Update DOM on a Received Event
-    this.receivedEvent =  function(id) {
+    const receivedEvent =  function(id) {
       if ( id = 'deviceready') {
         platformBrowserDynamic().bootstrapModule(AppModule)
           .catch(err => console.log(err));
       }
     };
-    this.initialize();
-}.bind(this);
+    initialize();
+};
 
 app();
 

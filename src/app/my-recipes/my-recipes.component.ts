@@ -5,18 +5,13 @@ import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {MatChipInputEvent} from '@angular/material';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
-import { breakpointsProvider, BreakpointsService, BreakpointEvent, BreakpointConfig } from 'angular-breakpoints';
-const defaultBreakpoints: BreakpointConfig = {
-  xs: { max: 768 },
-  sm: { min: 768, max: 992 },
-  md: { min: 992, max: 1200 },
-  lg: { min: 1200 }
-};
+import {BreakpointObserver} from '@angular/cdk/layout';
+
 @Component({
   selector: 'app-my-recipes',
   templateUrl: './my-recipes.component.html',
   styleUrls: ['./my-recipes.component.css'],
-  providers: [AuthService, breakpointsProvider(defaultBreakpoints)]
+  providers: [AuthService, BreakpointObserver]
 })
 export class MyRecipesComponent implements OnInit {
 @ViewChild(SnackBarComponent)
@@ -30,9 +25,9 @@ snackBarRef: SnackBarComponent;
   separatorKeysCodes = [ENTER, COMMA];
   constructor( public dialogRef: MatDialogRef<MyRecipesComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any,
-    private authService: AuthService, private fb: FormBuilder, private breakpointsService: BreakpointsService) {
-    this.breakpointsService.changes.subscribe((event: BreakpointEvent) => {
-      if (event.name === 'xs'){
+    private authService: AuthService, private fb: FormBuilder, private breakpointsService: BreakpointObserver) {
+    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
+      if (result.matches) {
         this.isXs = true;
       } else {
         this.isXs = false;

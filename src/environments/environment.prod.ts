@@ -19,6 +19,7 @@ export const environment = {
     secret: "AmCBW-pOpsEZa_JMnhMKEP2T"
   },
   googleCloudVisionAPIKey: "AIzaSyCUiiGFM9vbof_TTe9bcN1sCKUQ6mnGJv4",
+  googlePlacesAPIKey: "AIzaSyBx7pSuNVBwoJ9wK5LevM8KIVNdAkH-OVI",
   appleImagePath: 'assets/images/badgeFooter.jpg'
 };
 

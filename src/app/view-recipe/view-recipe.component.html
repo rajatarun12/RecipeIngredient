@@ -1,4 +1,4 @@
-<div class="row pad-left-2 width-full" *ngIf="recipes.RecipeObject['length'] > 0">
+<div class="row pad-left-2 width-full" [ngClass]="{'hidden-op':!showResults}" *ngIf="recipes.RecipeObject['length'] > 0">
   <div class="btn-group filterGroup col-xs-12">
     <button type="button" mat-raised-button color="warn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{filterValue | translate}}
@@ -18,9 +18,9 @@
       <a class="dropdown-item" (click)="getSortResults('DESC')" [innerHTML]=" 'HighToLowLabel' | translate"></a>
     </div>
   </div>
-  <mat-icon class="align-right icon-clear" (click)="clearResults()"><i class="fas fa-times-circle fa-2x"></i>Clear Results</mat-icon>
+  <mat-icon class="align-right icon-clear" ngbTooltip="Clear Results" (click)="clearResults()"><i class="fas fa-times-circle fa-2x"></i></mat-icon>
 </div>
-<div class="row pad-left">
+<div class="row pad-left" [ngClass]="{'hidden-op':!showResults}">
   <div *ngFor="let hit of recipes.RecipeObject; let in = index" class="border-round recipeCard col-xs-12 col-sm-12 col-md-12 col-lg-5" >
     <mat-card>
       <div class="media row">
@@ -32,9 +32,11 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-lg-12 mar-left mar-top mar-right">
           <div class="row">
-            <app-nutrient-dialog [nutrients]="hit.nutrients"></app-nutrient-dialog>
+            <app-nutrient-dialog [nutrients]="hit.nutrients" [percentDaily]="hit.percentDaily"></app-nutrient-dialog>
           <a (click)="handleUrlChange(hit.recipieUrl)">
-            <button mat-raised-button color="accent" class="btn btn-success" ngbTooltip="View Website"><i class="material-icons">visibility</i></button></a>
+            <button mat-icon-button class="button-icons" ngbTooltip="View Website"><i class="fas fa-globe fa-2x"></i></button></a>
+            <a (click)="handleNearby(hit.title)">
+              <button mat-icon-button class="button-icons" ngbTooltip="View Nearby"><i class="fas fa-map-marker-alt fa-2x"></i></button></a>
             <button mat-icon-button (click)="addToFav(hit, $event)"><i [ngClass]="{'fas':hit.favorite,'far':!hit.favorite,'fa-heart':true }"></i></button>
           </div>
         </div>
@@ -44,6 +46,15 @@
               {{ingredient}}
             </li>
           </ul>
+        </div>
+        <div class="media-row chips">
+          <mat-chip-list #chipList>
+            <mat-chip class="back-red"  *ngFor="let data of hit.healthLabels" [selectable]="true"
+                      [removable]="true" (remove)="addDietLabelToSearch(data)">
+              {{data}}
+              <mat-icon matChipRemove><i class="fas fa-plus"></i></mat-icon>
+            </mat-chip>
+          </mat-chip-list>
         </div>
       </div>
     </mat-card>

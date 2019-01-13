@@ -1,19 +1,14 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DatabaseServiceService} from '../services/database-service.service';
-import { breakpointsProvider, BreakpointsService, BreakpointEvent, BreakpointConfig } from 'angular-breakpoints';
 
-const defaultBreakpoints: BreakpointConfig = {
-  xs: { max: 768 },
-  sm: { min: 768, max: 992 },
-  md: { min: 992, max: 1200 },
-  lg: { min: 1200 }
-};
+import {BreakpointObserver} from '@angular/cdk/layout';
+
 @Component({
   selector: 'app-favorite-recipe-component',
   templateUrl: './favorite-recipe-component.component.html',
   styleUrls: ['./favorite-recipe-component.component.css'],
-  providers: [DatabaseServiceService, breakpointsProvider(defaultBreakpoints)]
+  providers: [DatabaseServiceService,BreakpointObserver]
 })
 export class FavoriteRecipeComponentComponent implements OnInit{
   detailView = true;
@@ -21,9 +16,9 @@ export class FavoriteRecipeComponentComponent implements OnInit{
   isXs: Boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private db: DatabaseServiceService, private breakpointsService: BreakpointsService) {
-    this.breakpointsService.changes.subscribe((event: BreakpointEvent) => {
-      if (event.name === 'xs'){
+    private db: DatabaseServiceService, private breakpointsService: BreakpointObserver) {
+    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
+      if (result.matches) {
         this.isXs = true;
       } else {
         this.isXs = false;

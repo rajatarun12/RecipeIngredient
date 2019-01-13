@@ -10,6 +10,7 @@ import {UserModel} from "../Models/UserModel";
 import {AuthService} from '../services/auth.service';
 import * as firebase from 'firebase/app';
 import { environment } from '../../environments/environment';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-recipe-search',
@@ -18,19 +19,29 @@ import { environment } from '../../environments/environment';
   providers: [RecipeService, AppGlobal, AuthService]
 })
 export class RecipeSearchComponent implements OnInit {
-  public recipe: RecipeModel;
+  public recipe;
   hideHeader: Boolean = false;
   appleImagePath: String =  environment.appleImagePath;
   opened: Boolean;
+  isXs: Boolean = false;
   user: UserModel;
   hideBadges: Boolean = false;
   notifications: any;
   constructor(private recipeService: RecipeService,
               @Inject(DOCUMENT) private document: Document,
-              public appGlobal:AppGlobal,
+              public appGlobal: AppGlobal,
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private breakpointsService: BreakpointObserver) {
+    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
+      if (result.matches) {
+        this.isXs = true;
+      } else {
+        this.isXs = false;
+      }
+    });
+  }
 
   ngOnInit() {
     let language = '';
@@ -52,6 +63,29 @@ export class RecipeSearchComponent implements OnInit {
         this.notifications = notifications;
       });
     });
+    // Check whether SiriKit extension activates the test service
+    // @ts-ignore
+    const prefs = plugins.appPreferences;
+    const suitePrefs = prefs.suite('group.recipesearch');
+
+    suitePrefs.fetch(
+      function(value) {
+        // Activated by voice control
+        console.log(value);
+        if (value === 'Test') {
+          // Clear the auto start
+          suitePrefs.remove(function() {}, function() {}, 'start');
+          console.log('worked');
+          // Run a test service
+          // runTest();
+        }
+      },
+      // Error
+      function(error) {
+
+      },
+      'start'
+    );
   }
   setUserInfo(user){
     this.user = user;

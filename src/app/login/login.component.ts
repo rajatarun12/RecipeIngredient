@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit{
   loginWithGoogle(){
     this.authService.signInWithGoogle().then(result => {
       // This gives you a Google Access Token. You can use it to access the Google API.
-      localStorage.setItem('token',result.credential);
+      localStorage.setItem('token', result.credential.toString());
       // The signed-in user info.
       this.userInfo = result.user;
       const user = new UserModel({
@@ -84,12 +84,12 @@ export class LoginComponent implements OnInit{
       // ...
     }).catch(error => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       // The email of the user's account used.
-      var email = error.email;
+      const email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      const credential = error.credential;
       // ...
     });
   }
@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit{
   loginWithFaceBook(){
     this.authService.signInWithFacebook().then(result => {
       // This gives you a Google Access Token. You can use it to access the Google API.
-      localStorage.setItem('token',result.credential);
+      localStorage.setItem('token',result.credential.toString());
       // The signed-in user info.
       this.userInfo = result.user;
       const user = new UserModel({
@@ -136,8 +136,8 @@ export class LoginComponent implements OnInit{
     let error: String;
     if (authLabel === 'LoginLabel') {
       auth = this.authService.loginWithEmail(this.myForm.value.login, this.myForm.value.password).then(res => {
-        localStorage.setItem('token', res);
-        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res.uid});
+        localStorage.setItem('token', res.toString());
+        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res.uid.toString()});
 
         this.dialogRef.close(user);
         this.spinnerService.hide();
@@ -150,7 +150,7 @@ export class LoginComponent implements OnInit{
       });
     } else {
       auth = this.authService.registerWithEmail(this.myForm.value.login,this.myForm.value.password).then(res => {
-        localStorage.setItem('token',res);
+        localStorage.setItem('token',res.toString());
         const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res.uid});
         this.createDataBaseUserObject(user).then(res => {
           this.dialogRef.close(user);

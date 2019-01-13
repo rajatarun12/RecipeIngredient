@@ -1,12 +1,12 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators, FormArray, FormGroupDirective, NgForm} from '@angular/forms';
 import {RecipeService} from '../recipe.service';
 import {RecipeModel} from '../Models/recipeModel';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {IngredientCheckDirective} from '../directives/validators/ingredient-check.directive';
-import {AppGlobal} from "../Content/AppGlobal";
-import {TranslateService} from "@ngx-translate/core";
-import {GoogleCloudVisionService} from '../google-cloud-vision.service';
+import {AppGlobal} from '../Content/AppGlobal';
+import {TranslateService} from '@ngx-translate/core';
+import {GoogleCloudVisionService} from '../services/google-cloud-vision.service';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -32,66 +32,89 @@ ie: ElementRef;
 matcher: MyErrorStateMatcher;
   imageSearchData: any = [];
   recipes: RecipeModel = new RecipeModel({
-    RecipeObject:[]
+    RecipeObject: []
   });
   selectable: Boolean = true;
   voiceStarted: Boolean = false;
   removable: Boolean = true;
   inputs: String[]= ['0'];
   ingredients: String;
+  alreadyTriggered: Boolean = false;
   public myForm: FormGroup;
   collapsed: Boolean = true;
   itemsGroup: FormArray;
-  hideHeader:Boolean;
+  hideHeader: Boolean;
   constructor(private fb: FormBuilder,
               private recipeService: RecipeService,
               private spinnerService: Ng4LoadingSpinnerService,
-              public appGlobal:AppGlobal,
+              public appGlobal: AppGlobal,
               public translate: TranslateService,
-              private vision: GoogleCloudVisionService) { }
+              private vision: GoogleCloudVisionService,
+              private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+    const self = this;
     this.myForm = this.fb.group({
         'search': this.fb.array([this.createItem()])
     });
     this.translate.setDefaultLang(this.appGlobal.defaultContent);
+    // setInterval(() => {
+    //   this.listenForSiri();
+    // }, 2000);
   }
+  listenForSiri() {
+    // @ts-ignore
+    const prefs = plugins.appPreferences;
+    const suitePrefs = prefs.suite('group.recipesearch');
 
+    suitePrefs.fetch(
+      function(value) {
+        // Activated by voice control
+        console.log(value);
+        if (value === 'openCamera') {
+          // Clear the auto start
+          suitePrefs.remove(function() {}, function() {}, 'start');
+          this.searchPhoto(true);
+        }
+      }.bind(this),
+      // Error
+      function(error) {
+
+      },
+      'start'
+    );
+  }
   addSearchBox(): void {
     const inputLength = this.inputs.length;
     const lastIndex = Number(this.inputs[inputLength - 1]);
     if (lastIndex < 10) {
       this.itemsGroup = this.myForm.get('search') as FormArray;
-      this.itemsGroup.push(this.createItem())
+      this.itemsGroup.push(this.createItem());
       this.inputs.push((lastIndex + 1).toString());
     }
   }
-  searchPhoto(){
-    // this.spinnerService.show();
-    // navigator['camera'].getPicture((data) => {
-    //   this.vision.getLabels(data).subscribe(resp => {
-    //           this.imageSearchData =  resp.responses[0].labelAnnotations;
-    //           this.spinnerService.hide();
-    //         });
-    // }, () => {}, {
-    //   // @ts-ignore
-    //   destinationType: Camera.DestinationType.DATA_URL,
-    // });
-    this.spinnerService.show();
-    const fileCount: number = this.ie.nativeElement.files.length;
-    const formData = new FormData();
-    if (fileCount > 0) {
-      const base64 = new FileReader();
-      let res;
-      base64.readAsBinaryString(this.ie.nativeElement.files[0]);
-      setTimeout(() => {
-        const str = base64.result;
-        res = btoa(str);
-        this.vision.getLabels(res).subscribe(resp => {
-          this.imageSearchData =  resp.responses[0].labelAnnotations;
-          this.spinnerService.hide();
-        });
-      }, 5000);
+  searchPhoto(fromEvent) {
+    const self = this;
+    if (fromEvent) {
+        self.ie.nativeElement.click();
+    } else {
+        self.spinnerService.show();
+        const fileCount: number = self.ie.nativeElement.files.length;
+        const formData = new FormData();
+        if (fileCount > 0) {
+          const base64 = new FileReader();
+          let res;
+          base64.readAsBinaryString(self.ie.nativeElement.files[0]);
+          setTimeout(() => {
+            const str = base64.result;
+            res = btoa(str);
+            self.vision.getLabels(res).subscribe(resp => {
+              self.imageSearchData = resp.responses[0].labelAnnotations;
+              self.ref.detectChanges();
+              self.spinnerService.hide();
+            });
+          }, 5000);
+        }
     }
   }
   addIngredient(description) {
@@ -108,12 +131,12 @@ matcher: MyErrorStateMatcher;
   search() {
     const values = this.myForm;
     this.ingredients = '';
-    let ingredients = this.myForm.controls.search.value.reduce(((ingredients, value) => {
+    const ingredients = this.myForm.controls.search.value.reduce(((ingredients, value) => {
         ingredients.push(value.name);
         return ingredients;
     }), []);
-    ingredients = ingredients.concat(',');
-    this.recipeService.getRecipe(ingredients).subscribe(result => {
+    this.ingredients = ingredients.concat(',');
+    this.recipeService.getRecipe(this.ingredients).subscribe(result => {
       this.spinnerService.hide();
       const count = result['count'] || 0;
       this.imageSearchData = [];
@@ -121,7 +144,8 @@ matcher: MyErrorStateMatcher;
       this.sendRecipes.emit(new RecipeModel({
         RecipeObject: recipes,
         count: count,
-        originalList: result
+        originalList: result,
+        currentSearchQuery: this.ingredients
       }));
     });
   }
@@ -131,7 +155,7 @@ matcher: MyErrorStateMatcher;
       this.itemsGroup = this.myForm.get('search') as FormArray;
       this.itemsGroup.removeAt(index);
       this.inputs.pop();
-      if(this.itemsGroup.length < 5 && this.collapsed) {
+      if (this.itemsGroup.length < 5 && this.collapsed) {
         this.collapsed = false;
       }
     }
@@ -169,26 +193,7 @@ matcher: MyErrorStateMatcher;
   }
   enableSpeech() {
     const flag = environment.production;
-    if (flag) {
-      const url = environment.fileUrl[this.getMobileOperatingSystem()];
-      // @ts-ignore
-      const my_media = new Media(url,
-        // success callback
-        function () {
-          console.log(' playAudio():Audio Success');
-        },
-        // error callback
-        function (err) {
-          console.log('playAudio():Audio Error: ' + err);
-        }
-      );
-      my_media.startRecord();
-      this.voiceStarted = true;
-      setTimeout(() => {
-        this.voiceStarted = false;
-        my_media.stopRecord();
-      }, 3000);
-    } else {
+    if (!flag) {
       const synth = window.speechSynthesis;
       const voices = synth.getVoices();
 
@@ -210,12 +215,30 @@ matcher: MyErrorStateMatcher;
               this.imageSearchData.push({description: elem, score: 100});
               this.voiceStarted = false;
             });
-          }
-          else {
+          } else {
             this.voiceStarted = false;
           }
         }.bind(this);
       };
+    } else {
+      const url = environment.fileUrl[this.getMobileOperatingSystem()];
+      // @ts-ignore
+      const my_media = new Media(url,
+        // success callback
+        function () {
+          console.log(' playAudio():Audio Success');
+        },
+        // error callback
+        function (err) {
+          console.log('playAudio():Audio Error: ' + err);
+        }
+      );
+      my_media.startRecord();
+      this.voiceStarted = true;
+      setTimeout(() => {
+        this.voiceStarted = false;
+        my_media.stopRecord();
+      }, 3000);
     }
   }
 }

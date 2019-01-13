@@ -15,18 +15,21 @@ import {SettingsComponent} from '../settings/settings.component';
 import {LoginComponent} from '../login/login.component';
 import {FollowersComponent} from '../followers/followers.component';
 import {MyRecipesComponent} from '../my-recipes/my-recipes.component';
+import {PrivacyPolicyComponent} from '../privacy-policy/privacy-policy.component';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css'],
-  providers: [AuthService, TranslateService, AppGlobal]
+  providers: [AuthService, TranslateService, AppGlobal, BreakpointObserver]
 })
 export class SideNavComponent implements OnInit {
   userEmail: String;
   loginActive: Boolean;
   displayName: String;
   language;
+  isXs;
   @Input() user;
   @Output() userInfo = new EventEmitter<UserModel>();
   constructor(public  translate: TranslateService,
@@ -34,7 +37,14 @@ export class SideNavComponent implements OnInit {
               private auth: AuthService,
               private spinnerService :Ng4LoadingSpinnerService,
               private appGlobal:AppGlobal,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private breakpointsService: BreakpointObserver) {
+      this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
+      if (result.matches) {
+        this.isXs = true;
+      } else {
+        this.isXs = false;
+      }
+      });
 
     this.route.params.forEach(param => {
       this.language = param['language']
@@ -42,7 +52,16 @@ export class SideNavComponent implements OnInit {
     this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
     console.log(this.translate.getLangs());
   }
-
+  handlePrivacyPolicy(){
+    if(!this.isXs) {
+      let dialogRef = this.dialog.open(PrivacyPolicyComponent, {
+        width: '100em',
+        height: '90%'
+      });
+    } else {
+      window.open('https://www.iubenda.com/privacy-policy/31926591', '_blank');
+    }
+  }
   ngOnInit() {
 
     firebase.auth().getRedirectResult().then(result => {

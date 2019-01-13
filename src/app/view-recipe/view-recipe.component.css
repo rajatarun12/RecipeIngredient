@@ -26,6 +26,7 @@ mat-icon.icon-clear > svg {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.2em;
 }
 
 .label-centered{
@@ -76,7 +77,7 @@ mat-icon.icon-clear > svg {
     margin-right: 2em;
   }
 }
-@media(min-width: 992px) {
+@media(min-width: 1090px) {
   .pad-left{
     padding-left: 4em;
   }
@@ -84,10 +85,17 @@ mat-icon.icon-clear > svg {
     padding-left: 7em;
   }
   .border-round{
-    margin-left: 0;
     margin-left:3em;
   }
 
+}
+@media (min-width: 992px) and (max-width: 1089px) {
+  .border-round{
+    margin-left:2em;
+  }
+  .media-body {
+    margin-left: 2.5em;
+  }
 }
 @media (min-width: 1024px) and (max-width: 1250px){
     .media-body{
@@ -111,4 +119,14 @@ mat-icon.icon-clear > svg {
 .show-scroll {
   opacity: 1;
   transition: all .2s ease-in-out;
+}
+.hidden-op {
+  opacity: 0;
+}
+.chips {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+.back-red {
+  background-color: #E84A4D !important;
 }
