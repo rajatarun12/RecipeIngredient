@@ -22,7 +22,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.css'],
+  styleUrls: ['./side-nav.component.scss'],
   providers: [AuthService, TranslateService, AppGlobal, BreakpointObserver]
 })
 export class SideNavComponent implements OnInit {

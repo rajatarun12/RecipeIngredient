@@ -7,7 +7,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 @Component({
   selector: 'app-favorite-recipe-component',
   templateUrl: './favorite-recipe-component.component.html',
-  styleUrls: ['./favorite-recipe-component.component.css'],
+  styleUrls: ['./favorite-recipe-component.component.scss'],
   providers: [DatabaseServiceService,BreakpointObserver]
 })
 export class FavoriteRecipeComponentComponent implements OnInit{

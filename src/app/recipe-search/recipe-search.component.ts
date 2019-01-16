@@ -15,7 +15,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 @Component({
   selector: 'app-recipe-search',
   templateUrl: './recipe-search.component.html',
-  styleUrls: ['./recipe-search.component.css'],
+  styleUrls: ['./recipe-search.component.scss'],
   providers: [RecipeService, AppGlobal, AuthService]
 })
 export class RecipeSearchComponent implements OnInit {

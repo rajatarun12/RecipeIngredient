@@ -4,7 +4,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 @Component({
   selector: 'app-recipe-slider',
   templateUrl: './recipe-slider.component.html',
-  styleUrls: ['./recipe-slider.component.css'],
+  styleUrls: ['./recipe-slider.component.scss'],
   providers: [BreakpointObserver]
 })
 export class RecipeSliderComponent implements OnInit, OnChanges {

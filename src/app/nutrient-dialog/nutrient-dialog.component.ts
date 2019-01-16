@@ -5,7 +5,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 @Component({
   selector: 'app-nutrient-dialog',
   templateUrl: './nutrient-dialog.component.html',
-  styleUrls: ['./nutrient-dialog.component.css']
+  styleUrls: ['./nutrient-dialog.component.scss']
 })
 export class NutrientDialogComponent implements OnInit {
   @Input() nutrients;

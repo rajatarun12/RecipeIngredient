@@ -1,0 +1,61 @@
+@import '~sass/main';
+
+.input-bottom{
+  margin-bottom: $margin-md;
+  color: teal;
+  font-size: $font-xl;
+}
+.width-full{
+  width: 100%;
+}
+.pad-left{
+  padding-left: $padding-md;
+}
+.deep-purple{
+  color: #5E42B0;
+}
+.jumbotron {
+  padding: $padding-md $padding-lg $padding-md $padding-md !important;
+  background: url('../../assets/images/header.png');
+  background-size: 100%;
+}
+.mat-drawer{
+  left: 0 !important;
+}
+.fullHeight {
+  height: 100vh;
+  overflow-x: hidden;
+}
+.badge{
+  text-align: right;
+}
+.pad-top{
+  padding-top: 0.6 * $padding-md;
+}
+.hide-header{
+  opacity: 0;
+}
+
+@media (max-width:  #{$breakpoint-tablet}) {
+  .badge{
+    display: none;
+  }
+}
+
+@media(min-width: #{$breakpoint-lg-tablet}){
+   .mar-left{
+     margin-left: 1.5 * $margin-md;
+   }
+}
+
+@media(min-width: #{$breakpoint-lg-desktop}){
+  .mar-left{
+    margin-left: 3 * $margin-lg;
+  }
+}
+
+@media (min-width: #{$breakpoint-desktop}){
+  .mar-left{
+    margin-left: $margin-lg;
+  }
+}

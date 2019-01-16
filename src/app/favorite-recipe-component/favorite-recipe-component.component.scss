@@ -1,0 +1,52 @@
+@import '~sass/main';
+
+.mar-left {
+  margin-left: $margin-md;
+}
+
+.mar-top {
+  margin-top: $margin-md;
+}
+
+.mar-bottom {
+  margin-bottom: $margin-md;
+}
+
+.media-heading {
+  margin-left: $margin-lg !important;
+}
+
+.center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-right {
+  text-align: right;
+  margin-bottom: $margin-md;
+}
+
+.likeButton {
+  margin-left: $margin-md;
+  margin-top: 0.4em;
+  color: $brand-danger;
+}
+
+@media (max-width: $breakpoint-lg-mobile) {
+  .hide-devices {
+    visibility: hidden;
+  }
+  .show-devices {
+    visibility: visible;
+  }
+}
+
+@media (min-width: $breakpoint-lg-mobile) {
+  .hide-devices {
+    visibility: visible;
+  }
+  .show-devices {
+    visibility: hidden;
+  }
+}

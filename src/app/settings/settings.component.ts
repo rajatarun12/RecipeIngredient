@@ -9,7 +9,7 @@ import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
+  styleUrls: ['./settings.component.scss'],
   providers: [AuthService, NgbTooltipConfig]
 })
 export class SettingsComponent implements OnInit {

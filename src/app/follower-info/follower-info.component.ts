@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 @Component({
   selector: 'app-follower-info',
   templateUrl: './follower-info.component.html',
-  styleUrls: ['./follower-info.component.css']
+  styleUrls: ['./follower-info.component.scss']
 })
 export class FollowerInfoComponent implements OnInit {
 step = 0;

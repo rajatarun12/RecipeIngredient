@@ -8,7 +8,7 @@ import {FollowerInfoComponent} from '../follower-info/follower-info.component';
 @Component({
   selector: 'app-followers',
   templateUrl: './followers.component.html',
-  styleUrls: ['./followers.component.css'],
+  styleUrls: ['./followers.component.scss'],
   providers: [AuthService]
 })
 export class FollowersComponent implements OnInit {

@@ -1,8 +1,10 @@
+@import '~sass/main';
+
 .list-group-item {
   border: none;
 }
 .margin-all {
-  margin: 1em;
+  margin: $margin-md;
 
 }
 .width-nav{
@@ -16,16 +18,16 @@
 }
 
 .mar-bottom{
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }
 .list-container{
   height: 90vh;
-  padding-top: 2em;
+  padding-top: $padding-lg;
 }
 .list-container > button{
-  margin-bottom: 1em !important;
+  margin-bottom: $margin-md !important;
 }
 
 .mar-top{
-  margin-top: 2em;
+  margin-top: $margin-lg;
 }

@@ -10,7 +10,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 @Component({
   selector: 'app-my-recipes',
   templateUrl: './my-recipes.component.html',
-  styleUrls: ['./my-recipes.component.css'],
+  styleUrls: ['./my-recipes.component.scss'],
   providers: [AuthService, BreakpointObserver]
 })
 export class MyRecipesComponent implements OnInit {

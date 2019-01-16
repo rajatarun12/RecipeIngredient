@@ -1,0 +1,129 @@
+@import '~sass/main';
+
+.border-round{
+  margin-bottom: 0.3 * $margin-md;
+  margin-top: 0.3 * $margin-md;
+  margin-left:$margin-md;
+  padding: $padding-md;
+}
+.width-full{
+  width: 100%;
+}
+.media.row{
+  margin-bottom: $margin-md;
+}
+.pad-left-2{
+  padding-left: $padding-lg;
+}
+.mar-top{
+  margin-top: $margin-md;
+}
+.align-right{
+  text-align: right;
+}
+mat-icon.icon-clear > svg {
+  margin-right: $margin-sm;
+}
+.icon-clear{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.2 * $margin-md;
+}
+
+.label-centered{
+  margin: auto;
+  width: 50%;
+  padding: 1px;
+}
+.filterGroup{
+  margin-right: $margin-md;
+}
+.border-round > img{
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+}
+.mar-right{
+  margin-right: $margin-md;
+}
+.btn-danger.mar-right{
+  margin-right: $margin-md;
+}
+.mar-left{
+  margin-left: $margin-md;
+}
+.tooltip-host {
+  display: inline-flex;
+  align-items: center;
+  margin: 50px;
+}
+.btn{
+  margin-bottom: $margin-sm;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.show-scroll {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
+.hidden-op {
+  opacity: 0;
+}
+.chips {
+  margin-left: $margin-sm;
+  margin-right: $margin-sm;
+}
+.back-red {
+  background-color: #E84A4D !important;
+}
+
+@media (min-width: #{$breakpoint-tablet}){
+  .border-round {
+    margin-left: 0.2 * $margin-md;
+    margin-right: 2.5 * $margin-md;
+  }
+}
+@media (max-width: #{$breakpoint-sm-mobile}){
+  .border-round{
+    border-top: 0;
+    padding-left: $padding-lg;
+    margin-left: 0;
+  }
+  .mar-right {
+    margin-right: $margin-lg;
+  }
+}
+@media(min-width: 1090px) {
+  .pad-left{
+    padding-left: 2 * $padding-lg;
+  }
+  .pad-left-2{
+    padding-left: 7 * $padding-md;
+  }
+  .border-round{
+    margin-left: 3 * $margin-md;
+  }
+}
+@media (min-width: 992px) and (max-width: 1089px) {
+  .border-round{
+    margin-left: $margin-lg;
+  }
+  .media-body {
+    margin-left: 2.5 * $margin-md;
+  }
+}
+@media (min-width: #{$breakpoint-desktop}) and (max-width: #{$breakpoint-md-desktop}) {
+  .media-body{
+    margin-left: $margin-lg;
+  }
+  .mar-left {
+    margin-left: 0;
+  }
+}
