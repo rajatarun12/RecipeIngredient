@@ -7,7 +7,7 @@ let infowindow: any = '';
 @Component({
   selector: 'app-googlemaps',
   templateUrl: './googlemaps.component.html',
-  styleUrls: ['./googlemaps.component.css']
+  styleUrls: ['./googlemaps.component.scss']
 })
 export class GooglemapsComponent implements AfterViewInit {
   @ViewChild('mapObj')

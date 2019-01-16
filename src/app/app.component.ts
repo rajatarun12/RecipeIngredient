@@ -7,7 +7,7 @@ import {AppGlobal} from './Content/AppGlobal';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   providers: [AppGlobal]
 })
 export class AppComponent implements OnInit {

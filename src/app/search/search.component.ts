@@ -22,7 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
+  styleUrls: ['./search.component.scss'],
   providers: [AppGlobal, NgbTooltipConfig, GoogleCloudVisionService]
 })
 export class SearchComponent implements OnInit {

@@ -21,7 +21,7 @@ import {MatDialog} from '@angular/material';
 @Component({
   selector: 'app-view-recipe',
   templateUrl: './view-recipe.component.html',
-  styleUrls: ['./view-recipe.component.css'],
+  styleUrls: ['./view-recipe.component.scss'],
   host: {'(window:scroll)' : 'onWindowScroll()'},
   providers: [RecipeService, NgbTooltipConfig, AppGlobal, DatabaseServiceService]
 })

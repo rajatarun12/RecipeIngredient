@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   providers: [AuthService, TranslateService, AppGlobal]
 })
 export class LoginComponent implements OnInit{
