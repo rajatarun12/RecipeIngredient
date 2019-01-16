@@ -1,51 +1,52 @@
+@import '~sass/main';
+
 .input-bottom{
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }
 .chevron{
-  padding-top: 2em;
+  padding-top: $padding-lg;
 }
 .glyph{
-  background: transparent;
+  background: $brand-transparent;
 }
 .danger{
-  color:red;
+  color: $brand-danger;
 }
 .ng-invalid{
-  border-color: red;
+  border-color: $brand-danger;
 }
 .mat-form-field{
   width: 100%;
 }
 .mar-right{
-  margin-right: 1em;
+  margin-right: $margin-md;
 }
 
 .mar-bottom{
-  margin-bottom: 0.5em;
+  margin-bottom: $margin-sm;
 }
 .center-justify{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1em;
+  margin-top: $margin-md;
 }
 .back-green {
-  background-color: green;
+  background-color: $brand-success;
 }
 .back-yellow {
-  background-color: yellow;
+  background-color: $brand-warning;
 }
 .back-red {
-  background-color: red;
+  background-color: $brand-danger;
 }
 mat-chip {
-  margin-bottom: 1em!important;
+  margin-bottom: $margin-md !important;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  color: white;
+  color: $brand-white;
 }
-
 mat-card {
-  margin-right: 1em;
+  margin-right: $margin-md;
 }
 .align-left{
   display: flex;
@@ -53,8 +54,8 @@ mat-card {
   justify-content: center;
 }
 .voice-start{
-  color: red;
+  color: $brand-danger;
 }
 .fa-13x {
-  font-size: 1.3em;
-       }
+  font-size: 1.3 * $font-md;
+}

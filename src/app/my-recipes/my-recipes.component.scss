@@ -1,3 +1,5 @@
+@import '~sass/main';
+
 mat-input-container {
   width: 100%;
 }
@@ -8,5 +10,5 @@ mat-form-field{
   text-align: right;
 }
 .header-title {
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }

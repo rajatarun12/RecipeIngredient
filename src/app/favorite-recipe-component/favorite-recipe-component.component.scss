@@ -1,42 +1,52 @@
-.mar-left{
-  margin-left: 1em;
+@import '~sass/main';
+
+.mar-left {
+  margin-left: $margin-md;
 }
-.mar-top{
-  margin-top: 1em;
+
+.mar-top {
+  margin-top: $margin-md;
 }
+
 .mar-bottom {
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }
+
 .media-heading {
-  margin-left: 2em !important;
+  margin-left: $margin-lg !important;
 }
-@media (max-width: 500px) {
-  .hide-devices{
-    visibility: hidden;
-  }
-  .show-devices {
-    visibility: visible;
-  }
-}
-@media (min-width: 500px) {
-  .hide-devices{
-    visibility: visible;
-  }
-  .show-devices {
-    visibility: hidden;
-  }
-}
-.likeButton{
-  margin-left: 1em;
-  margin-top: 0.4em;
-  color: red;
-}
-.center-flex{
+
+.center-flex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.align-right{
+
+.align-right {
   text-align: right;
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
+}
+
+.likeButton {
+  margin-left: $margin-md;
+  margin-top: 0.4em;
+  color: $brand-danger;
+}
+
+@media (max-width: $breakpoint-lg-mobile) {
+  .hide-devices {
+    visibility: hidden;
+  }
+  .show-devices {
+    visibility: visible;
+  }
+}
+
+@media (min-width: $breakpoint-lg-mobile) {
+  .hide-devices {
+    visibility: visible;
+  }
+  .show-devices {
+    visibility: hidden;
+  }
 }

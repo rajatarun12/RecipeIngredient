@@ -1,44 +1,46 @@
+@import '~sass/main';
 
 /* Custom, iPhone Retina */
-@media (min-width : 320px) {
+@media (min-width : #{$breakpoint-iphone-retina}) {
   .authButtonAlign{
     text-align: left !important;
     width: 100% !important;
   }
   .authButtonAlign > button{
     width: 100% !important;
-    margin-bottom: 1em;
+    margin-bottom: $margin-md;
   }
 }
 
 /* Extra Small Devices, Phones */
-@media (min-width : 480px) {
+@media (min-width : #{$breakpoint-sm-mobile}) {
   .authButtonAlign{
     text-align: left !important;
 
   }
   .authButtonAlign > button{
     width: 100% !important;
-    margin-bottom: 1em;
+    margin-bottom: $margin-md;
   }
 }
 
 /* Small Devices, Tablets */
-@media  (min-width : 768px) {
+@media  (min-width : #{$breakpoint-tablet}) {
   .authButtonAlign{
     text-align: left !important;
     width: 100% !important;
   }
   .authButtonAlign > button{
     width: 100% !important;
-    margin-bottom: 1em;
+    margin-bottom: $margin-md;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: #{$breakpoint-tablet}) {
   .authButtonAlign{
     text-align: right;
   }
 }
+
 .authButtonAlign{
   text-align: right;
 }
@@ -50,6 +52,6 @@
 }
 
 .mar-bottom{
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }
 

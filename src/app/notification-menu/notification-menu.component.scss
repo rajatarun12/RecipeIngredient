@@ -1,7 +1,9 @@
+@import '~sass/main';
+
 .pad-left{
-  padding-left: 1em;
+  padding-left: $padding-md;
 }
 .mar-top{
-  margin-top: 2em;
+  margin-top: $margin-lg;
 }
 

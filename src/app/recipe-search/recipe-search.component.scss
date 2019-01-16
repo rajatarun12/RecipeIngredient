@@ -1,24 +1,23 @@
+@import '~sass/main';
 
 .input-bottom{
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
   color: teal;
-  font-size: 3em;
-
+  font-size: $font-xl;
 }
 .width-full{
   width: 100%;
 }
 .pad-left{
-  padding-left: 1em;
+  padding-left: $padding-md;
 }
 .deep-purple{
   color: #5E42B0;
 }
 .jumbotron {
-  padding: 1rem 2rem 1rem 1rem !important;
+  padding: $padding-md $padding-lg $padding-md $padding-md !important;
   background: url('../../assets/images/header.png');
   background-size: 100%;
-
 }
 .mat-drawer{
   left: 0 !important;
@@ -30,29 +29,33 @@
 .badge{
   text-align: right;
 }
-@media (max-width:  768px) {
+.pad-top{
+  padding-top: 0.6 * $padding-md;
+}
+.hide-header{
+  opacity: 0;
+}
+
+@media (max-width:  #{$breakpoint-tablet}) {
   .badge{
     display: none;
   }
 }
-.pad-top{
-  padding-top: 0.6em;
-}
-@media(min-width: 1000px){
+
+@media(min-width: #{$breakpoint-lg-tablet}){
    .mar-left{
-     margin-left: 1.5em;
+     margin-left: 1.5 * $margin-md;
    }
 }
-@media(min-width: 1435px){
+
+@media(min-width: #{$breakpoint-lg-desktop}){
   .mar-left{
-    margin-left: 6em;
+    margin-left: 3 * $margin-lg;
   }
 }
-@media (min-width: 1025px){
+
+@media (min-width: #{$breakpoint-desktop}){
   .mar-left{
-    margin-left: 2em;
+    margin-left: $margin-lg;
   }
-}
-.hide-header{
-  opacity: 0;
 }

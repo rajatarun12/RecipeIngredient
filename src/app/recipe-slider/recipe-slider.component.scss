@@ -1,16 +1,18 @@
+@import '~sass/main';
+
 .mar-left{
-  margin-left: 1em;
+  margin-left: $margin-md;
 }
 .mar-top{
-  margin-top: 1em;
+  margin-top: $margin-md;
 }
 .mar-bottom {
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }
 .media-heading {
-  margin-left: 2em !important;
+  margin-left: $margin-lg !important;
 }
-@media (max-width: 500px) {
+@media (max-width: #{$breakpoint-lg-mobile}) {
   .hide-devices{
     visibility: hidden;
   }
@@ -18,7 +20,7 @@
     visibility: visible;
   }
 }
-@media (min-width: 500px) {
+@media (min-width: #{$breakpoint-lg-mobile}) {
   .hide-devices{
     visibility: visible;
   }
@@ -27,8 +29,8 @@
   }
 }
 .likeButton{
-  margin-left: 1em;
-  margin-top: 0.4em;
+  margin-left: $margin-lg;
+  margin-top: $margin-sm;
   color: red;
 }
 .center-flex{
@@ -38,5 +40,5 @@
 }
 .align-right{
   text-align: right;
-  margin-bottom: 1em;
+  margin-bottom: $margin-md;
 }
