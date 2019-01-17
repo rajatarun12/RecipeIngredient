@@ -12,6 +12,9 @@
 .media.row{
   margin-bottom: $margin-md;
 }
+.media-row {
+  width: 100%;
+}
 .pad-left-2{
   padding-left: $padding-lg;
 }
@@ -79,6 +82,12 @@ mat-icon.icon-clear > svg {
 .chips {
   margin-left: $margin-sm;
   margin-right: $margin-sm;
+}
+.mat-chip:not(.mat-basic-chip) {
+  margin: 0 $margin-sm;
+}
+.mat-chip-list-wrapper {
+  margin: 0;
 }
 .back-red {
   background-color: #E84A4D !important;
