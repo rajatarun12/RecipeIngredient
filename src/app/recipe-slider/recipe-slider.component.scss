@@ -12,6 +12,9 @@
 .media-heading {
   margin-left: $margin-lg !important;
 }
+.media-row {
+  width: 100%;
+}
 @media (max-width: #{$breakpoint-lg-mobile}) {
   .hide-devices{
     visibility: hidden;
