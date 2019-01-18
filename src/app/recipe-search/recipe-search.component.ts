@@ -24,7 +24,6 @@ export class RecipeSearchComponent implements OnInit {
   appleImagePath: String =  environment.appleImagePath;
   opened: Boolean;
   isXs: Boolean = false;
-  user: UserModel;
   hideBadges: Boolean = false;
   notifications: any;
   constructor(private recipeService: RecipeService,
@@ -87,9 +86,7 @@ export class RecipeSearchComponent implements OnInit {
       'start'
     );
   }
-  setUserInfo(user){
-    this.user = user;
-  }
+
   sendRecipes(result){
     this.recipe = result;
   }

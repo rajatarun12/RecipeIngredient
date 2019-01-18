@@ -3,3 +3,15 @@
 .input-bottom{
   margin-bottom: $margin-md;
 }
+.fullHeight {
+  height: 100vh;
+  overflow-x: hidden;
+}
+.jumbotron {
+  padding: $padding-md $padding-lg $padding-md $padding-md !important;
+  background: url('../assets/images/header.png');
+  background-size: 100%;
+}
+.mat-drawer{
+  left: 0 !important;
+}

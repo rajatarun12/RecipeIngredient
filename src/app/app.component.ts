@@ -3,6 +3,7 @@ declare var Tour: any;
 import { NgModel } from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {AppGlobal} from './Content/AppGlobal';
+import {UserModel} from './Models/UserModel';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import {AppGlobal} from './Content/AppGlobal';
   providers: [AppGlobal]
 })
 export class AppComponent implements OnInit {
+  user: UserModel;
   constructor(private translate: TranslateService, private appGlobal: AppGlobal) {
     translate.setDefaultLang(this.appGlobal.defaultContent);
 
@@ -32,10 +34,15 @@ export class AppComponent implements OnInit {
         }
       ]});
 
+
+
 // Initialize the tour
 //     tour.init();
 
 // Start the tour
 //     tour.start();
+  }
+  setUserInfo(user) {
+    this.user = user;
   }
 }

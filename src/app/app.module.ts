@@ -46,8 +46,9 @@ import { FooterComponent } from './footer/footer.component';
 
 
 const appRoutes = [
-  {path: '', redirectTo: 'recipeSearch/en', pathMatch: 'full'},
-  {path : 'recipeSearch/:language', component: RecipeSearchComponent}
+  {path: '', redirectTo: 'recipeSearch/search/en', pathMatch: 'full'},
+  {path : 'recipeSearch/search/:language', component: RecipeSearchComponent},
+  {path : 'recipeSearch/favorites', component: FavoriteRecipeComponentComponent},
 ];
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'http://s3.us-east-2.amazonaws.com/locale-content/', '.json');

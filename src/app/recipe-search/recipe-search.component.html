@@ -1,29 +1,9 @@
-<div class="width-full">
-<mat-sidenav-container [ngClass]="{'jumbotron': (!recipe) }">
-  <mat-sidenav #sidenav mode="push" [(opened)]="opened" >
-    <app-side-nav (userInfo)="setUserInfo($event)" [user]="user"></app-side-nav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div [ngClass]="{'pad-top' : true,'jumbotron': (!!recipe),'fullHeight': !recipe }">
-      <div class="row ">
-        <div class="col-sm-1 pad-top menu-side-open deep-purple">
-        <a (click)="sidenav.toggle()" id="MenuBars"><i class="fas fa-bars fa-2x"></i></a>
-          <!--// TODO FUTURE -->
-          <!--<app-notification-menu [notifications] = "notifications"></app-notification-menu>-->
-        </div>
-      </div>
-      <div class="text-center">
-        <img src="../../assets/images/logo7.PNG"  *ngIf="!isXs" width="500px" height="auto"/>
-        <h2 *ngIf="isXs" class="input-bottom page-header" [innerHTML]=" 'pageTitle' | translate"></h2>
-        <app-search (sendRecipes)="sendRecipes($event)"></app-search>
-      </div>
-    </div>
-    <div [hidden]="!recipe">
-    <app-view-recipe [recipes]="recipe" [user]="user"></app-view-recipe>
-    </div>
 
-  </mat-sidenav-content>
-
-</mat-sidenav-container>
-  <app-footer-component></app-footer-component>
+<div class="text-center">
+  <img src="../../assets/images/logo7.PNG"  *ngIf="!isXs" width="500px" height="auto"/>
+  <h2 *ngIf="isXs" class="input-bottom page-header" [innerHTML]=" 'pageTitle' | translate"></h2>
+  <app-search (sendRecipes)="sendRecipes($event)"></app-search>
+</div>
+<div [hidden]="!recipe">
+  <app-view-recipe [recipes]="recipe" [user]="user"></app-view-recipe>
 </div>

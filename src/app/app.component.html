@@ -1,2 +1,24 @@
 <ng4-loading-spinner> </ng4-loading-spinner>
-<router-outlet></router-outlet>
+<div class="width-full">
+  <mat-sidenav-container [ngClass]="{'jumbotron': (!recipe) }">
+    <mat-sidenav #sidenav mode="push" [(opened)]="opened" >
+      <app-side-nav (userInfo)="setUserInfo($event)" [user]="user"></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div [ngClass]="{'pad-top' : true,'jumbotron': (!!recipe),'fullHeight': !recipe }">
+        <div class="row ">
+          <div class="col-sm-1 pad-top menu-side-open deep-purple">
+            <a (click)="sidenav.toggle()" id="MenuBars"><i class="fas fa-bars fa-2x"></i></a>
+            <!--// TODO FUTURE -->
+            <!--<app-notification-menu [notifications] = "notifications"></app-notification-menu>-->
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+  <app-footer-component></app-footer-component>
+</div>
+

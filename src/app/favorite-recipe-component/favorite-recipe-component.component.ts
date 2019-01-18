@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DatabaseServiceService} from '../services/database-service.service';
 
@@ -15,7 +15,7 @@ export class FavoriteRecipeComponentComponent implements OnInit{
   recipes;
   isXs: Boolean = false;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private db: DatabaseServiceService, private breakpointsService: BreakpointObserver) {
     this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
       if (result.matches) {

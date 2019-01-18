@@ -18,7 +18,6 @@ import {MyRecipesComponent} from '../my-recipes/my-recipes.component';
 import {PrivacyPolicyComponent} from '../privacy-policy/privacy-policy.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
-
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
