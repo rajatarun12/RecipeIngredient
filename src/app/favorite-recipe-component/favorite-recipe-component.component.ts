@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild, Optional} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild, Optional, Input} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DatabaseServiceService} from '../services/database-service.service';
 
@@ -13,20 +13,13 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 export class FavoriteRecipeComponentComponent implements OnInit{
   detailView = true;
   recipes;
-  isXs: Boolean = false;
+  @Input() dashboardView;
+  @Input() userEmail;
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private db: DatabaseServiceService, private breakpointsService: BreakpointObserver) {
-    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
-      if (result.matches) {
-        this.isXs = true;
-      } else {
-        this.isXs = false;
-      }
-    });
-  }
+    private db: DatabaseServiceService, private breakpointsService: BreakpointObserver) {}
   ngOnInit() {
-      this.db.getFavoriteRecipes(this.data.user).then(res => {
+      this.db.getFavoriteRecipes(this.userEmail).then(res => {
         const recipes = [];
         Object.keys(res).forEach(key => {
           recipes.push(res[key][0]['name']);

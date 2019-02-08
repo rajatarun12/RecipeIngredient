@@ -43,19 +43,22 @@ import { SafePipe } from './safe.pipe';
 import {Ng2GoogleChartsModule} from 'ng2-google-charts';
 import { GooglemapsComponent } from './googlemaps/googlemaps.component';
 import { FooterComponent } from './footer/footer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
 
 
 const appRoutes = [
   {path: '', redirectTo: 'recipeSearch/search/en', pathMatch: 'full'},
   {path : 'recipeSearch/search/:language', component: RecipeSearchComponent},
   {path : 'recipeSearch/favorites', component: FavoriteRecipeComponentComponent},
+  {path : 'recipeSearch/dashboard', component: DashboardComponent}
 ];
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'http://s3.us-east-2.amazonaws.com/locale-content/', '.json');
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent
+    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent
   ],
   imports: [
     BrowserModule,

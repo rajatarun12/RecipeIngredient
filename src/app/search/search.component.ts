@@ -39,6 +39,7 @@ matcher: MyErrorStateMatcher;
   removable: Boolean = true;
   inputs: String[]= ['0'];
   ingredients: String;
+  values: String[] = [];
   alreadyTriggered: Boolean = false;
   public myForm: FormGroup;
   collapsed: Boolean = true;
@@ -84,20 +85,16 @@ matcher: MyErrorStateMatcher;
       'start'
     );
   }
-  addSearchBox(): void {
-    const inputLength = this.inputs.length;
-    const lastIndex = Number(this.inputs[inputLength - 1]);
-    if (lastIndex < 10) {
-      this.itemsGroup = this.myForm.get('search') as FormArray;
-      this.itemsGroup.push(this.createItem());
-      this.inputs.push((lastIndex + 1).toString());
+  addIngredients(event: any) {
+    if (event.key === 'Enter') {
+      this.values.push(event.target.value);
     }
   }
   searchPhoto(fromEvent) {
     const self = this;
     if (fromEvent) {
         self.ie.nativeElement.click();
-    } else {
+    } else if (fromEvent && fromEvent.key !== 'Enter') {
         self.spinnerService.show();
         const fileCount: number = self.ie.nativeElement.files.length;
         const formData = new FormData();
@@ -106,7 +103,7 @@ matcher: MyErrorStateMatcher;
           let res;
           base64.readAsBinaryString(self.ie.nativeElement.files[0]);
           setTimeout(() => {
-            const str = base64.result;
+            const str = base64.result.toString();
             res = btoa(str);
             self.vision.getLabels(res).subscribe(resp => {
               self.imageSearchData = resp.responses[0].labelAnnotations;
@@ -128,26 +125,35 @@ matcher: MyErrorStateMatcher;
       name: ['', Validators.compose([IngredientCheckDirective(/[^a-zA-Z, ]/g)])]
     });
   }
-  search() {
-    const values = this.myForm;
-    this.ingredients = '';
-    const ingredients = this.myForm.controls.search.value.reduce(((ingredients, value) => {
-        ingredients.push(value.name);
-        return ingredients;
-    }), []);
-    this.ingredients = ingredients.concat(',');
-    this.recipeService.getRecipe(this.ingredients).subscribe(result => {
-      this.spinnerService.hide();
-      const count = result['count'] || 0;
-      this.imageSearchData = [];
-      const recipes = this.recipes.getRecipes(result['hits']);
-      this.sendRecipes.emit(new RecipeModel({
-        RecipeObject: recipes,
-        count: count,
-        originalList: result,
-        currentSearchQuery: this.ingredients
-      }));
-    });
+  search(event: any) {
+    if(!this.values.length){
+      this.itemsGroup = this.myForm.get('search') as FormArray;
+      const val = this.itemsGroup.value[0].name;
+      this.values.push(val);
+    }
+    if (event.x) {
+      const values = this.myForm;
+      const ingredients = this.values.concat(',');
+      this.ingredients = ingredients.toString();
+      this.spinnerService.show();
+      this.recipeService.getRecipe(this.ingredients).subscribe(result => {
+        this.spinnerService.hide();
+        const count = result['count'] || 0;
+        this.imageSearchData = [];
+        const recipes = this.recipes.getRecipes(result['hits']);
+        this.sendRecipes.emit(new RecipeModel({
+          RecipeObject: recipes,
+          count: count,
+          originalList: result,
+          currentSearchQuery: this.ingredients
+        }));
+      });
+    }
+  }
+
+
+  removeIngredient(index) {
+    this.values.splice(index,1);
   }
 
   removeSearchBox(index) {

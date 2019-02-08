@@ -1,13 +1,73 @@
 @import '~sass/main';
 
+.blur.contrast {
+  -webkit-filter: contrast(120%);
+  filter: contrast(120%);
+}
+
 .border-round{
   margin-bottom: 0.3 * $margin-md;
   margin-top: 0.3 * $margin-md;
   margin-left:$margin-md;
   padding: $padding-md;
 }
+.mat-card {
+  padding: 0px;
+  border-radius: 27px;
+  box-shadow: 0 -2px 14px 1px rgba(0, 0, 0, 0.5);
+}
 .width-full{
   width: 100%;
+}
+
+.recipeCard {
+  float: left;
+}
+.ingredients {
+  height: 10em !important;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.media-object {
+  border-top-left-radius: 27px;
+  border-top-right-radius: 27px;
+  -webkit-filter: contrast(120%);filter: contrast(120%);
+}
+
+.image-fade::after {
+  display: block;
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #000 100%);
+  margin-top: -150px;
+  height: 150px;
+  width: 100%;
+  content: '';
+}
+
+.dropdowns {
+  border-radius: 15px;
+  background-color: #f54d00;
+  color: var(--white);
+}
+
+.border-bottom {
+  border-bottom: 1px gray;
+}
+.card-bottom{
+  padding: 0 3em 3em 3em;
+}
+
+.card-top {
+  position: relative;
+}
+.card-text{
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  padding: 4em 2em;
+  color: var(--white);
 }
 .media.row{
   margin-bottom: $margin-md;
@@ -34,6 +94,17 @@ mat-icon.icon-clear > svg {
   margin-bottom: 0.2 * $margin-md;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.recipes-heading {
+  opacity: 0.38;
+  font-family: Raleway;
+  font-size: 33px;
+  font-weight: 600;
+  color: #000000;
+}
 .label-centered{
   margin: auto;
   width: 50%;
@@ -82,6 +153,11 @@ mat-icon.icon-clear > svg {
 .chips {
   margin-left: $margin-sm;
   margin-right: $margin-sm;
+  height: 5em;
+}
+.see-more-link {
+  text-decoration: none;
+  margin-left: 1em;
 }
 .mat-chip:not(.mat-basic-chip) {
   margin: 0 $margin-sm;

@@ -135,9 +135,10 @@ export class LoginComponent implements OnInit{
     let auth;
     let error: String;
     if (authLabel === 'LoginLabel') {
+
       auth = this.authService.loginWithEmail(this.myForm.value.login, this.myForm.value.password).then(res => {
         localStorage.setItem('token', res.toString());
-        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res.uid.toString()});
+        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res['uid'].toString()});
 
         this.dialogRef.close(user);
         this.spinnerService.hide();
@@ -151,7 +152,7 @@ export class LoginComponent implements OnInit{
     } else {
       auth = this.authService.registerWithEmail(this.myForm.value.login,this.myForm.value.password).then(res => {
         localStorage.setItem('token',res.toString());
-        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res.uid});
+        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res['uid']});
         this.createDataBaseUserObject(user).then(res => {
           this.dialogRef.close(user);
           this.spinnerService.hide();

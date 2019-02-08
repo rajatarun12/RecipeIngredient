@@ -1,9 +1,21 @@
-
-<div class="text-center">
-  <img src="../../assets/images/logo7.PNG"  *ngIf="!isXs" width="500px" height="auto"/>
-  <h2 *ngIf="isXs" class="input-bottom page-header" [innerHTML]=" 'pageTitle' | translate"></h2>
-  <app-search (sendRecipes)="sendRecipes($event)"></app-search>
+<div class="nav row" *ngIf="!loginActive">
+    <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="login()">login</a> </p></div>
+    <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="register()">Register</a></p></div>
 </div>
-<div [hidden]="!recipe">
-  <app-view-recipe [recipes]="recipe" [user]="user"></app-view-recipe>
+<div class="nav row" *ngIf="loginActive">
+  <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="nav-item" href="#/recipeSearch/dashboard">dashboard</a></p></div>
+  <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item">{{displayName}}</p></div>
+</div>
+<div class="text-center header-rectangle">
+  <!--<img src="../../assets/images/logo7.PNG"  *ngIf="!isXs" width="500px" height="auto"/>-->
+  <h2 class="input-bottom page-header">LET'S COOK WITH US</h2>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 search-background" >
+      <app-search (sendRecipes)="sendRecipes($event)"></app-search>
+    </div>
+  </div>
+</div>
+<div [hidden]="!recipe" class="view-recipe">
+  <app-view-recipe [recipes]="recipe"></app-view-recipe>
 </div>

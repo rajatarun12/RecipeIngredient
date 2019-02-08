@@ -1,6 +1,28 @@
-<div class="row">
-  <div class="col-xs-8 col-sm-8 col-md-8"><h4 [innerHTML]="'FavoritesLabel' | translate"></h4></div>
-  <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 align-right"><mat-icon (click)="toggleExpand(true)"><i class="fas fa-expand fa-2x"></i></mat-icon></div>
-  <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2"><mat-icon (click)="toggleExpand(false)"><i class="fas fa-compress fa-2x "></i></mat-icon></div>
+<div *ngIf="!dashboardView">
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8"><h4 [innerHTML]="'FavoritesLabel' | translate"></h4></div>
+    <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 align-right"><mat-icon (click)="toggleExpand(true)"><i class="fas fa-expand fa-2x"></i></mat-icon></div>
+    <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2"><mat-icon (click)="toggleExpand(false)"><i class="fas fa-compress fa-2x "></i></mat-icon></div>
+  </div>
+  <app-recipe-slider [recipes]="recipes" [detailView]="detailView"></app-recipe-slider>
 </div>
-<app-recipe-slider [recipes]="recipes" [detailView]="detailView"></app-recipe-slider>
+<div *ngIf="dashboardView">
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8"><h4 class="media-heading">Favorites</h4><h4 class="media-heading">{{'  ('+recipes.length+')'}}</h4></div>
+    <div class="col-xs-2 col-sm-2 col-md-2 flex-end"><h4 class="media-heading"><a>See all</a></h4></div>
+  </div>
+  <div class="row" *ngIf="!!recipes">
+    <mat-card  *ngFor="let recipeDetails of recipes.splice(0,4)" class="col-sm-2 card">
+      <div class="row media">
+        <div class="media-left col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <img *ngIf="recipeDetails.image" class="media-object" src="{{recipeDetails.image}}" width="100%" height="auto" alt="...">
+        </div>
+        <div class="media-body">
+          <div class="float col-xs-12 col-sm-11">
+            <h4>{{recipeDetails.title}}</h4>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

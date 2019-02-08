@@ -1,44 +1,60 @@
-<div class="margin-all width-nav containr">
-  <div class="list-container">
-    <h6>{{displayName}}</h6>
-    <p>{{userEmail}}</p>
-    <form novalidate>
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              User
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <button mat-raised-button class="mar-bottom width-full" *ngIf="!loginActive" color="primary" type="button" class="width-full" (click)="login()" [innerHTML]="'LoginLabel' | translate"></button>
-          <button mat-raised-button class="mar-bottom width-full"  *ngIf="!loginActive" color="primary" type="button" class="width-full" (click)="register()" [innerHTML]="'registerLabel' | translate"></button>
-          <button mat-raised-button  class="mar-bottom width-full" [hidden]="!loginActive" color="warn" type="button" class="width-full" (click)="signOut()" [innerHTML]="'signOutLabel' | translate"></button>
-        </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="step === 1" [disabled]="!loginActive" (opened)="setStep(1)" >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Features
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFollowers()">Follow</button>
+<div class="side-fixed">
+  <a (click)="openDialog()" class="side-icon top-icon"><i class="fas fa-cogs fa-2x"></i></a>
+  <a href="#/recipeSearch/dashboard" class="side-icon center-icon"><i class="fas fa-utensils fa-2x"></i></a>
+  <a (click)="openDialog()" class="side-icon center-below"><i class="fas fa-glass-martini fa-2x"></i></a>
+  <a (click)="signOut()" class="side-icon bottom-icon"><i class="fa fa-sign-out-alt fa-2x"></i></a>
+</div>
+<div class="nav-container" *ngIf="!loginActive">
+<div class="nav-bottom">
+	<button mat-raised-button class="mar-bottom width-full" *ngIf="!loginActive" color="primary" type="button" class="width-full" (click)="login()" [innerHTML]="'LoginLabel' | translate"></button>
+	<button mat-raised-button class="mar-bottom width-full"  *ngIf="!loginActive" color="primary" type="button" class="width-full" (click)="register()" [innerHTML]="'registerLabel' | translate"></button>
+</div>
+</div>
 
-          <button mat-raised-button color="primary" [hidden]="!loginActive"  type="button" class="width-full" (click)="openDialog()" [innerHTML]="'settingsLabel' | translate"></button>
-        </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="step === 2" [disabled]="!loginActive" (opened)="setStep(2)" >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Recipes
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleFavRecipes()" [innerHTML]="'FavoriteRecipeLabel' | translate"></button>
-          <button mat-raised-button  class="mar-bottom" [hidden]="!loginActive" color="link" type="button" class="width-full" (click)="handleMyRecipies()">My Recipes</button>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <div class="mar-top">
-      <button mat-raised-button   color="link" type="button" class="width-full" (click)="handlePrivacyPolicy()" >Privacy policy</button>
-      </div>
-    </form>
-  </div>
+<div class="nav-container" [hidden]="!loginActive">
+	<div class="nav-header">
+<i class="fas fa-plus fa-2x"></i>&nbsp; Add Your Recipe
+</div>
+<div class="nav-item margin-main">
+Filters
+</div>
+<div class="nav-item margin-main">
+Time
+</div>
+<div class="range-slider-container">
+<input type="range" class="range-slider" name="volume" min="0" max="11">
+</div>
+<div class="nav-seperator"></div>
+<div class="nav-item">
+Diets
+</div>
+<div class="nav-seperator"></div>
+<div class="nav-item">
+Meat
+</div>
+<div class="nav-item">
+Vegetarian
+</div>
+<div class="nav-item">
+Vegan
+</div>
+<div class="nav-item">
+Vetarian
+</div>
+<div class="nav-seperator"></div>
+<div class="nav-item">
+Difficulty
+</div>
+<div class="nav-seperator"></div>
+<div class="nav-item">
+Easy
+</div>
+<div class="nav-item">
+Medium
+</div>
+<div class="nav-item">
+Hard
+</div>
 </div>
 
 <app-snack-bar></app-snack-bar>

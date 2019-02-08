@@ -116,8 +116,8 @@ export class AuthService {
     });
   }
 
-  getMyRecipeDetails() {
-    const email = this._firebaseAuth.auth.currentUser.email;
+  getMyRecipeDetails(emailId) {
+    const email = emailId || this._firebaseAuth.auth.currentUser.email;
     let emailAd = email.split('@')[0];
     let ref = firebase.database().ref('/users/' + emailAd + '/myRecipes');
     return new Promise(res => {

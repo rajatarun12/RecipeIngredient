@@ -10,9 +10,9 @@ export class RecipeService {
   apiURL = 'https://api.edamam.com/search';
   getRecipe(ingredient) {
     const recipeUrl = this.apiURL + '?q=' + ingredient + '&app_id=' + this.appId + '&app_key=' + this.appKey + '&from=0&to=3000';
-    this.spinnerService.show();
     return this.http.get(recipeUrl);
   }
 }
+
 
 

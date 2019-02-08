@@ -1,0 +1,214 @@
+@import '~sass/main';
+
+.blur.contrast {
+  -webkit-filter: contrast(120%);
+  filter: contrast(120%);
+}
+
+.border-round{
+  margin-bottom: 0.3 * $margin-md;
+  margin-top: 0.3 * $margin-md;
+  margin-left:$margin-md;
+  padding: $padding-md;
+}
+.mat-card {
+  padding: 0px;
+  border-radius: 27px;
+  box-shadow: 0 -2px 14px 1px rgba(0, 0, 0, 0.5);
+}
+.width-full{
+  width: 100%;
+}
+
+.recipeCard {
+  float: left;
+}
+.ingredients {
+  height: 10em !important;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.media-object {
+  border-top-left-radius: 27px;
+  border-top-right-radius: 27px;
+  -webkit-filter: contrast(120%);filter: contrast(120%);
+}
+
+.image-fade::after {
+  display: block;
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #000 100%);
+  margin-top: -150px;
+  height: 150px;
+  width: 100%;
+  content: '';
+}
+
+.dropdowns {
+  border-radius: 15px;
+  background-color: #f54d00;
+  color: var(--white);
+}
+
+.border-bottom {
+  border-bottom: 1px gray;
+}
+.card-bottom{
+  padding: 0 3em 3em 3em;
+}
+
+.card-top {
+  position: relative;
+}
+.card-text{
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  padding: 4em 2em;
+  color: var(--white);
+}
+.media.row{
+  margin-bottom: $margin-md;
+}
+.media-row {
+  width: 100%;
+}
+.pad-left-2{
+  padding-left: $padding-lg;
+}
+.mar-top{
+  margin-top: $margin-md;
+}
+.align-right{
+  text-align: right;
+}
+mat-icon.icon-clear > svg {
+  margin-right: $margin-sm;
+}
+.icon-clear{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.2 * $margin-md;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.recipes-heading {
+  opacity: 0.38;
+  font-family: Raleway;
+  font-size: 33px;
+  font-weight: 600;
+  color: #000000;
+}
+.label-centered{
+  margin: auto;
+  width: 50%;
+  padding: 1px;
+}
+.filterGroup{
+  margin-right: $margin-md;
+}
+.border-round > img{
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+}
+.mar-right{
+  margin-right: $margin-md;
+}
+.btn-danger.mar-right{
+  margin-right: $margin-md;
+}
+.mar-left{
+  margin-left: $margin-md;
+}
+.tooltip-host {
+  display: inline-flex;
+  align-items: center;
+  margin: 50px;
+}
+.btn{
+  margin-bottom: $margin-sm;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.show-scroll {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
+.hidden-op {
+  opacity: 0;
+}
+.chips {
+  margin-left: $margin-sm;
+  margin-right: $margin-sm;
+  height: 5em;
+}
+.see-more-link {
+  text-decoration: none;
+  margin-left: 1em;
+}
+.mat-chip:not(.mat-basic-chip) {
+  margin: 0 $margin-sm;
+}
+.mat-chip-list-wrapper {
+  margin: 0;
+}
+.back-red {
+  background-color: #E84A4D !important;
+}
+
+@media (min-width: #{$breakpoint-tablet}){
+  .border-round {
+    margin-left: 0.2 * $margin-md;
+    margin-right: 2.5 * $margin-md;
+  }
+}
+@media (max-width: #{$breakpoint-sm-mobile}){
+  .border-round{
+    border-top: 0;
+    padding-left: $padding-lg;
+    margin-left: 0;
+  }
+  .mar-right {
+    margin-right: $margin-lg;
+  }
+}
+@media(min-width: 1090px) {
+  .pad-left{
+    padding-left: 2 * $padding-lg;
+  }
+  .pad-left-2{
+    padding-left: 7 * $padding-md;
+  }
+  .border-round{
+    margin-left: 3 * $margin-md;
+  }
+}
+@media (min-width: 992px) and (max-width: 1089px) {
+  .border-round{
+    margin-left: $margin-lg;
+  }
+  .media-body {
+    margin-left: 2.5 * $margin-md;
+  }
+}
+@media (min-width: #{$breakpoint-desktop}) and (max-width: #{$breakpoint-md-desktop}) {
+  .media-body{
+    margin-left: $margin-lg;
+  }
+  .mar-left {
+    margin-left: 0;
+  }
+}

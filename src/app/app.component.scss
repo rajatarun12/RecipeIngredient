@@ -6,12 +6,34 @@
 .fullHeight {
   height: 100vh;
   overflow-x: hidden;
+  background: url('../assets/images/header.jpeg');
+  background-position: right -10em top;
+  background-size: 100%;
+  background-repeat: repeat-x;
+  background-size: cover;
+  -webkit-filter: saturate(1.5) contrast(85%);
+  filter: saturate(1.5) contrast(85%);
 }
+
 .jumbotron {
   padding: $padding-md $padding-lg $padding-md $padding-md !important;
-  background: url('../assets/images/header.png');
-  background-size: 100%;
 }
 .mat-drawer{
   left: 0 !important;
+}
+.mat-sidenav-content{
+  overflow-y: hidden;
+}
+.overlap-block {
+  position: absolute;
+  padding: 1em;
+}
+.mat-sidenav-container {
+  margin-bottom: 0px;
+  height: 100vh;
+  overflow-y: hidden;
+  padding: 0px !important;
+}
+.mat-drawer {
+  background-color: gray;
 }

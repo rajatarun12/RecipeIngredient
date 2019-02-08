@@ -1,0 +1,26 @@
+.dashboard-container {
+  padding: 3em 5em;
+  font-family: Raleway-Regular !important;
+}
+.favorite-container {
+  margin-bottom: 3em;
+}
+.dashboard-heading {
+  margin-bottom: 6em;
+}
+.media-heading {
+  font-size: 22px;
+  margin-left: 0.5em;
+  margin-bottom: 3em;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.search-image {
+  text-decoration: none;
+  color: black;
+&:hover {
+  color: black;
+}
+}

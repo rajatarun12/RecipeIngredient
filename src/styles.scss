@@ -1,5 +1,5 @@
 @import './sass/main';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 
 html, body {
   max-width: 100%;
@@ -7,6 +7,16 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-y: auto;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("sass/Raleway-Regular.ttf");
+}
+
+h1,h2,h3,p,a,h4,div {
+  font-family: Raleway;
+  font-weight: 600;
 }
 body {
   /*@ts-ignore*/

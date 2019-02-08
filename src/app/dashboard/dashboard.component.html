@@ -1,0 +1,13 @@
+
+<div class="dashboard-container">
+  <div class="dashboard-heading media-heading row">
+    <h1 class="col-sm-11">USER DASHBOARD</h1>
+    <h1 class="col-sm-1 flex-end"><a class="search-image" href="#/recipeSearch/search/en"> <i class="fas fa-search"></i></a></h1>
+  </div>
+  <div class="favorite-container">
+      <app-favorite-recipe-component [userEmail]="userEmail" [dashboardView]="true"></app-favorite-recipe-component>
+  </div>
+  <div class="my-recipes-container">
+      <app-my-recipes [userEmail]="userEmail" [dashboardView]="true"></app-my-recipes>
+  </div>
+</div>

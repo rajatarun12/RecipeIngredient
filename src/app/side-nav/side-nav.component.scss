@@ -1,33 +1,103 @@
 @import '~sass/main';
 
-.list-group-item {
-  border: none;
-}
-.margin-all {
-  margin: $margin-md;
 
-}
-.width-nav{
-  width: 15em;
-}
-.width-full {
-  width: 100%;
-}
-.mat-form-field{
-  width: 100%;
-}
+   .nav-container {
+    width: 17em;
+    height: 100%;
+    background-color: #222;
+    color: white;
+     margin-left: 3.55em;
+     .fixed-side-nav {
+       width: 1em;
+       height: 100%;
+       background-color: #222;
+       color: white;
+     }
+  }
 
-.mar-bottom{
-  margin-bottom: $margin-md;
-}
-.list-container{
-  height: 90vh;
-  padding-top: $padding-lg;
-}
-.list-container > button{
-  margin-bottom: $margin-md !important;
-}
+  .side-fixed {
+    width: 3.5em;
+    background-color: #222;
+    float: left;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .margin-main {
+    margin: 1em 1em 1em 0;
+  }
+  .nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background: linear-gradient(to right, #ff9900 0%, #ff3300 100%);
+  }
+  .range-slider-container {
+    width: 100%;
+    padding: 5px 15px;
+  }
+  .range-slider {
+    width: 100%;
+  }
 
-.mar-top{
-  margin-top: $margin-lg;
-}
+  .nav-item {
+    padding: 5px 15px;
+    &:hover {
+      border-left: 2px solid orange;
+    }
+  }
+  .dis-block {
+    display: block;
+  }
+  .nav-seperator {
+    height: 20px;
+  }
+  .nav-bottom {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+    padding-right: 3em;
+    border-top: 2px solid gray;
+  }
+
+  .top-icon {
+    position: fixed;
+    display: flex;
+    top: 0;
+    margin-bottom: 10em;
+    padding-top: 2em;
+  }
+  .center-icon{
+    display: flex;
+    align-items: center;
+    margin-top: -6em;
+  }
+  .center-below {
+    margin-top: 2em;
+    position: absolute;
+
+  }
+  .fa-2x {
+    color: white !important;
+    //justify-content: space-around;
+    //padding: 0.5em;
+  }
+
+  .side-icon {
+    padding: 0.5em;
+    &:hover {
+      border-left: 2px solid orange;
+    }
+  }
+  .bottom-icon {
+    display: flex;
+    position: absolute;
+    float: left;
+    clear: left;
+    bottom: 0;
+  }

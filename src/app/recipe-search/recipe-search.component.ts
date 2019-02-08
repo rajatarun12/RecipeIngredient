@@ -6,11 +6,13 @@ import { DOCUMENT } from '@angular/platform-browser';
 import {AppGlobal} from "../Content/AppGlobal";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
+import { firebase } from "@firebase/app";
 import {UserModel} from "../Models/UserModel";
 import {AuthService} from '../services/auth.service';
-import * as firebase from 'firebase/app';
+import {LoginComponent} from '../login/login.component';
 import { environment } from '../../environments/environment';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-recipe-search',
@@ -24,12 +26,17 @@ export class RecipeSearchComponent implements OnInit {
   appleImagePath: String =  environment.appleImagePath;
   opened: Boolean;
   isXs: Boolean = false;
+  language;
+  loginActive;
+  displayName;
   hideBadges: Boolean = false;
   notifications: any;
   constructor(private recipeService: RecipeService,
               @Inject(DOCUMENT) private document: Document,
               public appGlobal: AppGlobal,
+              public dialog: MatDialog,
               private translate: TranslateService,
+              private route: ActivatedRoute,
               private activatedRoute: ActivatedRoute,
               private authService: AuthService,
               private breakpointsService: BreakpointObserver) {
@@ -54,19 +61,33 @@ export class RecipeSearchComponent implements OnInit {
     else {
       this.hideBadges = false;
     }
-    firebase.auth().getRedirectResult().then(result => {
-      this.authService.getUserNotifications().then(notifications => {
-        if(!notifications){
-          this.notifications = [{title: "You have 0 Notifications"}];
-        }
-        this.notifications = notifications;
-      });
+    const localStorageData = localStorage.getItem('recipeSearchData');
+    let localStorageDataJSON;
+    if(localStorageData){
+      localStorageDataJSON = JSON.parse(localStorageData);
+    }
+    if(localStorageDataJSON.user){
+        this.updateUserData(localStorageDataJSON);
+    } else {
+      firebase.auth().getRedirectResult().then(result => {
+          localStorage.setItem('recipeSearchData', JSON.stringify(result));
+          this.updateUserData(result);
+          this.authService.getUserNotifications().then(notifications => {
+            if(!notifications){
+              this.notifications = [{title: "You have 0 Notifications"}];
+            }
+            this.notifications = notifications;
+          });
     });
+    }
     // Check whether SiriKit extension activates the test service
     // @ts-ignore
     const prefs = plugins.appPreferences;
     const suitePrefs = prefs.suite('group.recipesearch');
-
+    this.route.params.forEach(param => {
+      this.language = param['language']
+    });
+    this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
     suitePrefs.fetch(
       function(value) {
         // Activated by voice control
@@ -85,6 +106,63 @@ export class RecipeSearchComponent implements OnInit {
       },
       'start'
     );
+  }
+  updateUserData(result){
+    let user;
+    if (result.credential) {
+      user = result.user;
+    }
+    if(user){
+      const resultObj = {
+        login: true,
+        email: result.user.email,
+        displayName: result.user.displayName,
+        name: result.user.displayName,
+        uid: result.user.uid
+      };
+
+      const user = new UserModel(resultObj);
+      // this.userInfo.emit(resultObj);
+      // this.userEmail = resultObj.email;
+      this.displayName = resultObj.displayName;
+      this.loginActive = true;
+    }
+  }
+  login(){
+    let dialogRef = this.dialog.open(LoginComponent, {
+      width: '30em',
+      data: {
+        authLabel: 'LoginLabel',
+        language: this.language
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(!!result.login){
+        // this.userInfo.emit(result);
+        // this.userEmail = result.email;
+        this.loginActive = true;
+        this.displayName = result.displayName;
+      }
+    });
+  }
+
+  register(){
+    let dialogRef = this.dialog.open(LoginComponent, {
+      width: '30em',
+      data: {
+        authLabel: 'registerLabel',
+        language: this.language
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(!!result.login){
+        // this.userInfo.emit(result);
+        // this.userEmail = result.email;
+        this.loginActive = true;
+      }
+    });
   }
 
   sendRecipes(result){

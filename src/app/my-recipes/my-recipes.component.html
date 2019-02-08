@@ -1,68 +1,93 @@
-<div class="container">
-  <div class="recipes-header row" *ngIf="viewRecipeView">
+
+
+<div *ngIf="!dashboardView">
+  <div class="container">
+    <div class="recipes-header row" *ngIf="viewRecipeView">
       <div class="col-xs-6 col-sm-6 col-md-6"><h4>My Recipes</h4></div>
       <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 pull-right"><mat-icon (click)="toggleExpand(true)"><i class="fas fa-expand fa-2x"></i></mat-icon></div>
       <div *ngIf="!isXs"  class="col-xs-2 col-sm-2 col-md-2 pull-right"><mat-icon (click)="toggleExpand(false)"><i class="fas fa-compress fa-2x "></i></mat-icon></div>
-    <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
-      <mat-icon (click)="switchView()"><i class="fas fa-plus-circle fa-2x"></i></mat-icon>
+      <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
+        <mat-icon (click)="switchView()"><i class="fas fa-plus-circle fa-2x"></i></mat-icon>
+      </div>
     </div>
-  </div>
-  <div class="recipes-body" *ngIf="viewRecipeView">
-    <app-recipe-slider [recipes]="myRecipes" [detailView]="detailView"></app-recipe-slider>
-  </div>
-  <div class="recipes-header row" *ngIf="!viewRecipeView">
-    <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
-      <a (click)="switchView()"><i class="fas fa-arrow-left fa-2x"></i></a>
+    <div class="recipes-body" *ngIf="viewRecipeView">
+      <app-recipe-slider [recipes]="myRecipes" [detailView]="detailView"></app-recipe-slider>
     </div>
-  </div>
-  <div class="recipes-body row" *ngIf="!viewRecipeView">
-    <div class="col-xs-2 col-md-2"></div>
-    <div class="col-xs-8 col-md-8">
-    <form [formGroup]="myRecipeForm" novalidate>
-      <div class="row mar-bottom">
-          <mat-input-container>
-            <input matInput type="text" formControlName="title" placeholder="Title" />
-          </mat-input-container>
+    <div class="recipes-header row" *ngIf="!viewRecipeView">
+      <div class="header-title col-xs-2 col-sm-2 col-md-2 pull-right">
+        <a (click)="switchView()"><i class="fas fa-arrow-left fa-2x"></i></a>
       </div>
-      <div class="row mar-bottom" >
-        <mat-input-container>
-          <input matInput type="text" formControlName="recipeUrl" placeholder="Recipe Url" />
-        </mat-input-container>
-      </div>
-      <div class="row mar-bottom">
-        <mat-form-field class="demo-chip-list">
-          <mat-chip-list #chipList>
-            <mat-chip *ngFor="let label of dietLabels" [selectable]="selectable"
-                      [removable]="removable" (remove)="removeDietLabel(label)">
-              {{label}}
-              <mat-icon matChipRemove *ngIf="removable"><i class="far fa-times-circle"></i></mat-icon>
-            </mat-chip>
-            <input placeholder="Diet labels"
-                   [matChipInputFor]="chipList" formControlName="dietLabels"
-                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                   (matChipInputTokenEnd)="addDietLabel($event)" />
-          </mat-chip-list>
-        </mat-form-field>
-      </div>
-      <div class="row mar-bottom">
-        <mat-input-container>
+    </div>
+    <div class="recipes-body row" *ngIf="!viewRecipeView">
+      <div class="col-xs-2 col-md-2"></div>
+      <div class="col-xs-8 col-md-8">
+        <form [formGroup]="myRecipeForm" novalidate>
+          <div class="row mar-bottom">
+            <mat-input-container>
+              <input matInput type="text" formControlName="title" placeholder="Title" />
+            </mat-input-container>
+          </div>
+          <div class="row mar-bottom" >
+            <mat-input-container>
+              <input matInput type="text" formControlName="recipeUrl" placeholder="Recipe Url" />
+            </mat-input-container>
+          </div>
+          <div class="row mar-bottom">
+            <mat-form-field class="demo-chip-list">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let label of dietLabels" [selectable]="selectable"
+                          [removable]="removable" (remove)="removeDietLabel(label)">
+                  {{label}}
+                  <mat-icon matChipRemove *ngIf="removable"><i class="far fa-times-circle"></i></mat-icon>
+                </mat-chip>
+                <input placeholder="Diet labels"
+                       [matChipInputFor]="chipList" formControlName="dietLabels"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       (matChipInputTokenEnd)="addDietLabel($event)" />
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+          <div class="row mar-bottom">
+            <mat-input-container>
           <textarea matInput formControlName="ingredients" matTextareaAutosize matAutosizeMinRows="2"
                     matAutosizeMaxRows="20" placeholder="Ingredients"  ></textarea>
-        </mat-input-container>
-      </div>
-      <div class="row mar-bottom">
-        <mat-input-container>
+            </mat-input-container>
+          </div>
+          <div class="row mar-bottom">
+            <mat-input-container>
           <textarea matInput type="text" matTextareaAutosize matAutosizeMinRows="2"
                     matAutosizeMaxRows="20" formControlName="instructions" placeholder="Instructions" ></textarea>
-        </mat-input-container>
-      </div>
+            </mat-input-container>
+          </div>
 
-    </form>
-      <div class="row mar-bottom">
-        <button mat-raised-button color="primary" [disabled]="!myRecipeForm.valid" (click)="saveRecipe()">Save</button>
+        </form>
+        <div class="row mar-bottom">
+          <button mat-raised-button color="primary" [disabled]="!myRecipeForm.valid" (click)="saveRecipe()">Save</button>
+        </div>
       </div>
     </div>
+    <app-snack-bar></app-snack-bar>
   </div>
-  <app-snack-bar></app-snack-bar>
 </div>
+<div *ngIf="dashboardView">
+  <div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8"><h4 class="media-heading">My Recipes</h4><h4 class="media-heading">{{'  ('+myRecipes.length+')'}}</h4></div>
+    <div class="col-xs-2 col-sm-2 col-md-2 flex-end"><h4 class="media-heading"><a>See all</a></h4></div>
+  </div>
+  <div class="row" *ngIf="!!myRecipes">
+    <mat-card  *ngFor="let recipeDetails of myRecipes.splice(0,4)" class="col-sm-2 card">
+      <div class="row media">
+        <div class="media-left col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <img onerror="this.src='../../assets/images/Food.png'" class="media-object" src="{{recipeDetails.image}}" width="100%" height="auto" alt="...">
+        </div>
+        <div class="media-body">
+          <div class="float col-xs-12 col-sm-11">
+            <h4>{{recipeDetails.title}}</h4>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
 

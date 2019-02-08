@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, Optional, Input} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
@@ -15,6 +15,8 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 })
 export class MyRecipesComponent implements OnInit {
 @ViewChild(SnackBarComponent)
+  @Input() dashboardView;
+  @Input() userEmail;
 snackBarRef: SnackBarComponent;
   visible: boolean = true;
   selectable: boolean = true;
@@ -23,24 +25,15 @@ snackBarRef: SnackBarComponent;
   isXs: Boolean =  false;
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
-  constructor( public dialogRef: MatDialogRef<MyRecipesComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: any,
-    private authService: AuthService, private fb: FormBuilder, private breakpointsService: BreakpointObserver) {
-    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
-      if (result.matches) {
-        this.isXs = true;
-      } else {
-        this.isXs = false;
-      }
-    });
-  }
+  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private authService: AuthService, private fb: FormBuilder, private breakpointsService: BreakpointObserver) {}
   myRecipes: any = [];
   viewRecipeView: Boolean = true;
   myRecipeForm: FormGroup;
   noRecipesFound: Boolean = false;
   dietLabels: any = [];
   ngOnInit() {
-    this.authService.getMyRecipeDetails().then(recipes => {
+    this.authService.getMyRecipeDetails(this.userEmail).then(recipes => {
       if(!recipes){
         this.noRecipesFound = true;
       }
