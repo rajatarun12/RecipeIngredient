@@ -45,6 +45,7 @@ import { GooglemapsComponent } from './googlemaps/googlemaps.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
+import { RecipeDetailsFlyoutComponent } from './recipe-details-flyout/recipe-details-flyout.component';
 
 
 const appRoutes = [
@@ -58,7 +59,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent
+    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent, RecipeDetailsFlyoutComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +104,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule
   ],
   exports: [ViewRecipeComponent, SearchComponent, MatSidenavModule, MatInputModule, MatDialogModule,MatCardModule],
-  entryComponents: [NutrientDialogTemplate, GooglemapsComponent, PrivacyPolicyComponent,FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent, FollowersComponent, MyRecipesComponent],
+  entryComponents: [NutrientDialogTemplate, RecipeDetailsFlyoutComponent, GooglemapsComponent, PrivacyPolicyComponent,FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent, FollowersComponent, MyRecipesComponent],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

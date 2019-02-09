@@ -15,14 +15,12 @@
   filter: saturate(1.5) contrast(85%);
 }
 
+
 .jumbotron {
   padding: $padding-md $padding-lg $padding-md $padding-md !important;
 }
 .mat-drawer{
   left: 0 !important;
-}
-.mat-sidenav-content{
-  overflow-y: hidden;
 }
 .overlap-block {
   position: absolute;
@@ -31,7 +29,6 @@
 .mat-sidenav-container {
   margin-bottom: 0px;
   height: 100vh;
-  overflow-y: hidden;
   padding: 0px !important;
 }
 .mat-drawer {

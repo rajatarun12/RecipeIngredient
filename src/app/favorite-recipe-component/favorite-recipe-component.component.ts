@@ -1,8 +1,10 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild, Optional, Input} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogConfig,MatDialogRef, MatDialog, DialogPosition} from '@angular/material';
 import {DatabaseServiceService} from '../services/database-service.service';
+import {RecipeDetailsFlyoutComponent} from '../recipe-details-flyout/recipe-details-flyout.component';
 
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {Overlay} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-favorite-recipe-component',
@@ -15,10 +17,12 @@ export class FavoriteRecipeComponentComponent implements OnInit{
   recipes;
   @Input() dashboardView;
   @Input() userEmail;
+
   constructor(
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,public overlay: Overlay,
     private db: DatabaseServiceService, private breakpointsService: BreakpointObserver) {}
   ngOnInit() {
+      this.recipes = [];
       this.db.getFavoriteRecipes(this.userEmail).then(res => {
         const recipes = [];
         Object.keys(res).forEach(key => {
@@ -48,6 +52,23 @@ export class FavoriteRecipeComponentComponent implements OnInit{
       //   this.recipeDetails = res;
       //   this.detailView = true;
       // })
+  }
+  openDialog(recipe): void {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.position = {'top': '0', 'right':'0'}
+    dialogConfig.autoFocus = true;
+    dialogConfig.minWidth  = '50vw';
+    dialogConfig.height = '100%';
+    dialogConfig.data = {
+      recipe: recipe
+    };
+    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.noop();
+
+    let dialogRef = this.dialog.open(RecipeDetailsFlyoutComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
   toggleExpand(b: boolean) {
     this.detailView = b;

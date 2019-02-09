@@ -1,5 +1,5 @@
 .dashboard-container {
-  padding: 3em 5em;
+  padding: 6em 5em;
   font-family: Raleway-Regular !important;
 }
 .favorite-container {
@@ -7,6 +7,19 @@
 }
 .dashboard-heading {
   margin-bottom: 6em;
+}
+.header {
+  top: 0;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 4em;
+  button {
+    width: 10em;
+    background-image: linear-gradient(to right, #ff7900, #f34400);
+    height: 100%;
+  }
 }
 .media-heading {
   font-size: 22px;

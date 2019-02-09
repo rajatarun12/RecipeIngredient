@@ -33,6 +33,7 @@ snackBarRef: SnackBarComponent;
   noRecipesFound: Boolean = false;
   dietLabels: any = [];
   ngOnInit() {
+    this,this.myRecipes = [];
     this.authService.getMyRecipeDetails(this.userEmail).then(recipes => {
       if(!recipes){
         this.noRecipesFound = true;

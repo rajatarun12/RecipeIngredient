@@ -18,17 +18,25 @@ h1,h2,h3,p,a,h4,div {
   font-family: Raleway;
   font-weight: 600;
 }
+
 body {
   /*@ts-ignore*/
   padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
   padding-top: env(safe-area-inset-top); /* iOS 11.2 */
 }
-.cdk-overlay-pane{
-  margin-top: 1.5em;
-  width: 30em;
+.cdk-overlay-pane {
+  width: 100px !important;
+  top: 2em !important;
+  right: 10em !important;
+  .mat-dialog-container {
+    padding: 0 !important;
+  }
 }
 .mat-expansion-panel-body{
   padding: 10px 0.5em 0.5em !important;
+}
+.cdk-global-overlay-wrapper {
+  overflow: scroll !important;
 }
 .mat-expansion-panel-body > button{
   margin-bottom: 1em !important;

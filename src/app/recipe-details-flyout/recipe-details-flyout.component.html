@@ -1,0 +1,27 @@
+<md-dialog-content>
+<div *ngIf="recipe">
+
+<div class="media-body">
+    <h4>{{recipe.title}}</h4>
+  <hr />
+</div>
+<div class="row media"  *ngIf="recipe">
+  <div class="media-image col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <img *ngIf="recipe.image" class="media-object" src="{{recipe.image}}" width="100%" alt="...">
+  </div>
+</div>
+  <div class="round-buttons">
+    <a href="" class="round-button"><i class="fas fa-comments"></i></a>
+    <a href="" class="round-button"><i class="fab fa-facebook-f"></i></a>
+    <a href="" class="round-button"><i class="fas fa-print"></i></a>
+    <a href="" class="round-button"><i class="fab fa-pinterest-p"></i></a>
+  </div>
+  <div class="recipe-steps">
+      <h1 class="ingredients"> Ingredients</h1>
+    <ol class="row steps" >
+      <li class="col-sm-12 step" *ngFor="let step of recipe.ingredients; let i = index">{{step}}</li>
+    </ol>
+  </div>
+
+</div>
+</md-dialog-content>
