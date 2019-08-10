@@ -1,15 +1,14 @@
-import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
 import {RecipeService} from '../recipe.service';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
-import {Inject, HostListener } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Inject, HostListener } from '@angular/core';
 import {RecipeModel} from '../Models/recipeModel';
 import {AppGlobal} from '../Content/AppGlobal';
 import {TranslateService} from '@ngx-translate/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import {FirebaseOperation} from 'angularfire2/database/interfaces';
-import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {FirebaseOperation} from '@angular/fire/database/interfaces';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs/Observable';
 import {UserModel} from '../Models/UserModel';
 import {DatabaseServiceService} from '../services/database-service.service';
@@ -28,7 +27,8 @@ import {MatDialog} from '@angular/material';
 export class ViewRecipeComponent implements OnInit,OnChanges {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
-  @ViewChild(SnackBarComponent)
+  @Output() clearRecipes = new EventEmitter<RecipeModel>();
+  @ViewChild(SnackBarComponent, {static: false})
     snackBarRef: SnackBarComponent;
   ingredient = '';
   showResults: Boolean = true;
@@ -39,7 +39,6 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   sortValue: String;
   constructor(private recipeService: RecipeService,
               public dialog: MatDialog,
-              @Inject(DOCUMENT) private document: Document,
               private appGlobal: AppGlobal,
               private spinnerService: Ng4LoadingSpinnerService,
               public translate: TranslateService,
@@ -75,13 +74,7 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
     this.filterValue = filterType;
     this.recipes.getFilteredItem(filterType);
   }
-  addToFav(obj, evt) {
-    this.foodDb.addToFav(obj, this.user['email']).then(res => {
-      this.snackBarRef.openSnackBar('Recipe added to favorites');
-      evt.srcElement.dataset.prefix = 'fas';
-      console.log(evt);
-    });
-  }
+
   getSortResults(sortType) {
     const sortTypeMap = {
       'ASC': 'Low to High',
@@ -117,6 +110,7 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   }
   clearResults() {
     this.showResults = false;
+    this.clearRecipes.emit();
   }
   addDietLabelToSearch(query){
     let ingredients = this.recipes.getCurrentSearchQuery();

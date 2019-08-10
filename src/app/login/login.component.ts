@@ -5,9 +5,11 @@ import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppGlobal} from '../Content/AppGlobal';
 import {AuthService} from '../services/auth.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material';
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {PrivacyPolicyComponent} from '../privacy-policy/privacy-policy.component';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit{
   myForm: FormGroup;
   authLabel: String;
   userInfo: any;
+  isXs;
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     public registerRef: MatDialogRef<LoginComponent>,
@@ -27,8 +30,10 @@ export class LoginComponent implements OnInit{
     private authService:AuthService,
     private spinnerService :Ng4LoadingSpinnerService,
     private db: AngularFireDatabase,
+    public dialog: MatDialog,
     public translate: TranslateService,
     private route: ActivatedRoute,
+    private breakpointsService: BreakpointObserver,
     private appGlobal:AppGlobal) {
     this.authLabel = data.authLabel;
   }
@@ -38,7 +43,14 @@ export class LoginComponent implements OnInit{
     this.myForm =  this.fb.group({
       'login': ['', Validators.compose([Validators.email, Validators.required])],
       'password': ['', Validators.required]
-    })
+    });
+    this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {
+      if (result.matches) {
+        this.isXs = true;
+      } else {
+        this.isXs = false;
+      }
+    });
   }
 
   onNoClick(): void {
@@ -129,41 +141,34 @@ export class LoginComponent implements OnInit{
       // ...
     });
   }
+  handlePrivacyPolicy(){
+    if(!this.isXs) {
+      let dialogRef = this.dialog.open(PrivacyPolicyComponent, {
+        width: '100em',
+        height: '90%'
+      });
+    } else {
+      window.open('https://www.iubenda.com/privacy-policy/31926591', '_blank');
+    }
+  }
   onLoginClick(authLabel){
     this.spinnerService.show();
     const loginPassword = this.myForm.value.login + '-' + this.myForm.value.password;
     let auth;
     let error: String;
-    if (authLabel === 'LoginLabel') {
+    auth = this.authService.loginWithEmail(this.myForm.value.login, this.myForm.value.password).then(res => {
+      localStorage.setItem('recipeSearchData', JSON.stringify(res));
+      const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res['user']['uid'].toString()});
 
-      auth = this.authService.loginWithEmail(this.myForm.value.login, this.myForm.value.password).then(res => {
-        localStorage.setItem('token', res.toString());
-        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res['uid'].toString()});
-
-        this.dialogRef.close(user);
-        this.spinnerService.hide();
-      }).catch(err => {
-        error = err.message;
-        if(err.code === 'auth/wrong-password'){
-          this.myForm.controls['password'].setErrors({'invalidPassword': true} );
-        }
-        this.spinnerService.hide();
-      });
-    } else {
-      auth = this.authService.registerWithEmail(this.myForm.value.login,this.myForm.value.password).then(res => {
-        localStorage.setItem('token',res.toString());
-        const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res['uid']});
-        this.createDataBaseUserObject(user).then(res => {
-          this.dialogRef.close(user);
-          this.spinnerService.hide();
-        });
-
-      }).catch(err => {
-        error = err.message;
-        this.myForm.controls['login'].setErrors({'duplicateUser': true} );
-        this.spinnerService.hide();
-      });
-    }
+      this.dialogRef.close(user);
+      this.spinnerService.hide();
+    }).catch(err => {
+      error = err.message;
+      if(err.code === 'auth/wrong-password'){
+        this.myForm.controls['password'].setErrors({'invalidPassword': true} );
+      }
+      this.spinnerService.hide();
+    });
     console.log(auth);
   }
 

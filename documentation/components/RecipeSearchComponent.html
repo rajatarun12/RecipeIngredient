@@ -1,0 +1,1458 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ingredient-recipe documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ingredient-recipe documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>RecipeSearchComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/recipe-search/recipe-search.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/RecipeService.html" target="_self" >RecipeService</a></code>
+                                <code><a href="../injectables/AppGlobal.html" target="_self" >AppGlobal</a></code>
+                                <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-recipe-search</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./recipe-search.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./recipe-search.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#appGlobal">appGlobal</a>
+                            </li>
+                            <li>
+                                <a href="#appleImagePath">appleImagePath</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dialog">dialog</a>
+                            </li>
+                            <li>
+                                <a href="#displayName">displayName</a>
+                            </li>
+                            <li>
+                                <a href="#hideBadges">hideBadges</a>
+                            </li>
+                            <li>
+                                <a href="#hideHeader">hideHeader</a>
+                            </li>
+                            <li>
+                                <a href="#ingredients">ingredients</a>
+                            </li>
+                            <li>
+                                <a href="#isXs">isXs</a>
+                            </li>
+                            <li>
+                                <a href="#language">language</a>
+                            </li>
+                            <li>
+                                <a href="#loginActive">loginActive</a>
+                            </li>
+                            <li>
+                                <a href="#notifications">notifications</a>
+                            </li>
+                            <li>
+                                <a href="#opened">opened</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#recipe">recipe</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clearRecipes">clearRecipes</a>
+                            </li>
+                            <li>
+                                <a href="#login">login</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#register">register</a>
+                            </li>
+                            <li>
+                                <a href="#sendRecipes">sendRecipes</a>
+                            </li>
+                            <li>
+                                <a href="#updateUserData">updateUserData</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(recipeService: <a href="../injectables/RecipeService.html">RecipeService</a>, document: Document, appGlobal: <a href="../injectables/AppGlobal.html">AppGlobal</a>, dialog: MatDialog, translate: TranslateService, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, breakpointsService: BreakpointObserver)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>recipeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RecipeService.html" target="_self" >RecipeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>document</td>
+                                                  
+                                                        <td>
+                                                                    <code>Document</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>appGlobal</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppGlobal.html" target="_self" >AppGlobal</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translate</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslateService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activatedRoute</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>breakpointsService</td>
+                                                  
+                                                        <td>
+                                                                    <code>BreakpointObserver</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearRecipes"></a>
+                    <span class="name">
+                        <b>
+                            clearRecipes
+                        </b>
+                        <a href="#clearRecipes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearRecipes()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="181"
+                            class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:181</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="login"></a>
+                    <span class="name">
+                        <b>
+                            login
+                        </b>
+                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>login()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="133"
+                            class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:133</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:54</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="register"></a>
+                    <span class="name">
+                        <b>
+                            register
+                        </b>
+                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>register()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="153"
+                            class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:153</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendRecipes"></a>
+                    <span class="name">
+                        <b>
+                            sendRecipes
+                        </b>
+                        <a href="#sendRecipes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sendRecipes(result)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:172</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>result</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUserData"></a>
+                    <span class="name">
+                        <b>
+                            updateUserData
+                        </b>
+                        <a href="#updateUserData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateUserData(result)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="112"
+                            class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:112</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>result</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appGlobal"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            appGlobal</b>
+                            <a href="#appGlobal"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/AppGlobal.html" target="_self" >AppGlobal</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appleImagePath"></a>
+                        <span class="name">
+                            <b>
+                            appleImagePath</b>
+                            <a href="#appleImagePath"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>environment.appleImagePath</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dialog"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            dialog</b>
+                            <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatDialog</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="displayName"></a>
+                        <span class="name">
+                            <b>
+                            displayName</b>
+                            <a href="#displayName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hideBadges"></a>
+                        <span class="name">
+                            <b>
+                            hideBadges</b>
+                            <a href="#hideBadges"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hideHeader"></a>
+                        <span class="name">
+                            <b>
+                            hideHeader</b>
+                            <a href="#hideHeader"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ingredients"></a>
+                        <span class="name">
+                            <b>
+                            ingredients</b>
+                            <a href="#ingredients"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isXs"></a>
+                        <span class="name">
+                            <b>
+                            isXs</b>
+                            <a href="#isXs"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="language"></a>
+                        <span class="name">
+                            <b>
+                            language</b>
+                            <a href="#language"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loginActive"></a>
+                        <span class="name">
+                            <b>
+                            loginActive</b>
+                            <a href="#loginActive"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="notifications"></a>
+                        <span class="name">
+                            <b>
+                            notifications</b>
+                            <a href="#notifications"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="opened"></a>
+                        <span class="name">
+                            <b>
+                            opened</b>
+                            <a href="#opened"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="recipe"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            recipe</b>
+                            <a href="#recipe"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/recipe-search/recipe-search.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import {RecipeService} from &#x27;../recipe.service&#x27;;
+import {RecipeModel} from &#x27;../Models/recipeModel&#x27;;
+import {Inject, HostListener } from &#x27;@angular/core&#x27;;
+import { DOCUMENT } from &#x27;@angular/platform-browser&#x27;;
+import {AppGlobal} from &quot;../Content/AppGlobal&quot;;
+import {TranslateService} from &quot;@ngx-translate/core&quot;;
+import {ActivatedRoute} from &quot;@angular/router&quot;;
+import { firebase } from &quot;@firebase/app&quot;;
+import {UserModel} from &quot;../Models/UserModel&quot;;
+import {AuthService} from &#x27;../services/auth.service&#x27;;
+import {LoginComponent} from &#x27;../login/login.component&#x27;;
+import { environment } from &#x27;../../environments/environment&#x27;;
+import {BreakpointObserver} from &#x27;@angular/cdk/layout&#x27;;
+import {MatDialog} from &#x27;@angular/material&#x27;;
+import {RegisterComponent} from &#x27;../register/register.component&#x27;;
+
+@Component({
+  selector: &#x27;app-recipe-search&#x27;,
+  templateUrl: &#x27;./recipe-search.component.html&#x27;,
+  styleUrls: [&#x27;./recipe-search.component.scss&#x27;],
+  providers: [RecipeService, AppGlobal, AuthService]
+})
+export class RecipeSearchComponent implements OnInit {
+  public recipe;
+  hideHeader: Boolean &#x3D; false;
+  appleImagePath: String &#x3D;  environment.appleImagePath;
+  opened: Boolean;
+  isXs: Boolean &#x3D; false;
+  language;
+  loginActive;
+  displayName;
+  ingredients;
+  hideBadges: Boolean &#x3D; false;
+  notifications: any;
+  constructor(private recipeService: RecipeService,
+              @Inject(DOCUMENT) private document: Document,
+              public appGlobal: AppGlobal,
+              public dialog: MatDialog,
+              private translate: TranslateService,
+              private route: ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
+              private breakpointsService: BreakpointObserver) {
+    this.breakpointsService.observe(&#x27;(max-width: 768px)&#x27;).subscribe(result &#x3D;&gt; {
+      if (result.matches) {
+        this.isXs &#x3D; true;
+      } else {
+        this.isXs &#x3D; false;
+      }
+    });
+  }
+
+  ngOnInit() {
+    let language &#x3D; &#x27;&#x27;;
+    this.activatedRoute.params.forEach(param &#x3D;&gt; {
+      language &#x3D; param[&#x27;language&#x27;]
+    });
+    this.translate.setDefaultLang(language || this.appGlobal.defaultContent);
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+      this.hideBadges &#x3D; true;
+    }
+    else {
+      this.hideBadges &#x3D; false;
+    }
+    const localStorageData &#x3D; localStorage.getItem(&#x27;recipeSearchData&#x27;);
+    let localStorageDataJSON;
+    if(localStorageData){
+      localStorageDataJSON &#x3D; JSON.parse(localStorageData);
+    }
+    if(localStorageDataJSON &amp;&amp; localStorageDataJSON.user){
+        this.updateUserData(localStorageDataJSON);
+    } else {
+      firebase.auth().getRedirectResult().then(result &#x3D;&gt; {
+          localStorage.setItem(&#x27;recipeSearchData&#x27;, JSON.stringify(result));
+          this.updateUserData(result);
+          this.authService.getUserNotifications().then(notifications &#x3D;&gt; {
+            if(!notifications){
+              this.notifications &#x3D; [{title: &quot;You have 0 Notifications&quot;}];
+            }
+            this.notifications &#x3D; notifications;
+          });
+    });
+    }
+    // Check whether SiriKit extension activates the test service
+    // @ts-ignore
+    const prefs &#x3D; plugins.appPreferences;
+    const suitePrefs &#x3D; prefs.suite(&#x27;group.recipesearch&#x27;);
+    this.route.params.forEach(param &#x3D;&gt; {
+      this.language &#x3D; param[&#x27;language&#x27;]
+    });
+    this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
+    suitePrefs.fetch(
+      function(value) {
+        // Activated by voice control
+        console.log(value);
+        if (value &#x3D;&#x3D;&#x3D; &#x27;Test&#x27;) {
+          // Clear the auto start
+          suitePrefs.remove(function() {}, function() {}, &#x27;start&#x27;);
+          console.log(&#x27;worked&#x27;);
+          // Run a test service
+          // runTest();
+        }
+      },
+      // Error
+      function(error) {
+
+      },
+      &#x27;start&#x27;
+    );
+  }
+  updateUserData(result){
+    let user;
+    if (result.user) {
+      user &#x3D; result.user;
+    }
+    if(user){
+      const resultObj &#x3D; {
+        login: true,
+        email: result.user.email,
+        displayName: result.user.displayName,
+        name: result.user.displayName,
+        uid: result.user.uid
+      };
+
+      const user &#x3D; new UserModel(resultObj);
+      // this.userInfo.emit(resultObj);
+      // this.userEmail &#x3D; resultObj.email;
+      this.displayName &#x3D; resultObj.displayName;
+      this.loginActive &#x3D; true;
+    }
+  }
+  login(){
+    let dialogRef &#x3D; this.dialog.open(LoginComponent, {
+      width: &#x27;30em&#x27;,
+      panelClass: &#x27;login-container&#x27;,
+      data: {
+        authLabel: &#x27;LoginLabel&#x27;,
+        language: this.language
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+      if(!!result.login){
+        // this.userInfo.emit(result);
+        // this.userEmail &#x3D; result.email;
+        this.loginActive &#x3D; true;
+        this.displayName &#x3D; result.displayName;
+      }
+    });
+  }
+
+  register(){
+    let dialogRef &#x3D; this.dialog.open(RegisterComponent, {
+      width: &#x27;30em&#x27;,
+      panelClass: &#x27;login-container&#x27;,
+      data: {
+        authLabel: &#x27;registerLabel&#x27;,
+        language: this.language
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+      if(!!result.login){
+        // this.userInfo.emit(result);
+        // this.userEmail &#x3D; result.email;
+        this.loginActive &#x3D; true;
+      }
+    });
+  }
+
+  sendRecipes(result){
+    this.recipe &#x3D; result.recipes;
+    this.ingredients &#x3D; result.ingredients.split(&#x27;,&#x27;).filter(item &#x3D;&gt; {
+      if(item){
+        return item;
+      }
+    });
+  }
+
+  clearRecipes(){
+    delete this.recipe;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div [hidden]&#x3D;&quot;recipe&quot;&gt;
+&lt;div class&#x3D;&quot;nav row&quot; *ngIf&#x3D;&quot;!loginActive&quot;&gt;
+    &lt;div class&#x3D;&quot;offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block&quot;&gt;&lt;p class&#x3D;&quot;nav-item&quot;&gt;&lt;a class&#x3D;&quot;&quot; (click)&#x3D;&quot;login()&quot;&gt;login&lt;/a&gt; &lt;/p&gt;&lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-md-1 col-lg-1 nav-block&quot;&gt;&lt;p class&#x3D;&quot;nav-item&quot;&gt;&lt;a class&#x3D;&quot;&quot; (click)&#x3D;&quot;register()&quot;&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;nav row&quot; *ngIf&#x3D;&quot;loginActive&quot;&gt;
+  &lt;div class&#x3D;&quot;offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block&quot;&gt;&lt;p class&#x3D;&quot;nav-item&quot;&gt;&lt;a class&#x3D;&quot;nav-item&quot; href&#x3D;&quot;#/recipeSearch/dashboard&quot;&gt;dashboard&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-md-1 col-lg-1 nav-block&quot;&gt;&lt;p class&#x3D;&quot;nav-item&quot;&gt;{{displayName}}&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;text-center header-rectangle&quot; [hidden]&#x3D;&quot;recipe&quot;&gt;
+  &lt;!--&lt;img src&#x3D;&quot;../../assets/images/logo7.PNG&quot;  *ngIf&#x3D;&quot;!isXs&quot; width&#x3D;&quot;500px&quot; height&#x3D;&quot;auto&quot;/&gt;--&gt;
+  &lt;h2 class&#x3D;&quot;input-bottom page-header&quot;&gt;LET&#x27;S COOK WITH US&lt;/h2&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col-md-1&quot;&gt;&lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-md-10 search-background&quot; &gt;
+      &lt;app-search (sendRecipes)&#x3D;&quot;sendRecipes($event)&quot;&gt;&lt;/app-search&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div [hidden]&#x3D;&quot;!recipe&quot; class&#x3D;&quot;view-recipe&quot;&gt;
+  &lt;app-view-recipe [recipes]&#x3D;&quot;recipe&quot; (clearRecipes)&#x3D;&quot;clearRecipes($event)&quot;&gt;&lt;/app-view-recipe&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./recipe-search.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &#x27;~sass/main&#x27;;
+
+.input-bottom{
+  margin-bottom: $margin-md;
+  color: teal;
+  font-size: $font-xl;
+}
+
+.nav {
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1em;
+  position: absolute;
+  text-decoration: none;
+  z-index: 3;
+}
+.nav-block {
+  float: left;
+}
+.nav-item {
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+
+}
+
+.page-header {
+  font-family: Raleway;
+  font-size: 51px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--white);
+}
+.width-full{
+  width: 100%;
+}
+
+.chips {
+  padding-left: 1.5em;
+}
+.pad-left{
+  padding-left: $padding-md;
+}
+.deep-purple{
+  color: #5E42B0;
+}
+.jumbotron {
+  padding: $padding-md $padding-lg $padding-md $padding-md !important;
+  background-size: 100%;
+}
+.jumbotron::after {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0, #000 100%);
+}
+.mat-drawer{
+  left: 0 !important;
+}
+.fullHeight {
+  height: 100vh;
+  overflow-x: hidden;
+}
+.badge{
+  text-align: right;
+}
+.pad-top{
+  padding-top: 0.6 * $padding-md;
+}
+.hide-header{
+  opacity: 0;
+}
+
+.search-background {
+  margin-bottom: -12em;
+  padding: 3em 1em 4em 1em;
+  background-image: linear-gradient(to right, #ff7900, #f34400);
+}
+
+.header-rectangle {
+  padding-top: 6em;
+  padding-bottom: 2em;
+  background: #d8d8d8 url(&quot;../../assets/images/front-header.jpg&quot;);
+  background-size: 100%;
+  background-position: bottom center;
+  &amp;::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    top: 0;
+    height: 150px;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 0, #000 100%);
+    opacity: 0.6;
+    z-index: 2;
+  }
+}
+
+@media (max-width:  #{$breakpoint-tablet}) {
+  .badge{
+    display: none;
+  }
+}
+
+@media(min-width: #{$breakpoint-lg-tablet}){
+   .mar-left{
+     margin-left: 1.5 * $margin-md;
+   }
+}
+
+@media(min-width: #{$breakpoint-lg-desktop}){
+  .mar-left{
+    margin-left: 3 * $margin-lg;
+  }
+}
+
+@media (min-width: #{$breakpoint-desktop}){
+  .mar-left{
+    margin-left: $margin-lg;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div [hidden]="recipe"><div class="nav row" *ngIf="!loginActive">    <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="login()">login</a> </p></div>    <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="register()">Register</a></p></div></div><div class="nav row" *ngIf="loginActive">  <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="nav-item" href="#/recipeSearch/dashboard">dashboard</a></p></div>  <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item">{{displayName}}</p></div></div></div><div class="text-center header-rectangle" [hidden]="recipe">  <!--<img src="../../assets/images/logo7.PNG"  *ngIf="!isXs" width="500px" height="auto"/>-->  <h2 class="input-bottom page-header">LET\'S COOK WITH US</h2>  <div class="row">    <div class="col-md-1"></div>    <div class="col-md-10 search-background" >      <app-search (sendRecipes)="sendRecipes($event)"></app-search>    </div>  </div></div><div [hidden]="!recipe" class="view-recipe">  <app-view-recipe [recipes]="recipe" (clearRecipes)="clearRecipes($event)"></app-view-recipe></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateRecipeComponent', 'selector': 'app-create-recipe'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FavoriteRecipeComponentComponent', 'selector': 'app-favorite-recipe-component'},{'name': 'FollowerInfoComponent', 'selector': 'app-follower-info'},{'name': 'FollowersComponent', 'selector': 'app-followers'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponentComponent', 'selector': 'app-footer-component'},{'name': 'GooglemapsComponent', 'selector': 'app-googlemaps'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MyRecipesComponent', 'selector': 'app-my-recipes'},{'name': 'NotificationMenuComponent', 'selector': 'app-notification-menu'},{'name': 'NutrientDialogComponent', 'selector': 'app-nutrient-dialog'},{'name': 'NutrientDialogTemplate', 'selector': 'app-nutrient-dialog-template'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'RecipeDetailsFlyoutComponent', 'selector': 'app-recipe-details-flyout'},{'name': 'RecipeInfoComponent', 'selector': 'app-recipe-info'},{'name': 'RecipeSearchComponent', 'selector': 'app-recipe-search'},{'name': 'RecipeSliderComponent', 'selector': 'app-recipe-slider'},{'name': 'RecipeTileComponent', 'selector': 'app-recipe-tile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SideNavComponent', 'selector': 'app-side-nav'},{'name': 'SnackBarComponent', 'selector': 'app-snack-bar'},{'name': 'ViewRecipeComponent', 'selector': 'app-view-recipe'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RecipeSearchComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RecipeSearchComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

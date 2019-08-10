@@ -16,9 +16,13 @@
   border-radius: 27px;
   box-shadow: 0 -2px 14px 1px rgba(0, 0, 0, 0.5);
 }
-.width-full{
+.view-recipe-container{
   width: 100%;
+  margin-top: 2em;
+  z-index: 0;
 }
+
+
 
 .recipeCard {
   float: left;
@@ -48,8 +52,31 @@
 
 .dropdowns {
   border-radius: 15px;
-  background-color: #f54d00;
+  background-color: red;
   color: var(--white);
+}
+.navbar {
+  top: 0;
+  position: sticky;
+  box-shadow: 2px 2px 2px grey;
+  position: -webkit-sticky;
+  overflow: hidden;
+  background-color: black;
+  width: 100%;
+  z-index: 1;
+  .nav-row {
+    width: 100%;
+  }
+  .back-red {
+    background-color: #E84A4D !important;
+  }
+  .create-recipe {
+    width: 10em;
+    background-image: linear-gradient(to right, #ff7900, #f34400);
+    position: absolute;
+    height: 100%;
+    left: 0;
+  }
 }
 
 .border-bottom {

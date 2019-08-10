@@ -68,7 +68,12 @@ mat-card {
 .text-center{
   text-align: center;
 }
-
+.not-chosen-ingredients{
+  font-size: 10px;
+  text-align: left;
+  color: var(--white);
+  width: 100%;
+}
 .chosen-ingredients{
   font-size: 20px;
   font-weight: bold;

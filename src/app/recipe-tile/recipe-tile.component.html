@@ -24,7 +24,7 @@
       </ul>
     </div>
     <div class="media-row chips">
-      <a href="javascript.void" class="see-more-link">See more</a>
+      <a (click)="seemore()" class="see-more-link">See more</a>
       <mat-chip-list #chipList>
         <mat-chip class="back-red"  *ngFor="let data of data.healthLabels" [selectable]="true"
                   [removable]="true" (remove)="addDietLabelToSearch(data)">
@@ -34,4 +34,5 @@
       </mat-chip-list>
     </div>
   </div>
+  <app-snack-bar></app-snack-bar>
 </mat-card>

@@ -1,23 +1,16 @@
-<div class="text-center mar-bottom">
-  <h2 [innerHTML]="'LoginLabel' | translate"></h2></div>
+<div class="text-center mar-bottom loginHeader">
+  <h2 [innerHTML]="'LoginLabel' | translate"></h2>
+</div>
 
-<form class="container" [formGroup]="myForm" novalidate>
-  <div class="row mar-bottom">
-    <div class="col-md-6  authButtonAlign">
-      <button mat-raised-button color="warn" (click)="loginWithGoogle()" [innerHTML]="'GoogleLoginLabel' | translate"></button>
-    </div>
-    <div class="col-md-6 authButtonAlign">
-      <button mat-raised-button color="primary" (click)="loginWithFaceBook()" [innerHTML]="'FacebookLoginLabel' | translate"></button>
-    </div>
-  </div>
+<form class="container login-form" [formGroup]="myForm" novalidate>
   <div class="row text-center">
     <div class="col-md-12 width-full">
       <mat-input-container>
         <input matInput class="width-full" type="text" placeholder="{{'EmailLabel' | translate}}" formControlName="login"/>
-        <mat-error *ngIf="myForm.controls['login']['email']">
+        <mat-error *ngIf="myForm.controls && myForm.controls['login'] && myForm.controls['login']['email']">
             Please provide valid email
         </mat-error>
-        <mat-error *ngIf="myForm.controls['login']['duplicateUser']">
+        <mat-error *ngIf="myForm.controls && myForm.controls['login'] && myForm.controls['login']['duplicateUser']">
             User already exists
         </mat-error>
       </mat-input-container>
@@ -27,7 +20,7 @@
     <div class="col-md-12 ">
       <mat-input-container>
         <input matInput class="width-full" type="password" placeholder="{{'PasswordLabel' | translate}}" formControlName="password"/>
-        <mat-error *ngIf="myForm.controls['password']['errors']['invalidPassword']">
+        <mat-error *ngIf="myForm.controls && myForm.controls['password'] && myForm.controls['password']['errors'] && myForm.controls['password']['errors']['invalidPassword']">
            Incorrect credentials
         </mat-error>
       </mat-input-container>
@@ -40,6 +33,18 @@
     </div>
     <div class="col-md-6 authButtonAlign">
       <button mat-raised-button color="primary" [disabled]="!myForm.valid" (click)="onLoginClick(authLabel)" [innerHTML]="authLabel | translate"></button>
+    </div>
+  </div>
+  <div class="row mar-bottom">
+    <div class="offset-md-2 col-md-1 authButtonAlign">
+      <img src="assets/images/facebook.png" class="facebook icon" (click)="loginWithFaceBook()" />
+      <!--<button mat-raised-button color="warn" (click)="loginWithGoogle()" [innerHTML]="'GoogleLoginLabel' | translate"></button>-->
+    </div>
+    <div class="col-md-1 authButtonAlign">
+      <img src="assets/images/google.png" class="google icon" (click)="loginWithGoogle()" />
+    </div>
+    <div class="offset-md-2 col-md-6 privacyPolicy">
+      <a (click)="handlePrivacyPolicy()">Privacy Policy</a>
     </div>
   </div>
 </form>

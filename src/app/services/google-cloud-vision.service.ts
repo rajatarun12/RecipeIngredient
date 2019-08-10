@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
@@ -44,9 +44,7 @@ export class GoogleCloudVisionService {
       ]
     };
 
-    return this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.googleCloudVisionAPIKey, body).map(res => {
-      return res.json();
-    });
+    return this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.googleCloudVisionAPIKey, body);
   }
 
 }

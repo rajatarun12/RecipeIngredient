@@ -35,6 +35,10 @@
 .width-full{
   width: 100%;
 }
+
+.chips {
+  padding-left: 1.5em;
+}
 .pad-left{
   padding-left: $padding-md;
 }
@@ -43,7 +47,6 @@
 }
 .jumbotron {
   padding: $padding-md $padding-lg $padding-md $padding-md !important;
-  background: url('../../assets/images/header.png');
   background-size: 100%;
 }
 .jumbotron::after {
@@ -72,14 +75,10 @@
   background-image: linear-gradient(to right, #ff7900, #f34400);
 }
 
-.view-recipe{
-    margin-top: 12em;
-}
-
 .header-rectangle {
   padding-top: 6em;
   padding-bottom: 2em;
-  background: #d8d8d8 url("../../assets/images/front-header.jpg");
+  background: #d8d8d8 url("../../../assets/images/front-header.jpg");
   background-size: 100%;
   background-position: bottom center;
   &::before {

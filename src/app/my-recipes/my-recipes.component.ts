@@ -14,7 +14,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
   providers: [AuthService, BreakpointObserver]
 })
 export class MyRecipesComponent implements OnInit {
-@ViewChild(SnackBarComponent)
+@ViewChild(SnackBarComponent, {static: false})
   @Input() dashboardView;
   @Input() userEmail;
 snackBarRef: SnackBarComponent;
@@ -22,6 +22,7 @@ snackBarRef: SnackBarComponent;
   selectable: boolean = true;
   removable: boolean = true;
   detailView: boolean = true;
+  totalToShow;
   isXs: Boolean =  false;
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
@@ -33,13 +34,15 @@ snackBarRef: SnackBarComponent;
   noRecipesFound: Boolean = false;
   dietLabels: any = [];
   ngOnInit() {
-    this,this.myRecipes = [];
-    this.authService.getMyRecipeDetails(this.userEmail).then(recipes => {
+    this.myRecipes = [];
+    let userData = JSON.parse(localStorage.getItem('recipeSearchData'));
+    this.authService.getMyRecipeDetails(this.userEmail || (userData && userData.user && userData.user.email)).then(recipes => {
       if(!recipes){
         this.noRecipesFound = true;
       }
       else{
         this.myRecipes = this.formatRecipes(recipes);
+        this.totalToShow = this.dashboardView ? 4 : this.myRecipes.length;
       }
     });
 

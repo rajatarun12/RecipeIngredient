@@ -26,8 +26,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   providers: [AppGlobal, NgbTooltipConfig, GoogleCloudVisionService]
 })
 export class SearchComponent implements OnInit {
-  @Output() sendRecipes = new EventEmitter<RecipeModel>();
-@ViewChild('imageElement')
+  @Output() sendRecipes = new EventEmitter<any>();
+@ViewChild('imageElement', {static: false})
 ie: ElementRef;
 matcher: MyErrorStateMatcher;
   imageSearchData: any = [];
@@ -106,7 +106,7 @@ matcher: MyErrorStateMatcher;
             const str = base64.result.toString();
             res = btoa(str);
             self.vision.getLabels(res).subscribe(resp => {
-              self.imageSearchData = resp.responses[0].labelAnnotations;
+              self.imageSearchData = resp['responses'][0].labelAnnotations;
               self.ref.detectChanges();
               self.spinnerService.hide();
             });
@@ -126,12 +126,13 @@ matcher: MyErrorStateMatcher;
     });
   }
   search(event: any) {
-    if(!this.values.length){
-      this.itemsGroup = this.myForm.get('search') as FormArray;
-      const val = this.itemsGroup.value[0].name;
-      this.values.push(val);
-    }
+
     if (event.x) {
+      if(!this.values.length){
+        this.itemsGroup = this.myForm.get('search') as FormArray;
+        const val = this.itemsGroup.value[0].name;
+        this.values.push(val);
+      }
       const values = this.myForm;
       const ingredients = this.values.concat(',');
       this.ingredients = ingredients.toString();
@@ -141,12 +142,15 @@ matcher: MyErrorStateMatcher;
         const count = result['count'] || 0;
         this.imageSearchData = [];
         const recipes = this.recipes.getRecipes(result['hits']);
-        this.sendRecipes.emit(new RecipeModel({
-          RecipeObject: recipes,
-          count: count,
-          originalList: result,
-          currentSearchQuery: this.ingredients
-        }));
+        this.sendRecipes.emit({
+          recipes: new RecipeModel({
+            RecipeObject: recipes,
+            count: count,
+            originalList: result,
+            currentSearchQuery: this.ingredients
+          }),
+          ingredients: this.ingredients
+        });
       });
     }
   }

@@ -1,0 +1,22 @@
+<div class="create-recipe-container">
+  <div class="create-component-header row">
+    <h2>Create Recipe</h2>
+  </div>
+  <div class="create-component-form row">
+    <form [formGroup]="addRecipeForm" class="col-xs-8 col-sm-11">
+      <div class="row">
+        <mat-input-container class="recipe-name">
+          <input matInput type="text" formControlName="recipeTitle" class="width-full recipe-name" placeholder="Recipe name" />
+        </mat-input-container>
+      </div>
+      <div class="row">
+        <mat-input-container class="recipe-ingredients col-sm-6">
+          <input matInput type="text" formControlName="ingredient" class="width-full recipe-name" placeholder="Ingredient" />
+        </mat-input-container>
+        <mat-input-container class="recipe-ingredients col-sm-6">
+          <input matInput type="text" formControlName="ingredientQuantity" class="width-full recipe-name" placeholder="Quantity" />
+        </mat-input-container>
+      </div>
+    </form>
+  </div>
+</div>

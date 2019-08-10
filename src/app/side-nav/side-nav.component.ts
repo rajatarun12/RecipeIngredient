@@ -7,7 +7,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AngularFireDatabase } from 'angularfire2/database';
 import {UserModel} from "../Models/UserModel";
 import {FavoriteRecipeComponentComponent} from "../favorite-recipe-component/favorite-recipe-component.component";
-import { firebase } from "@firebase/app";
+import * as firebase from "firebase/app";
 import {TranslateService} from "@ngx-translate/core";
 import {AppGlobal} from "../Content/AppGlobal";
 import {ActivatedRoute} from "@angular/router";

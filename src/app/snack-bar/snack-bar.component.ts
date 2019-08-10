@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material';
-import {RecipeSearchComponent} from '../recipe-search/recipe-search.component';
+import {RecipeSearchComponent} from '../search/recipe-search/recipe-search.component';
 
 @Component({
   selector: 'app-snack-bar',

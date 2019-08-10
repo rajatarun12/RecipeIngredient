@@ -25,11 +25,19 @@ body {
   padding-top: env(safe-area-inset-top); /* iOS 11.2 */
 }
 .cdk-overlay-pane {
-  width: 100px !important;
   top: 2em !important;
   right: 10em !important;
   .mat-dialog-container {
     padding: 0 !important;
+    max-width: none !important;
+
+  }
+}
+.login-container {
+  .mat-dialog-container {
+    -webkit-border-radius: 3em;
+    -moz-border-radius: 3em;
+    border-radius: 3em;
   }
 }
 .mat-expansion-panel-body{

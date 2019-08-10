@@ -1,4 +1,28 @@
-<div class="row pad-left-2 width-full" [ngClass]="{'hidden-op':!showResults}" *ngIf="recipes.RecipeObject['length'] > 0">
+<div class="navbar">
+  <button class="create-recipe hide-xs">Create a recipe</button>
+  <div class="nav-row row" role="search">
+    <div class="offset-sm-2 col-sm-4">
+      <input type="text" class="form-control" placeholder="Search">
+    </div>
+    <div class="offset-sm-4 col-sm-2 row" *ngIf="!loginActive">
+      <div class="col-sm-6 nav-block"><p class="nav-item"><a class="" (click)="login()">login</a> </p></div>
+      <div class="col-sm-6  nav-block"><p class="nav-item"><a class="" (click)="register()">Register</a></p></div>
+    </div>
+    <div class="offset-sm-4 col-sm-2 row" *ngIf="loginActive">
+      <div class="col-sm-6 nav-block"><p class="nav-item"><a class="nav-item" href="#/recipeSearch/dashboard">dashboard</a></p></div>
+      <div class="col-sm-6 nav-block"><p class="nav-item">{{displayName}}</p></div>
+    </div>
+  </div>
+  <div class="nav-row row">
+    <div class="offset-sm-2 col-sm-4 chips">
+      <mat-chip-list #chipList>
+        <mat-chip class="back-red" *ngFor="let item of ingredients; let j = index;" [selectable]="true" [removable]="true" (remove)="removeIngredient(j)">{{item}}
+          <mat-icon matChipRemove><i class="fa fa-times"></i></mat-icon></mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>
+<div class="row pad-left-2 view-recipe-container" [ngClass]="{'hidden-op':!showResults}" *ngIf="recipes.RecipeObject['length'] > 0">
   <div class="btn-group filterGroup col-xs-12 col-md-1">
     <button type="button" mat-raised-button color="warn" class="btn btn-default dropdown-toggle dropdowns" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{filterValue | translate}}
@@ -25,7 +49,7 @@
 </div>
 <hr/>
 <div class="row pad-left" [ngClass]="{'hidden-op':!showResults}" *ngFor="let hit of recipes.RecipeObject; let in = index; let even = even;">
-  <span *ngIf="even">
+  <span style="width: 100%" *ngIf="even">
     <div  class="border-round recipeCard col-xs-12 col-sm-12 col-md-12 col-lg-5" >
       <app-recipe-tile [data]="recipes['RecipeObject'][in]"></app-recipe-tile>
     </div>

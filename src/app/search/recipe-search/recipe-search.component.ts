@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {RecipeService} from '../recipe.service';
-import {RecipeModel} from '../Models/recipeModel';
+import {RecipeService} from '../../recipe.service';
+import {RecipeModel} from '../../Models/recipeModel';
 import {Inject, HostListener } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
-import {AppGlobal} from "../Content/AppGlobal";
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
-import { firebase } from "@firebase/app";
-import {UserModel} from "../Models/UserModel";
-import {AuthService} from '../services/auth.service';
-import {LoginComponent} from '../login/login.component';
-import { environment } from '../../environments/environment';
+import {AppGlobal} from '../../Content/AppGlobal';
+import {TranslateService} from '@ngx-translate/core';
+import {ActivatedRoute} from '@angular/router';
+import * as firebase from "firebase/app";
+import {UserModel} from '../../Models/UserModel';
+import {AuthService} from '../../services/auth.service';
+import {LoginComponent} from '../../login/login.component';
+import { environment } from '../../../environments/environment';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {MatDialog} from '@angular/material';
+import {RegisterComponent} from '../../register/register.component';
 
 @Component({
   selector: 'app-recipe-search',
@@ -29,10 +29,10 @@ export class RecipeSearchComponent implements OnInit {
   language;
   loginActive;
   displayName;
+  ingredients;
   hideBadges: Boolean = false;
   notifications: any;
   constructor(private recipeService: RecipeService,
-              @Inject(DOCUMENT) private document: Document,
               public appGlobal: AppGlobal,
               public dialog: MatDialog,
               private translate: TranslateService,
@@ -66,7 +66,7 @@ export class RecipeSearchComponent implements OnInit {
     if(localStorageData){
       localStorageDataJSON = JSON.parse(localStorageData);
     }
-    if(localStorageDataJSON.user){
+    if(localStorageDataJSON && localStorageDataJSON.user){
         this.updateUserData(localStorageDataJSON);
     } else {
       firebase.auth().getRedirectResult().then(result => {
@@ -74,7 +74,7 @@ export class RecipeSearchComponent implements OnInit {
           this.updateUserData(result);
           this.authService.getUserNotifications().then(notifications => {
             if(!notifications){
-              this.notifications = [{title: "You have 0 Notifications"}];
+              this.notifications = [{title: 'You have 0 Notifications'}];
             }
             this.notifications = notifications;
           });
@@ -109,7 +109,7 @@ export class RecipeSearchComponent implements OnInit {
   }
   updateUserData(result){
     let user;
-    if (result.credential) {
+    if (result.user) {
       user = result.user;
     }
     if(user){
@@ -131,6 +131,7 @@ export class RecipeSearchComponent implements OnInit {
   login(){
     let dialogRef = this.dialog.open(LoginComponent, {
       width: '30em',
+      panelClass: 'login-container',
       data: {
         authLabel: 'LoginLabel',
         language: this.language
@@ -148,8 +149,9 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   register(){
-    let dialogRef = this.dialog.open(LoginComponent, {
+    let dialogRef = this.dialog.open(RegisterComponent, {
       width: '30em',
+      panelClass: 'login-container',
       data: {
         authLabel: 'registerLabel',
         language: this.language
@@ -166,6 +168,15 @@ export class RecipeSearchComponent implements OnInit {
   }
 
   sendRecipes(result){
-    this.recipe = result;
+    this.recipe = result.recipes;
+    this.ingredients = result.ingredients.split(',').filter(item => {
+      if(item){
+        return item;
+      }
+    });
+  }
+
+  clearRecipes(){
+    delete this.recipe;
   }
 }

@@ -5,7 +5,7 @@
       <div class="col-md-2"></div>
       <div [formGroupName]="i" class="col-md-8 input-group" [hidden]="i > 1 && !collapsed">
         <mat-form-field class="md-icon-float">
-        <input autocomplete="off" matInput type="text" class="width" id="search" (keyup)="addIngredients($event)" placeholder="{{'IngredientLabel' | translate}}" formControlName="name">
+        <input autocomplete="off" matInput type="text" class="width" id="search" (keyup)="addIngredients($event)" placeholder="Search with ingredients" formControlName="name">
           <!--<a matSuffix *ngIf="myForm.touched && i === 0" (click)="clearSearchBoxes()" class="mar-right" ngbTooltip="clear all"><mat-icon  color="warn" class="fa fa-times" ></mat-icon></a>-->
           <!--<a matSuffix *ngIf="i === 0" (click)="enableSpeech()" [ngClass]="{'voice-start' : voiceStarted}"><mat-icon class="fas fa-microphone"></mat-icon></a>-->
           <!--<a matSuffix *ngIf="i > 0" (click)="removeSearchBox(i)"><mat-icon  color="warn" class="fa fa-times" ></mat-icon></a>-->
@@ -16,11 +16,14 @@
         <div class="align-left chosen-ingredients">
           <p class="text-center" > Your chosen Ingredients</p>
         </div>
-        <div class="align-left chosen-ingredients">
+        <div class="align-left chosen-ingredients" *ngIf="values.length">
           <mat-chip-list #chipList>
             <mat-chip *ngFor="let item of values; let j = index;" [selectable]="true" [removable]="true" (remove)="removeIngredient(j)">{{item}}
               <mat-icon matChipRemove><i class="fa fa-times"></i></mat-icon></mat-chip>
           </mat-chip-list>
+        </div>
+        <div class="align-left not-chosen-ingredients" *ngIf="!values.length">
+          <div >You can add multiple ingredients. Type a ingredient and press enter/return.</div>
         </div>
       </div>
     </div>
@@ -29,7 +32,7 @@
       <div class="col-md-6 text-center">
         <!--<button (click)="addSearchBox()" mat-raised-button color="primary" [disabled]="inputs.length >= 10" class="btn btn-primary mar-bottom" [innerHTML]=" 'AddIngredientLabel' | translate"></button>-->
         <button (click)="search($event)"  mat-raised-button color="primary" [disabled]="!myForm.valid" class="btn btn-primary mar-bottom" [innerHTML]=" 'SearchLabel' | translate"></button>
-        <a (click)="imageElement.click()"><img src="../../assets/images/photo-camera.png" class="photo-camera"/> </a>
+        <a (click)="imageElement.click()"><img src="assets/images/photo-camera.png" class="photo-camera"/> </a>
         <input hidden type="file" #imageElement (change)="searchPhoto(false)"/>
       </div>
     </div>

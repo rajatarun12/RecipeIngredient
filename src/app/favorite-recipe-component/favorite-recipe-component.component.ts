@@ -15,6 +15,7 @@ import {Overlay} from '@angular/cdk/overlay';
 export class FavoriteRecipeComponentComponent implements OnInit{
   detailView = true;
   recipes;
+  totalToShow;
   @Input() dashboardView;
   @Input() userEmail;
 
@@ -23,7 +24,8 @@ export class FavoriteRecipeComponentComponent implements OnInit{
     private db: DatabaseServiceService, private breakpointsService: BreakpointObserver) {}
   ngOnInit() {
       this.recipes = [];
-      this.db.getFavoriteRecipes(this.userEmail).then(res => {
+      let userData = JSON.parse(localStorage.getItem('recipeSearchData'));
+      this.db.getFavoriteRecipes(this.userEmail || (userData && userData.user && userData.user.email)).then(res => {
         const recipes = [];
         Object.keys(res).forEach(key => {
           recipes.push(res[key][0]['name']);
@@ -37,6 +39,7 @@ export class FavoriteRecipeComponentComponent implements OnInit{
         });
         Promise.all(recipePromises).then((res) => {
           this.recipes = res;
+          this.totalToShow = this.dashboardView ? 4 : this.recipes.length;
         });
       });
   }
@@ -59,6 +62,7 @@ export class FavoriteRecipeComponentComponent implements OnInit{
     dialogConfig.position = {'top': '0', 'right':'0'}
     dialogConfig.autoFocus = true;
     dialogConfig.minWidth  = '50vw';
+    dialogConfig.maxWidth  = '50vw';
     dialogConfig.height = '100%';
     dialogConfig.data = {
       recipe: recipe

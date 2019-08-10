@@ -45,8 +45,22 @@
   .step {
     color: black;
     padding-bottom: 1em;
+    margin: 0 0 1em;
+    padding-left: 1.5em;
+    position: relative;
     display: flex;
     align-items: center;
+    &:after {
+      content: '';
+      height: .4em;
+      width: .4em;
+      background: black;
+      display: block;
+      position: absolute;
+      transform: rotate(45deg);
+      top: .6em;
+      left: 0;
+    }
   }
   .steps{
 
@@ -73,8 +87,8 @@
 
 .media-object {
   position: absolute;
-  width: 40%;
-  height: auto;
+  width: 20em;
+  height: 20em;
   top: 2em;
   left: 3em;
 }
