@@ -9,7 +9,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {FirebaseOperation} from '@angular/fire/database/interfaces';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {UserModel} from '../Models/UserModel';
 import {DatabaseServiceService} from '../services/database-service.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';

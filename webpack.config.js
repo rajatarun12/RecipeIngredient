@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 
 module.exports = {
   entry: './src/main.ts',
@@ -9,7 +10,7 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: ['ts-loader', 'angular2-template-loader']
+        use: ['@ngtools/webpack']
       },
       {
         test: /\.(scss|sass)$/,
@@ -17,7 +18,11 @@ module.exports = {
       }]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' })
+    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new AngularCompilerPlugin({
+      tsConfigPath: './tsconfig.json',
+      entryModule: './src/main.ts'
+    })
   ]
 };
 

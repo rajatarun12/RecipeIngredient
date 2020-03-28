@@ -62,7 +62,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent,SettingsComponent,LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent, RecipeDetailsFlyoutComponent, RegisterComponent, CreateRecipeComponent
+    AppComponent, SearchComponent, SettingsComponent, LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent, RecipeDetailsFlyoutComponent, RegisterComponent, CreateRecipeComponent
   ],
   imports: [
     BrowserModule,
