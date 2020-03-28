@@ -5,7 +5,7 @@ import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppGlobal} from '../Content/AppGlobal';
 import {AuthService} from '../services/auth.service';
-import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PrivacyPolicyComponent} from '../privacy-policy/privacy-policy.component';

@@ -2,8 +2,8 @@ import {Component, Inject, OnInit, ViewChild, Optional, Input} from '@angular/co
 import {AuthService} from '../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
-import {MatChipInputEvent} from '@angular/material';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
@@ -14,7 +14,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
   providers: [AuthService, BreakpointObserver]
 })
 export class MyRecipesComponent implements OnInit {
-@ViewChild(SnackBarComponent, {static: false})
+@ViewChild(SnackBarComponent)
   @Input() dashboardView;
   @Input() userEmail;
 snackBarRef: SnackBarComponent;

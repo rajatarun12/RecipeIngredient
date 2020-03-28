@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {NutrientDialogTemplate} from '../nutrient-dialog/nutrient-dialog.component';
 declare var google: any;
 let map: any = '';
@@ -10,7 +10,7 @@ let infowindow: any = '';
   styleUrls: ['./googlemaps.component.scss']
 })
 export class GooglemapsComponent implements AfterViewInit {
-  @ViewChild('mapObj', {static: false})
+  @ViewChild('mapObj')
     mapObject: ElementRef;
   latitude = 40.7128;
   longitude = -73.935242;

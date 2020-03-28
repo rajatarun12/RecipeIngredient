@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {RecipeDetailsFlyoutComponent} from '../recipe-details-flyout/recipe-details-flyout.component';
 import {Overlay} from '@angular/cdk/overlay';
 import {CreateRecipeComponent} from '../create-recipe/create-recipe.component';

@@ -15,7 +15,7 @@ import {DatabaseServiceService} from '../services/database-service.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {NutrientDialogTemplate} from '../nutrient-dialog/nutrient-dialog.component';
 import {GooglemapsComponent} from '../googlemaps/googlemaps.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-view-recipe',
@@ -28,7 +28,7 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
   @Output() clearRecipes = new EventEmitter<RecipeModel>();
-  @ViewChild(SnackBarComponent, {static: false})
+  @ViewChild(SnackBarComponent)
     snackBarRef: SnackBarComponent;
   ingredient = '';
   showResults: Boolean = true;

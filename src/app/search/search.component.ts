@@ -27,7 +27,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SearchComponent implements OnInit {
   @Output() sendRecipes = new EventEmitter<any>();
-@ViewChild('imageElement', {static: false})
+@ViewChild('imageElement')
 ie: ElementRef;
 matcher: MyErrorStateMatcher;
   imageSearchData: any = [];

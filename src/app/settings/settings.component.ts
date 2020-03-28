@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService} from '../services/auth.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
@@ -14,7 +14,7 @@ import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
-  @ViewChild(SnackBarComponent, {static: false})
+  @ViewChild(SnackBarComponent)
   snackBarRef: SnackBarComponent;
   constructor(
     public dialogRef: MatDialogRef<SettingsComponent>,

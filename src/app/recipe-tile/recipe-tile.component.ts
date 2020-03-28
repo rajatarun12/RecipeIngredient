@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input, ViewChild} from '@angular/core';
 import {RecipeModel} from '../Models/recipeModel';
 import {DatabaseServiceService} from '../services/database-service.service';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
-import {MatDialogConfig, MatDialog} from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import {RecipeDetailsFlyoutComponent} from '../recipe-details-flyout/recipe-details-flyout.component';
 import {Overlay} from '@angular/cdk/overlay';
 import {GooglemapsComponent} from '../googlemaps/googlemaps.component';
@@ -14,7 +14,7 @@ import {GooglemapsComponent} from '../googlemaps/googlemaps.component';
 })
 export class RecipeTileComponent implements OnInit,OnChanges {
   @Input() data: any;
-  @ViewChild(SnackBarComponent, {static: false})
+  @ViewChild(SnackBarComponent)
   snackBarRef: SnackBarComponent;
   showResults: boolean;
   constructor(private foodDb: DatabaseServiceService,public dialog: MatDialog,public overlay: Overlay) { }

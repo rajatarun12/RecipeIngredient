@@ -1,5 +1,5 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild, Optional, Input} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogConfig,MatDialogRef, MatDialog, DialogPosition} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef, MatDialog, DialogPosition } from '@angular/material/dialog';
 import {DatabaseServiceService} from '../services/database-service.service';
 import {RecipeDetailsFlyoutComponent} from '../recipe-details-flyout/recipe-details-flyout.component';
 

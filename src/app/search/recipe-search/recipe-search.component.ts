@@ -11,7 +11,7 @@ import {AuthService} from '../../services/auth.service';
 import {LoginComponent} from '../../login/login.component';
 import { environment } from '../../../environments/environment';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {RegisterComponent} from '../../register/register.component';
 
 @Component({

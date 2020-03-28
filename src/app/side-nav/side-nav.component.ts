@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import * as crypto from 'crypto-js';
 import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
