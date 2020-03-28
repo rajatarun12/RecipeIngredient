@@ -14,7 +14,7 @@ import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
-  @ViewChild(SnackBarComponent)
+  @ViewChild(SnackBarComponent, { static: true })
   snackBarRef: SnackBarComponent;
   constructor(
     public dialogRef: MatDialogRef<SettingsComponent>,

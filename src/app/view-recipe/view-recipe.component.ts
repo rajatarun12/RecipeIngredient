@@ -28,7 +28,7 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
   @Output() clearRecipes = new EventEmitter<RecipeModel>();
-  @ViewChild(SnackBarComponent)
+  @ViewChild(SnackBarComponent, { static: true })
     snackBarRef: SnackBarComponent;
   ingredient = '';
   showResults: Boolean = true;

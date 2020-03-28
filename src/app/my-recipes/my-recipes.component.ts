@@ -14,7 +14,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
   providers: [AuthService, BreakpointObserver]
 })
 export class MyRecipesComponent implements OnInit {
-@ViewChild(SnackBarComponent)
+@ViewChild(SnackBarComponent, { static: false })
   @Input() dashboardView;
   @Input() userEmail;
 snackBarRef: SnackBarComponent;

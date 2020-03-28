@@ -14,7 +14,7 @@ import {GooglemapsComponent} from '../googlemaps/googlemaps.component';
 })
 export class RecipeTileComponent implements OnInit,OnChanges {
   @Input() data: any;
-  @ViewChild(SnackBarComponent)
+  @ViewChild(SnackBarComponent, { static: true })
   snackBarRef: SnackBarComponent;
   showResults: boolean;
   constructor(private foodDb: DatabaseServiceService,public dialog: MatDialog,public overlay: Overlay) { }

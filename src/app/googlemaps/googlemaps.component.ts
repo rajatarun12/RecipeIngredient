@@ -10,7 +10,7 @@ let infowindow: any = '';
   styleUrls: ['./googlemaps.component.scss']
 })
 export class GooglemapsComponent implements AfterViewInit {
-  @ViewChild('mapObj')
+  @ViewChild('mapObj', { static: true })
     mapObject: ElementRef;
   latitude = 40.7128;
   longitude = -73.935242;
