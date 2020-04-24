@@ -5,14 +5,12 @@ import {Inject, HostListener } from '@angular/core';
 import {AppGlobal} from '../../Content/AppGlobal';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute} from '@angular/router';
-import * as firebase from "firebase/app";
+import * as firebase from 'firebase/app';
 import {UserModel} from '../../Models/UserModel';
 import {AuthService} from '../../services/auth.service';
-import {LoginComponent} from '../../login/login.component';
 import { environment } from '../../../environments/environment';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
-import {RegisterComponent} from '../../register/register.component';
 
 @Component({
   selector: 'app-recipe-search',
@@ -22,15 +20,15 @@ import {RegisterComponent} from '../../register/register.component';
 })
 export class RecipeSearchComponent implements OnInit {
   public recipe;
-  hideHeader: boolean = false;
+  hideHeader = false;
   appleImagePath: string =  environment.appleImagePath;
   opened: boolean;
-  isXs: boolean = false;
+  isXs = false;
   language;
   loginActive;
   displayName;
   ingredients;
-  hideBadges: boolean = false;
+  hideBadges = false;
   notifications: any;
   constructor(private recipeService: RecipeService,
               public appGlobal: AppGlobal,
@@ -52,7 +50,7 @@ export class RecipeSearchComponent implements OnInit {
   ngOnInit() {
     let language = '';
     this.activatedRoute.params.forEach(param => {
-      language = param['language']
+      language = param.language;
     });
     this.translate.setDefaultLang(language || this.appGlobal.defaultContent);
     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
@@ -63,17 +61,17 @@ export class RecipeSearchComponent implements OnInit {
     }
     const localStorageData = localStorage.getItem('recipeSearchData');
     let localStorageDataJSON;
-    if(localStorageData){
+    if (localStorageData){
       localStorageDataJSON = JSON.parse(localStorageData);
     }
-    if(localStorageDataJSON && localStorageDataJSON.user){
+    if (localStorageDataJSON && localStorageDataJSON.user){
         this.updateUserData(localStorageDataJSON);
     } else {
       firebase.auth().getRedirectResult().then(result => {
           localStorage.setItem('recipeSearchData', JSON.stringify(result));
           this.updateUserData(result);
           this.authService.getUserNotifications().then(notifications => {
-            if(!notifications){
+            if (!notifications){
               this.notifications = [{title: 'You have 0 Notifications'}];
             }
             this.notifications = notifications;
@@ -85,7 +83,7 @@ export class RecipeSearchComponent implements OnInit {
     // const prefs = plugins.appPreferences;
     // const suitePrefs = prefs.suite('group.recipesearch');
     this.route.params.forEach(param => {
-      this.language = param['language']
+      this.language = param.language;
     });
     this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
     // suitePrefs.fetch(
@@ -112,7 +110,7 @@ export class RecipeSearchComponent implements OnInit {
     if (result.user) {
       user = result.user;
     }
-    if(user){
+    if (user){
       const resultObj = {
         login: true,
         email: result.user.email,
@@ -128,49 +126,49 @@ export class RecipeSearchComponent implements OnInit {
       this.loginActive = true;
     }
   }
-  login(){
-    let dialogRef = this.dialog.open(LoginComponent, {
-      width: '30em',
-      panelClass: 'login-container',
-      data: {
-        authLabel: 'LoginLabel',
-        language: this.language
-      }
-    });
+  // login(){
+  //   let dialogRef = this.dialog.open(LoginComponent, {
+  //     width: '30em',
+  //     panelClass: 'login-container',
+  //     data: {
+  //       authLabel: 'LoginLabel',
+  //       language: this.language
+  //     }
+  //   });
+  //
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(!!result.login){
+  //       // this.userInfo.emit(result);
+  //       // this.userEmail = result.email;
+  //       this.loginActive = true;
+  //       this.displayName = result.displayName;
+  //     }
+  //   });
+  // }
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(!!result.login){
-        // this.userInfo.emit(result);
-        // this.userEmail = result.email;
-        this.loginActive = true;
-        this.displayName = result.displayName;
-      }
-    });
-  }
-
-  register(){
-    let dialogRef = this.dialog.open(RegisterComponent, {
-      width: '30em',
-      panelClass: 'login-container',
-      data: {
-        authLabel: 'registerLabel',
-        language: this.language
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(!!result.login){
-        // this.userInfo.emit(result);
-        // this.userEmail = result.email;
-        this.loginActive = true;
-      }
-    });
-  }
+  // register(){
+  //   let dialogRef = this.dialog.open(RegisterComponent, {
+  //     width: '30em',
+  //     panelClass: 'login-container',
+  //     data: {
+  //       authLabel: 'registerLabel',
+  //       language: this.language
+  //     }
+  //   });
+  //
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(!!result.login){
+  //       // this.userInfo.emit(result);
+  //       // this.userEmail = result.email;
+  //       this.loginActive = true;
+  //     }
+  //   });
+  // }
 
   sendRecipes(result){
     this.recipe = result.recipes;
     this.ingredients = result.ingredients.split(',').filter(item => {
-      if(item){
+      if (item){
         return item;
       }
     });

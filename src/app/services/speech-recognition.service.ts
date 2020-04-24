@@ -12,7 +12,7 @@ export class SpeechRecognitionService {
         this.requestPermission();
       }
     }, () => {
-      console.log('hasPermission failed')
+      console.log('hasPermission failed');
     });
   }
 
@@ -21,7 +21,7 @@ export class SpeechRecognitionService {
     window.plugins.speechRecognition.requestPermission(() => {
         this.startspeech();
     }, () => {
-      console.log('requestPermission failed')
+      console.log('requestPermission failed');
     });
   }
 
@@ -37,7 +37,7 @@ export class SpeechRecognitionService {
     window.plugins.speechRecognition.startListening((items) => {
         console.log(items);
       }, () => {
-        console.log('startspeech failed')
+        console.log('startspeech failed');
       },  options);
   }
 }

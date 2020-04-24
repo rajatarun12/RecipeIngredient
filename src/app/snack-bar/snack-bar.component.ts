@@ -14,8 +14,8 @@ export class SnackBarComponent implements OnInit {
   ngOnInit() {
   }
   public openSnackBar(message){
-    this.snackBar.open(message,'',{
+    this.snackBar.open(message, '', {
       duration: 2000
     });
   }
-};
+}

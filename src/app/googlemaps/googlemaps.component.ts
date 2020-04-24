@@ -23,7 +23,7 @@ export class GooglemapsComponent implements AfterViewInit {
   }
   private setCurrentPosition() {
     return new Promise((res) => {
-      if ("geolocation" in navigator) {
+      if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition((position) => {
           this.latitude = position.coords.latitude || 40.7128;
           this.longitude = position.coords.longitude || -73.935242;
@@ -32,7 +32,7 @@ export class GooglemapsComponent implements AfterViewInit {
         }, (err) => {
             console.log(err);
             res();
-        },{
+        }, {
           enableHighAccuracy: true,
           timeout: 5000,
           maximumAge: 0
@@ -53,7 +53,7 @@ export class GooglemapsComponent implements AfterViewInit {
     infowindow = new google.maps.InfoWindow();
     const service = new google.maps.places.PlacesService(map);
     service.textSearch({
-      location: location,
+      location,
       radius: 50,
       query: title
     }, (results, status) => {
@@ -69,7 +69,7 @@ export class GooglemapsComponent implements AfterViewInit {
   createMarker(place) {
     const placeLoc = place.geometry.location;
     const marker = new google.maps.Marker({
-      map: map,
+      map,
       position: place.geometry.location
     });
 

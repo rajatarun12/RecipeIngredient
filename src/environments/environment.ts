@@ -7,22 +7,22 @@ export const environment = {
   production: false,
   dev: true,
   firebaseConfig: {
-    apiKey: "AIzaSyB1JSIvCrkz_82kvSkqTM-1gzJROSg16fk",
-    authDomain: "myrecipesearch-c52aa.firebaseapp.com",
-    databaseURL: "https://myrecipesearch-c52aa.firebaseio.com",
-    projectId: "myrecipesearch-c52aa",
-    storageBucket: "",
-    messagingSenderId: "1041313927441"
+    apiKey: 'AIzaSyB1JSIvCrkz_82kvSkqTM-1gzJROSg16fk',
+    authDomain: 'myrecipesearch-c52aa.firebaseapp.com',
+    databaseURL: 'https://myrecipesearch-c52aa.firebaseio.com',
+    projectId: 'myrecipesearch-c52aa',
+    storageBucket: '',
+    messagingSenderId: '1041313927441'
   },
   fileUrl: {
     'Windows Phone': '',
-    'Android': 'myRec.aac',
-    'iOS': 'documents://myRec.m4a'
+    Android: 'myRec.aac',
+    iOS: 'documents://myRec.m4a'
   },
   googleCreds: {
-    key: "1041313927441-2u9bt6ndo4drnv3hnghsubd3qna3rrvb.apps.googleusercontent.com",
-    secret: "AmCBW-pOpsEZa_JMnhMKEP2T"
+    key: '1041313927441-2u9bt6ndo4drnv3hnghsubd3qna3rrvb.apps.googleusercontent.com',
+    secret: 'AmCBW-pOpsEZa_JMnhMKEP2T'
   },
-  googleCloudVisionAPIKey: "AIzaSyCLL6Z8vkGyn5yq-Kf6-H15FKLvLmE7OGE",
+  googleCloudVisionAPIKey: 'AIzaSyCLL6Z8vkGyn5yq-Kf6-H15FKLvLmE7OGE',
   appleImagePath: '../../assets/images/badgeFooter.jpg'
 };

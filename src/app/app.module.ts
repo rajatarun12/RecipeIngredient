@@ -32,53 +32,29 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SideNavComponent } from './side-nav/side-nav.component';
 import {NutrientDialogTemplate, NutrientDialogComponent} from './nutrient-dialog/nutrient-dialog.component';
-import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire//auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FavoriteRecipeComponentComponent } from './favorite-recipe-component/favorite-recipe-component.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
-import {SettingsComponent} from './settings/settings.component';
-import { NotificationMenuComponent } from './notification-menu/notification-menu.component';
-import {LoginComponent} from './login/login.component';
-import { FollowersComponent } from './followers/followers.component';
-import { MyRecipesComponent } from './my-recipes/my-recipes.component';
-import {HttpModule} from '@angular/http';
-import { RecipeSliderComponent } from './recipe-slider/recipe-slider.component';
-import { RecipeInfoComponent } from './recipe-info/recipe-info.component';
-import { FollowerInfoComponent } from './follower-info/follower-info.component';
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { SafePipe } from './safe.pipe';
 import {Ng2GoogleChartsModule} from 'ng2-google-charts';
 import { GooglemapsComponent } from './googlemaps/googlemaps.component';
-import { FooterComponent } from './footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
-import { RecipeDetailsFlyoutComponent } from './recipe-details-flyout/recipe-details-flyout.component';
-import { RegisterComponent } from './register/register.component';
-import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
 
 const appRoutes = [
   {path: '', redirectTo: 'recipeSearch/search/en', pathMatch: 'full'},
-  {path : 'recipeSearch/search/:language', component: RecipeSearchComponent},
-  {path : 'recipeSearch/favorites', component: FavoriteRecipeComponentComponent},
-  {path : 'recipeSearch/myrecipes', component: MyRecipesComponent},
-  {path : 'recipeSearch/dashboard', component: DashboardComponent}
+  {path : 'recipeSearch/search/:language', component: RecipeSearchComponent}
 ];
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'http://s3.us-east-2.amazonaws.com/locale-content/', '.json');
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent, SettingsComponent, LoginComponent, ViewRecipeComponent, RecipeSearchComponent,
-    SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent,
-    SnackBarComponent, NotificationMenuComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, PrivacyPolicyComponent
-    , SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent, FollowerInfoComponent, FollowersComponent,
-    RecipeDetailsFlyoutComponent, RegisterComponent, CreateRecipeComponent
+    AppComponent, SearchComponent, ViewRecipeComponent, RecipeSearchComponent, NutrientDialogComponent, NutrientDialogTemplate,
+    SnackBarComponent, SafePipe, GooglemapsComponent, RecipeTileComponent
   ],
   imports: [
     BrowserModule,
@@ -97,8 +73,6 @@ export function createTranslateLoader(http: HttpClient) {
     Ng2GoogleChartsModule,
     MatFormFieldModule,
     MatListModule,
-    HttpModule,
-    HttpClientModule,
     MatSelectModule,
     MatOptionModule,
     MatDatepickerModule,
@@ -126,9 +100,7 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule
   ],
   exports: [ViewRecipeComponent, SearchComponent, MatSidenavModule, MatInputModule, MatDialogModule, MatCardModule],
-  entryComponents: [NutrientDialogTemplate, RegisterComponent, CreateRecipeComponent, RecipeDetailsFlyoutComponent,
-    GooglemapsComponent, PrivacyPolicyComponent, FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent,
-    LoginComponent, FollowersComponent, MyRecipesComponent, SnackBarComponent],
+  entryComponents: [NutrientDialogTemplate, GooglemapsComponent, SnackBarComponent],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

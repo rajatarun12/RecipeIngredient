@@ -1,8 +1,10 @@
+import {Recipe} from './recipe';
+
 export class RecipeModel {
-  RecipeObject?: Object[] = [];
-  count?: Number = 0;
+  RecipeObject?: object[] = [];
+  count =  0;
   originalList?: any;
-  previousList?: Object[] = []
+  previousList?: object[] = [];
   currentIndex = 10;
   currentSearchQuery = '';
 
@@ -27,42 +29,44 @@ export class RecipeModel {
         else {
           labels.push(dietLabel);
         }
-      })
+      });
     });
     return labels;
   }
 
   getSortResults(sortType, filterValue) {
     const tempObj = this.RecipeObject;
-    var sortMap = {
-      "Low-Carb": {
-        "ASC": "Carbs",
-        "DESC": "Carbs"
+    const sortMap = {
+      'Low-Carb': {
+        ASC: 'Carbs',
+        DESC: 'Carbs'
       },
-      "High-Protein": {
-        "ASC": "Protien",
-        "DESC": "Protien"
+      'High-Protein': {
+        ASC: 'Protien',
+        DESC: 'Protien'
       },
-      "Low-Fat": {
-        "ASC": "Fat",
-        "DESC": "Fat"
+      'Low-Fat': {
+        ASC: 'Fat',
+        DESC: 'Fat'
       },
-      "Relevance": {
-        "ASC": "Protien",
-        "DESC": "Protien"
+      Relevance: {
+        ASC: 'Protien',
+        DESC: 'Protien'
       },
-      "Balanced": {
-        "ASC": "Fat",
-        "DESC": "Fat"
+      Balanced: {
+        ASC: 'Fat',
+        DESC: 'Fat'
       }
     };
     const sortParameter = sortMap[filterValue][sortType];
 
     function compare(a, b) {
-      if (a.majorNutrients[sortParameter] < b.majorNutrients[sortParameter])
+      if (a.majorNutrients[sortParameter] < b.majorNutrients[sortParameter]) {
         return sortType === 'ASC' ? -1 : 1;
-      if (a.majorNutrients[sortParameter] > b.majorNutrients[sortParameter])
+      }
+      if (a.majorNutrients[sortParameter] > b.majorNutrients[sortParameter]) {
         return sortType === 'ASC' ? 1 : -1;
+      }
       return 0;
     }
 
@@ -72,8 +76,8 @@ export class RecipeModel {
   getFilteredItem(filterType) {
     const resultArr = [];
     const tempObj = this.previousList;
-    tempObj.forEach(obj => {
-      if (obj['dietLabels'].indexOf(filterType)) {
+    tempObj.forEach((obj: Recipe) => {
+      if (obj.dietLabels.indexOf(filterType)) {
         resultArr.push(obj);
       }
     });
@@ -81,22 +85,22 @@ export class RecipeModel {
   }
 
   getRecipes(recipes) {
-    let recipesList = recipes.reduce((recipesList, recipe) => {
-      let tempRecipe = {};
+    const recipesList = recipes.reduce((recipesList, recipe) => {
+      const tempRecipe = new Recipe();
       const dailyNutrients = this.getNutrients(recipe.recipe.totalDaily);
       const totalNutrients = this.getNutrients(recipe.recipe.totalNutrients);
-      tempRecipe['ingredients'] = recipe.recipe.ingredientLines;
-      tempRecipe['calories'] = recipe.recipe.calories;
-      tempRecipe['nutrients'] = totalNutrients[0];
-      tempRecipe['majorNutrients'] = this.majorNutrients(recipe.recipe.totalNutrients);
-      tempRecipe['dailyNutrients'] = dailyNutrients[0];
-      tempRecipe['percentDaily'] = [totalNutrients[1], dailyNutrients[1]];
-      tempRecipe['image'] = recipe.recipe.image;
-      tempRecipe['title'] = recipe.recipe.label;
-      tempRecipe['recipieUrl'] = recipe.recipe.url;
-      tempRecipe['dietLabels'] = recipe.recipe.dietLabels;
-      tempRecipe['healthLabels'] = recipe.recipe.healthLabels;
-      tempRecipe['fav'] = false;
+      tempRecipe.ingredients = recipe.recipe.ingredientLines;
+      tempRecipe.calories = recipe.recipe.calories;
+      tempRecipe.nutrients = totalNutrients[0];
+      tempRecipe.majorNutrients = this.majorNutrients(recipe.recipe.totalNutrients);
+      tempRecipe.dailyNutrients = dailyNutrients[0];
+      tempRecipe.percentDaily = [totalNutrients[1], dailyNutrients[1]];
+      tempRecipe.image = recipe.recipe.image;
+      tempRecipe.title = recipe.recipe.label;
+      tempRecipe.recipieUrl = recipe.recipe.url;
+      tempRecipe.dietLabels = recipe.recipe.dietLabels;
+      tempRecipe.healthLabels = recipe.recipe.healthLabels;
+      tempRecipe.fav = false;
       recipesList.push(tempRecipe);
       return recipesList;
     }, []);
@@ -110,7 +114,7 @@ export class RecipeModel {
     Object.keys(nutrients).forEach(nutrientObj => {
       const tempObj = [];
       const nutrient = nutrients[nutrientObj];
-      nutrientsList[nutrient['label']] = Number(nutrient['quantity'].toString()).toFixed(2);
+      nutrientsList[nutrient.label] = Number(nutrient.quantity.toString()).toFixed(2);
     });
     return nutrientsList;
   }
@@ -121,9 +125,9 @@ export class RecipeModel {
     Object.keys(nutrients).forEach(nutrientObj => {
       const tempObj = [];
       const nutrient = nutrients[nutrientObj];
-      tempObj.push(nutrient['label']);
-      nutrientsDict[nutrient['label']] = Number(nutrient['quantity'].toString()).toFixed(2);
-      tempObj.push(Number(nutrient['quantity'].toString()).toFixed(2) + ' ' + nutrient['unit']);
+      tempObj.push(nutrient.label);
+      nutrientsDict[nutrient.label] = Number(nutrient.quantity.toString()).toFixed(2);
+      tempObj.push(Number(nutrient.quantity.toString()).toFixed(2) + ' ' + nutrient.unit);
       nutrientsList.push(tempObj);
     });
     return [nutrientsList, nutrientsDict];

@@ -24,7 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
   host: {'(window:scroll)' : 'onWindowScroll()'},
   providers: [RecipeService, NgbTooltipConfig, AppGlobal, DatabaseServiceService]
 })
-export class ViewRecipeComponent implements OnInit,OnChanges {
+export class ViewRecipeComponent implements OnInit, OnChanges {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
   @Input() showRecipes: boolean;
@@ -32,7 +32,7 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   @ViewChild(SnackBarComponent, { static: true })
     snackBarRef: SnackBarComponent;
   ingredient = '';
-  showResults: boolean = true;
+  showResults = true;
   recipeCollection: AngularFirestoreCollection<RecipeModel>;
   recipeList: Observable<any>;
   navIsFixed: boolean;
@@ -78,8 +78,8 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
 
   getSortResults(sortType) {
     const sortTypeMap = {
-      'ASC': 'Low to High',
-      'DESC': 'High to Low'
+      ASC: 'Low to High',
+      DESC: 'High to Low'
     };
     this.sortValue = sortTypeMap[sortType];
     this.recipes.getSortResults(sortType, this.filterValue);
@@ -106,7 +106,7 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   handleNearby(title){
     const dialogRef = this.dialog.open(GooglemapsComponent, {
       width: '200em',
-      data: {title: title}
+      data: {title}
     });
   }
   clearResults() {
@@ -115,12 +115,12 @@ export class ViewRecipeComponent implements OnInit,OnChanges {
   }
   addDietLabelToSearch(query){
     let ingredients = this.recipes.getCurrentSearchQuery();
-    ingredients = ingredients.toString().replace(/,/g,'');
+    ingredients = ingredients.toString().replace(/,/g, '');
     ingredients += (',' + query);
     this.spinnerService.show();
-    this.recipeService.getRecipe(ingredients).subscribe(result => {
+    this.recipeService.getRecipe(ingredients).subscribe((result: any) => {
       this.spinnerService.hide();
-      const recipes = this.recipes.getRecipes(result['hits']);
+      const recipes = this.recipes.getRecipes(result.hits);
       this.recipes.RecipeObject = recipes;
     });
   }

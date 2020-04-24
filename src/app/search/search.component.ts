@@ -22,6 +22,9 @@ interface Cuisine {
   value: string;
   viewValue: string;
 }
+interface GoogleImageResponse {
+  _body: object;
+}
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -37,15 +40,15 @@ matcher: MyErrorStateMatcher;
   recipes: RecipeModel = new RecipeModel({
     RecipeObject: []
   });
-  selectable: boolean = true;
-  voiceStarted: boolean = false;
-  removable: boolean = true;
+  selectable = true;
+  voiceStarted = false;
+  removable = true;
   inputs: string[] = ['0'];
   ingredients: string;
   values: string[] = [];
-  alreadyTriggered: boolean = false;
+  alreadyTriggered = false;
   public myForm: FormGroup;
-  collapsed: boolean = true;
+  collapsed = true;
   itemsGroup: FormArray;
   hideHeader: boolean;
   constructor(private fb: FormBuilder,
@@ -124,12 +127,12 @@ matcher: MyErrorStateMatcher;
         console.log(value);
         if (value === 'openCamera') {
           // Clear the auto start
-          suitePrefs.remove(function() {}, function() {}, 'start');
+          suitePrefs.remove(() => {}, () => {}, 'start');
           this.searchPhoto(true);
         }
       }.bind(this),
       // Error
-      function(error) {
+      (error) => {
 
       },
       'start'
@@ -153,9 +156,9 @@ matcher: MyErrorStateMatcher;
         setTimeout(() => {
           const str = base64.result.toString();
           res = btoa(str);
-          self.vision.getLabels(res).subscribe(resp => {
-            const responses = JSON.parse(resp['_body']);
-            self.imageSearchData = responses['responses'][0].labelAnnotations;
+          self.vision.getLabels(res).subscribe((resp: any) => {
+            const responses = JSON.parse(resp._body);
+            self.imageSearchData = responses.responses[0].labelAnnotations;
             self.ref.detectChanges();
             self.spinnerService.hide();
           });
@@ -169,7 +172,7 @@ matcher: MyErrorStateMatcher;
     this.itemsGroup = this.myForm.get('search') as FormArray;
     let descript =  this.itemsGroup.value[0].name;
     descript += description + ',';
-    this.itemsGroup.controls[0].setValue({'name': descript});
+    this.itemsGroup.controls[0].setValue({name: descript});
   }
   private createItem() {
     return this.fb.group({
@@ -179,7 +182,7 @@ matcher: MyErrorStateMatcher;
   search(event: any) {
 
     if (event.x) {
-      if(!this.values.length){
+      if (!this.values.length){
         this.itemsGroup = this.myForm.get('search') as FormArray;
         const val = this.itemsGroup.value[0].name;
         this.values.push(val);
@@ -191,15 +194,15 @@ matcher: MyErrorStateMatcher;
       ingredients.push(this.myForm.controls.dishType.value);
       this.ingredients = ingredients.toString();
       this.spinnerService.show();
-      this.recipeService.getRecipe(this.ingredients).subscribe(result => {
+      this.recipeService.getRecipe(this.ingredients).subscribe((result: any) => {
         this.spinnerService.hide();
-        const count = result['count'] || 0;
+        const count: number = result.count || 0;
         this.imageSearchData = [];
-        const recipes = this.recipes.getRecipes(result['hits']);
+        const recipes = this.recipes.getRecipes(result.hits);
         this.sendRecipes.emit({
           recipes: new RecipeModel({
             RecipeObject: recipes,
-            count: count,
+            count,
             originalList: result,
             currentSearchQuery: this.ingredients
           }),
@@ -211,7 +214,7 @@ matcher: MyErrorStateMatcher;
 
 
   removeIngredient(index) {
-    this.values.splice(index,1);
+    this.values.splice(index, 1);
   }
 
   removeSearchBox(index) {
@@ -233,10 +236,10 @@ matcher: MyErrorStateMatcher;
     for (let i = this.itemsGroup.length  ; i > 0; i--) {
        this.itemsGroup.removeAt(i);
     }
-    this.itemsGroup.controls[0].setValue({'name': ''});
+    this.itemsGroup.controls[0].setValue({name: ''});
   }
   getMobileOperatingSystem() {
-    const userAgent = navigator.userAgent || navigator.vendor || window['opera'];
+    const userAgent = navigator.userAgent || navigator.vendor;
 
     // Windows Phone must come first because its UA also contains "Android"
     if (/windows phone/i.test(userAgent)) {
@@ -255,54 +258,54 @@ matcher: MyErrorStateMatcher;
 
     return 'unknown';
   }
-  enableSpeech() {
-    const flag = environment.production;
-    if (!flag) {
-      const synth = window.speechSynthesis;
-      const voices = synth.getVoices();
-
-      const utterThis = new SpeechSynthesisUtterance('please say the ingredient');
-      utterThis.voice = voices[10];
-      synth.speak(utterThis);
-      utterThis.onend = (evt) => {
-        const recognition = new (window['SpeechRecognition'] || window['webkitSpeechRecognition'] || window['mozSpeechRecognition'] || window['msSpeechRecognition'])();
-        recognition.lang = 'en-US';
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 5;
-        recognition.start();
-        this.voiceStarted = true;
-
-        recognition.onresult = function (event) {
-          const transcript = event.results[0][0].transcript;
-          if (transcript) {
-            transcript.split(' ').forEach(elem => {
-              this.imageSearchData.push({description: elem, score: 100});
-              this.voiceStarted = false;
-            });
-          } else {
-            this.voiceStarted = false;
-          }
-        }.bind(this);
-      };
-    } else {
-      const url = environment.fileUrl[this.getMobileOperatingSystem()];
-      // @ts-ignore
-      const my_media = new Media(url,
-        // success callback
-        function () {
-          console.log(' playAudio():Audio Success');
-        },
-        // error callback
-        function (err) {
-          console.log('playAudio():Audio Error: ' + err);
-        }
-      );
-      my_media.startRecord();
-      this.voiceStarted = true;
-      setTimeout(() => {
-        this.voiceStarted = false;
-        my_media.stopRecord();
-      }, 3000);
-    }
-  }
+  // enableSpeech() {
+  //   const flag = environment.production;
+  //   if (!flag) {
+  //     const synth = window.speechSynthesis;
+  //     const voices = synth.getVoices();
+  //
+  //     const utterThis = new SpeechSynthesisUtterance('please say the ingredient');
+  //     utterThis.voice = voices[10];
+  //     synth.speak(utterThis);
+  //     utterThis.onend = (evt) => {
+  //       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+  //       recognition.lang = 'en-US';
+  //       recognition.interimResults = false;
+  //       recognition.maxAlternatives = 5;
+  //       recognition.start();
+  //       this.voiceStarted = true;
+  //
+  //       recognition.onresult = function(event) {
+  //         const transcript = event.results[0][0].transcript;
+  //         if (transcript) {
+  //           transcript.split(' ').forEach(elem => {
+  //             this.imageSearchData.push({description: elem, score: 100});
+  //             this.voiceStarted = false;
+  //           });
+  //         } else {
+  //           this.voiceStarted = false;
+  //         }
+  //       }.bind(this);
+  //     };
+  //   } else {
+  //     const url = environment.fileUrl[this.getMobileOperatingSystem()];
+  //     // @ts-ignore
+  //     const myMedia = new Media(url,
+  //       // success callback
+  //       () => {
+  //         console.log(' playAudio():Audio Success');
+  //       },
+  //       // error callback
+  //       (err) => {
+  //         console.log('playAudio():Audio Error: ' + err);
+  //       }
+  //     );
+  //     myMedia.startRecord();
+  //     this.voiceStarted = true;
+  //     setTimeout(() => {
+  //       this.voiceStarted = false;
+  //       myMedia.stopRecord();
+  //     }, 3000);
+  //   }
+  // }
 }
