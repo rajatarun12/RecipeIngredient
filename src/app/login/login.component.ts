@@ -19,7 +19,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 })
 export class LoginComponent implements OnInit{
   myForm: FormGroup;
-  authLabel: String;
+  authLabel: string;
   userInfo: any;
   isXs;
   constructor(
@@ -155,7 +155,7 @@ export class LoginComponent implements OnInit{
     this.spinnerService.show();
     const loginPassword = this.myForm.value.login + '-' + this.myForm.value.password;
     let auth;
-    let error: String;
+    let error: string;
     auth = this.authService.loginWithEmail(this.myForm.value.login, this.myForm.value.password).then(res => {
       localStorage.setItem('recipeSearchData', JSON.stringify(res));
       const user = new UserModel({ login: true, email: this.myForm.value.login, name: '', uid: res['user']['uid'].toString()});

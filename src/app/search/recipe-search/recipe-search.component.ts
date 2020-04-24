@@ -22,15 +22,15 @@ import {RegisterComponent} from '../../register/register.component';
 })
 export class RecipeSearchComponent implements OnInit {
   public recipe;
-  hideHeader: Boolean = false;
-  appleImagePath: String =  environment.appleImagePath;
-  opened: Boolean;
-  isXs: Boolean = false;
+  hideHeader: boolean = false;
+  appleImagePath: string =  environment.appleImagePath;
+  opened: boolean;
+  isXs: boolean = false;
   language;
   loginActive;
   displayName;
   ingredients;
-  hideBadges: Boolean = false;
+  hideBadges: boolean = false;
   notifications: any;
   constructor(private recipeService: RecipeService,
               public appGlobal: AppGlobal,
@@ -82,30 +82,30 @@ export class RecipeSearchComponent implements OnInit {
     }
     // Check whether SiriKit extension activates the test service
     // @ts-ignore
-    const prefs = plugins.appPreferences;
-    const suitePrefs = prefs.suite('group.recipesearch');
+    // const prefs = plugins.appPreferences;
+    // const suitePrefs = prefs.suite('group.recipesearch');
     this.route.params.forEach(param => {
       this.language = param['language']
     });
     this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
-    suitePrefs.fetch(
-      function(value) {
-        // Activated by voice control
-        console.log(value);
-        if (value === 'Test') {
-          // Clear the auto start
-          suitePrefs.remove(function() {}, function() {}, 'start');
-          console.log('worked');
-          // Run a test service
-          // runTest();
-        }
-      },
-      // Error
-      function(error) {
-
-      },
-      'start'
-    );
+    // suitePrefs.fetch(
+    //   function(value) {
+    //     // Activated by voice control
+    //     console.log(value);
+    //     if (value === 'Test') {
+    //       // Clear the auto start
+    //       suitePrefs.remove(function() {}, function() {}, 'start');
+    //       console.log('worked');
+    //       // Run a test service
+    //       // runTest();
+    //     }
+    //   },
+    //   // Error
+    //   function(error) {
+    //
+    //   },
+    //   'start'
+    // );
   }
   updateUserData(result){
     let user;

@@ -18,7 +18,7 @@ export class FollowersComponent implements OnInit {
                private authService: AuthService, private fb: FormBuilder) { }
   followers: any;
   searchForm: FormGroup;
-  viewContactView: Boolean = true;
+  viewContactView: boolean = true;
   userAdded= false;
   message = '';
   foundUser: any;

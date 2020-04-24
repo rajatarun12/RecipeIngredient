@@ -27,16 +27,17 @@ import { MatDialog } from '@angular/material/dialog';
 export class ViewRecipeComponent implements OnInit,OnChanges {
   @Input() recipes: RecipeModel;
   @Input() user: UserModel;
+  @Input() showRecipes: boolean;
   @Output() clearRecipes = new EventEmitter<RecipeModel>();
   @ViewChild(SnackBarComponent, { static: true })
     snackBarRef: SnackBarComponent;
   ingredient = '';
-  showResults: Boolean = true;
+  showResults: boolean = true;
   recipeCollection: AngularFirestoreCollection<RecipeModel>;
   recipeList: Observable<any>;
   navIsFixed: boolean;
-  filterValue: String;
-  sortValue: String;
+  filterValue: string;
+  sortValue: string;
   constructor(private recipeService: RecipeService,
               public dialog: MatDialog,
               private appGlobal: AppGlobal,

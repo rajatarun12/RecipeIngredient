@@ -1,4 +1,4 @@
-<mat-card>
+  <mat-card>
   <div class="media row card-top">
     <div class="media-left col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="image-fade"><img class="media-object blur contrast" src="{{data.image}}" width="100%" height="300em" alt="..."></div>
@@ -27,7 +27,7 @@
       <a (click)="seemore()" class="see-more-link">See more</a>
       <mat-chip-list #chipList>
         <mat-chip class="back-red"  *ngFor="let data of data.healthLabels" [selectable]="true"
-                  [removable]="true" (remove)="addDietLabelToSearch(data)">
+                  [removable]="true">
           {{data}}
           <mat-icon matChipRemove><i class="fas fa-plus"></i></mat-icon>
         </mat-chip>

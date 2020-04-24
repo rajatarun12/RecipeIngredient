@@ -1,4 +1,4 @@
-@import '~sass';
+@import './../../sass/_main';
 
 .input-bottom{
   margin-bottom: $margin-md;
@@ -8,6 +8,9 @@
 }
 .glyph{
   background: $brand-transparent;
+}
+.dropdowns-filters {
+  padding-top: 0.25rem;
 }
 .photo-camera{
   background: transparent;

@@ -17,7 +17,7 @@
     <div [ngClass]="{'col-xs-10':!isXs, 'col-sm-10':!isXs, 'col-md-10':!isXs, 'center-flex':true, 'col-xs-12': isXs}">
       <!--<button mat-icon-button (click)="detailViewToggle()"><i class="fas fa-arrow-left fa-2x"></i> </button>-->
       <!--[ngStyle]="{'z-index' : recipes.length - imgInd , 'margin-top': (imgInd > 0) && '-16em' }"-->
-      <mat-card *ngIf="!!recipeDetails" [ngClass]="{'animated':true, 'fadeInRight': fadeInFlag,'fadeInLeft':!fadeInFlag}">
+      <mat-card *ngIf="!!recipeDetails" [ngClass]="{'animated':true}">
         <div class="media row">
           <div class="media-left col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <img *ngIf="recipeDetails.image" class="media-object" src="{{recipeDetails.image}}" width="150px" height="150px" alt="...">
@@ -28,7 +28,7 @@
           </div>
           <div class="col-xs-12 col-sm-12 col-lg-12 mar-left mar-top mar-right">
             <div class="row">
-              <a (click)="handleUrlChange(recipeDetails.recipieUrl)">
+              <a>
                 <button mat-raised-button color="accent" class="btn btn-success"><i class="material-icons">visibility</i></button></a>
               <span class="likeButton"><i class="fas fa-heart"></i>{{recipeDetails.likes}}</span>
             </div>

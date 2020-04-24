@@ -23,15 +23,15 @@ snackBarRef: SnackBarComponent;
   removable: boolean = true;
   detailView: boolean = true;
   totalToShow;
-  isXs: Boolean =  false;
+  isXs: boolean =  false;
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private authService: AuthService, private fb: FormBuilder, private breakpointsService: BreakpointObserver) {}
   myRecipes: any = [];
-  viewRecipeView: Boolean = true;
+  viewRecipeView: boolean = true;
   myRecipeForm: FormGroup;
-  noRecipesFound: Boolean = false;
+  noRecipesFound: boolean = false;
   dietLabels: any = [];
   ngOnInit() {
     this.myRecipes = [];

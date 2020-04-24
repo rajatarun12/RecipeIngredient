@@ -7,7 +7,7 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./footer-component.component.scss']
 })
 export class FooterComponentComponent implements OnInit {
-  hideBadges: Boolean;
+  hideBadges: boolean;
   constructor(public translate: TranslateService) { }
 
   ngOnInit() {

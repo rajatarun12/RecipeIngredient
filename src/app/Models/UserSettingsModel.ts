@@ -2,13 +2,13 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class UserSettingsModel {
-  name: String;
-  age: String;
-  country: String;
-  language: String;
-  personalShare: Boolean;
-  countryShare: Boolean;
-  languageShare: Boolean;
+  name: string;
+  age: string;
+  country: string;
+  language: string;
+  personalShare: boolean;
+  countryShare: boolean;
+  languageShare: boolean;
   constructor(user){
     this.name = user.name || '';
     this.age = user.age || '';

@@ -59,7 +59,7 @@ export class AuthService {
       });
     });
   }
-  checkAndReturnUser(userEmail ?: String){
+  checkAndReturnUser(userEmail ?: string){
     const email = userEmail || this._firebaseAuth.auth.currentUser.email;
     let emailAd = email.split('@')[0];
     let ref = firebase.database().ref('/users/' + emailAd);

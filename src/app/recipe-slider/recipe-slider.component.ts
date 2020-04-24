@@ -11,13 +11,13 @@ export class RecipeSliderComponent implements OnInit, OnChanges {
   @Input()
   recipes: any;
   @Input()
-  detailView: Boolean = true;
-  recipesLoaded: Promise<Boolean>;
+  detailView: boolean = true;
+  recipesLoaded: Promise<boolean>;
   recipeDetails: any = {};
   curIndex = 0;
-  isXs: Boolean = false;
-  hideLeft: Boolean = true;
-  hideRight: Boolean = false;
+  isXs: boolean = false;
+  hideLeft: boolean = true;
+  hideRight: boolean = false;
 
   constructor(private breakpointsService: BreakpointObserver) {
     this.breakpointsService.observe('(max-width: 768px)').subscribe(result => {

@@ -25,9 +25,9 @@ import {BreakpointObserver} from '@angular/cdk/layout';
   providers: [AuthService, TranslateService, AppGlobal, BreakpointObserver]
 })
 export class SideNavComponent implements OnInit {
-  userEmail: String;
-  loginActive: Boolean;
-  displayName: String;
+  userEmail: string;
+  loginActive: boolean;
+  displayName: string;
   language;
   isXs;
   @Input() user;

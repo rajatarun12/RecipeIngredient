@@ -129,8 +129,8 @@ export class RecipeModel {
     return [nutrientsList, nutrientsDict];
   }
   pollRecipeData(){
-    var tempData = this.previousList;
-      this.RecipeObject = tempData.slice(0,this.currentIndex);
+      const tempData = Object.assign([], this.previousList);
+      this.RecipeObject = tempData.slice(0, this.currentIndex);
       this.currentIndex += 10;
   }
 

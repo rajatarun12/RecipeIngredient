@@ -7,16 +7,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './search/search.component';
 import { environment } from '../environments/environment';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatButtonModule} from '@angular/material/button';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatTooltipModule} from '@angular/material/tooltip';
+import { MatButtonModule} from '@angular/material/button';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RecipeSearchComponent } from './search/recipe-search/recipe-search.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { IngredientCheckDirective } from './directives/validators/ingredient-check.directive';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { MatCardModule } from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatExpansionPanelTitle} from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -25,6 +26,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule} from '@angular/material/select';
+import {MatOptionModule} from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -71,7 +74,11 @@ export function createTranslateLoader(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent, SearchComponent, SettingsComponent, LoginComponent, ViewRecipeComponent, RecipeSearchComponent, SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent, SnackBarComponent, NotificationMenuComponent, FollowersComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, FollowerInfoComponent, PrivacyPolicyComponent, SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent, RecipeDetailsFlyoutComponent, RegisterComponent, CreateRecipeComponent
+    AppComponent, SearchComponent, SettingsComponent, LoginComponent, ViewRecipeComponent, RecipeSearchComponent,
+    SideNavComponent, NutrientDialogComponent, NutrientDialogTemplate, FooterComponentComponent, FavoriteRecipeComponentComponent,
+    SnackBarComponent, NotificationMenuComponent, MyRecipesComponent, RecipeSliderComponent, RecipeInfoComponent, PrivacyPolicyComponent
+    , SafePipe, GooglemapsComponent, FooterComponent, DashboardComponent, RecipeTileComponent, FollowerInfoComponent, FollowersComponent,
+    RecipeDetailsFlyoutComponent, RegisterComponent, CreateRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -88,9 +95,12 @@ export function createTranslateLoader(http: HttpClient) {
     MatTabsModule,
     MatSlideToggleModule,
     Ng2GoogleChartsModule,
+    MatFormFieldModule,
     MatListModule,
     HttpModule,
     HttpClientModule,
+    MatSelectModule,
+    MatOptionModule,
     MatDatepickerModule,
     MatMenuModule,
     MatChipsModule,
@@ -116,7 +126,9 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule
   ],
   exports: [ViewRecipeComponent, SearchComponent, MatSidenavModule, MatInputModule, MatDialogModule, MatCardModule],
-  entryComponents: [NutrientDialogTemplate, RegisterComponent, CreateRecipeComponent, RecipeDetailsFlyoutComponent, GooglemapsComponent, PrivacyPolicyComponent, FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent, LoginComponent, FollowersComponent, MyRecipesComponent],
+  entryComponents: [NutrientDialogTemplate, RegisterComponent, CreateRecipeComponent, RecipeDetailsFlyoutComponent,
+    GooglemapsComponent, PrivacyPolicyComponent, FollowerInfoComponent , FavoriteRecipeComponentComponent, SettingsComponent,
+    LoginComponent, FollowersComponent, MyRecipesComponent, SnackBarComponent],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

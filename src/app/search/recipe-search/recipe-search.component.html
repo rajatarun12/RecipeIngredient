@@ -1,14 +1,14 @@
-<div [hidden]="recipe">
-<div class="nav row" *ngIf="!loginActive">
-    <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="login()">login</a> </p></div>
-    <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="register()">Register</a></p></div>
-</div>
-<div class="nav row" *ngIf="loginActive">
-  <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="nav-item" href="#/recipeSearch/dashboard">dashboard</a></p></div>
-  <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item">{{displayName}}</p></div>
-</div>
-</div>
-<div class="text-center header-rectangle" [hidden]="recipe">
+<!--<div [hidden]="recipe">-->
+<!--<div class="nav row" *ngIf="!loginActive">-->
+<!--    <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="login()">login</a> </p></div>-->
+<!--    <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item"><a class="" (click)="register()">Register</a></p></div>-->
+<!--</div>-->
+<!--<div class="nav row" *ngIf="loginActive">-->
+<!--  <div class="offset-md-10 col-md-1 offset-lg-10 col-lg-1 nav-block"><p class="nav-item"><a class="nav-item" href="#/recipeSearch/dashboard">dashboard</a></p></div>-->
+<!--  <div class="col-md-1 col-lg-1 nav-block"><p class="nav-item">{{displayName}}</p></div>-->
+<!--</div>-->
+<!--</div>-->
+<div class="text-center header-rectangle" *ngIf="!recipe">
   <!--<img src="../../assets/images/logo7.PNG"  *ngIf="!isXs" width="500px" height="auto"/>-->
   <h2 class="input-bottom page-header">LET'S COOK WITH US</h2>
   <div class="row">
@@ -19,5 +19,5 @@
   </div>
 </div>
 <div [hidden]="!recipe" class="view-recipe">
-  <app-view-recipe [recipes]="recipe" (clearRecipes)="clearRecipes($event)"></app-view-recipe>
+  <app-view-recipe [recipes]="recipe" (clearRecipes)="clearRecipes()"></app-view-recipe>
 </div>
