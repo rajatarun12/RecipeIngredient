@@ -42,6 +42,7 @@ import { SafePipe } from './safe.pipe';
 import {Ng2GoogleChartsModule} from 'ng2-google-charts';
 import { GooglemapsComponent } from './googlemaps/googlemaps.component';
 import { RecipeTileComponent } from './recipe-tile/recipe-tile.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 const appRoutes = [
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatFormFieldModule,
     MatListModule,
     MatSelectModule,
+    MatIconModule,
     MatOptionModule,
     MatDatepickerModule,
     MatMenuModule,

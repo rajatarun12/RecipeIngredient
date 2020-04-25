@@ -23,25 +23,6 @@
 <!--  </div>-->
 <!--</div>-->
 <div class="row pad-left-2 view-recipe-container" [ngClass]="{'hidden-op':!showResults}" >
-<!--  <div class="btn-group filterGroup col-xs-12 col-md-1">-->
-<!--    <button type="button" [disabled]="!recipes.RecipeObject['length'] > 0" mat-raised-button color="warn" class="btn btn-default dropdown-toggle dropdowns" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--      {{filterValue | translate}}-->
-<!--    </button>-->
-<!--    <div class="dropdown-menu">-->
-<!--      <a class="dropdown-item" (click)="getFilterResults('Relavence')" [innerHTML]=" 'ReleavenceLabel' | translate"></a>-->
-<!--      <div class="dropdown-divider"></div>-->
-<!--      <a class="dropdown-item" (click)="getFilterResults(i)" *ngFor="let i of getFilterList()">{{i}}</a>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="btn-group filterGroup col-xs-12 col-md-1">-->
-<!--    <button type="button" [disabled]="!recipes.RecipeObject['length'] > 0" mat-raised-button color="warn" class="btn btn-default dropdown-toggle dropdowns" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--      {{sortValue | translate}}-->
-<!--    </button>-->
-<!--    <div class="dropdown-menu">-->
-<!--      <a class="dropdown-item" (click)="getSortResults('ASC')" [innerHTML]=" 'LowToHighLabel' | translate"></a>-->
-<!--      <a class="dropdown-item" (click)="getSortResults('DESC')" [innerHTML]=" 'HighToLowLabel' | translate"></a>-->
-<!--    </div>-->
-<!--  </div>-->
   <h3 class="col-md-10 text-center recipes-heading">Recipes</h3>
   <button type="button" (click)="clearResults()" mat-raised-button class="col-md-1 btn btn-default dropdowns">
     Clear

@@ -1,23 +1,14 @@
 import {ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators, FormArray, FormGroupDirective, NgForm} from '@angular/forms';
+import {FormGroup, FormBuilder, FormArray} from '@angular/forms';
 import {RecipeService} from '../recipe.service';
 import {RecipeModel} from '../Models/recipeModel';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import {IngredientCheckDirective} from '../directives/validators/ingredient-check.directive';
 import {AppGlobal} from '../Content/AppGlobal';
 import {TranslateService} from '@ngx-translate/core';
 import {GoogleCloudVisionService} from '../services/google-cloud-vision.service';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 
-import {ErrorStateMatcher} from '@angular/material/core';
-import {environment} from '../../environments/environment';
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!(control && control.invalid);
-  }
-}
 interface Cuisine {
   value: string;
   viewValue: string;
@@ -25,6 +16,7 @@ interface Cuisine {
 interface GoogleImageResponse {
   _body: object;
 }
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -33,24 +25,19 @@ interface GoogleImageResponse {
 })
 export class SearchComponent implements OnInit {
   @Output() sendRecipes = new EventEmitter<any>();
-@ViewChild('imageElement', { static: true })
-ie: ElementRef;
-matcher: MyErrorStateMatcher;
+  @ViewChild('imageElement', { static: true })
+  ie: ElementRef;
   imageSearchData: any = [];
   recipes: RecipeModel = new RecipeModel({
     RecipeObject: []
   });
   selectable = true;
-  voiceStarted = false;
   removable = true;
-  inputs: string[] = ['0'];
   ingredients: string;
   values: string[] = [];
-  alreadyTriggered = false;
   public myForm: FormGroup;
   collapsed = true;
   itemsGroup: FormArray;
-  hideHeader: boolean;
   constructor(private fb: FormBuilder,
               private recipeService: RecipeService,
               private spinnerService: Ng4LoadingSpinnerService,
@@ -105,44 +92,21 @@ matcher: MyErrorStateMatcher;
   ngOnInit() {
     const self = this;
     this.myForm = this.fb.group({
-        search: this.fb.array([this.createItem()]),
+        search: this.fb.control(null, null),
         cuisineType: this.fb.control(null, null),
         dishType: this.fb.control(null, null),
         mealType: this.fb.control(null, null)
     });
     this.translate.setDefaultLang(this.appGlobal.defaultContent);
     this.values = [];
-    // setInterval(() => {
-    //   this.listenForSiri();
-    // }, 2000);
   }
-  listenForSiri() {
-    // @ts-ignore
-    const prefs = plugins.appPreferences;
-    const suitePrefs = prefs.suite('group.recipesearch');
 
-    suitePrefs.fetch(
-      function(value) {
-        // Activated by voice control
-        console.log(value);
-        if (value === 'openCamera') {
-          // Clear the auto start
-          suitePrefs.remove(() => {}, () => {}, 'start');
-          this.searchPhoto(true);
-        }
-      }.bind(this),
-      // Error
-      (error) => {
-
-      },
-      'start'
-    );
-  }
   addIngredients(event: any) {
     if (event.key === 'Enter') {
       this.values.push(event.target.value);
     }
   }
+
   searchPhoto(fromEvent) {
     const self = this;
     if (fromEvent && fromEvent.key !== 'Enter') {
@@ -157,8 +121,7 @@ matcher: MyErrorStateMatcher;
           const str = base64.result.toString();
           res = btoa(str);
           self.vision.getLabels(res).subscribe((resp: any) => {
-            const responses = JSON.parse(resp._body);
-            self.imageSearchData = responses.responses[0].labelAnnotations;
+            self.imageSearchData = resp.responses[0].labelAnnotations;
             self.ref.detectChanges();
             self.spinnerService.hide();
           });
@@ -174,13 +137,7 @@ matcher: MyErrorStateMatcher;
     descript += description + ',';
     this.itemsGroup.controls[0].setValue({name: descript});
   }
-  private createItem() {
-    return this.fb.group({
-      name: ['', Validators.compose([IngredientCheckDirective(/[^a-zA-Z, ]/g)])]
-    });
-  }
   search(event: any) {
-
     if (event.x) {
       if (!this.values.length){
         this.itemsGroup = this.myForm.get('search') as FormArray;
@@ -211,101 +168,7 @@ matcher: MyErrorStateMatcher;
       });
     }
   }
-
-
   removeIngredient(index) {
     this.values.splice(index, 1);
   }
-
-  removeSearchBox(index) {
-    if (index > 0) {
-      this.itemsGroup = this.myForm.get('search') as FormArray;
-      this.itemsGroup.removeAt(index);
-      this.inputs.pop();
-      if (this.itemsGroup.length < 5 && this.collapsed) {
-        this.collapsed = false;
-      }
-    }
-  }
-  toggleCollapse() {
-    this.collapsed = !this.collapsed;
-  }
-
-  clearSearchBoxes() {
-    this.itemsGroup = this.myForm.get('search') as FormArray;
-    for (let i = this.itemsGroup.length  ; i > 0; i--) {
-       this.itemsGroup.removeAt(i);
-    }
-    this.itemsGroup.controls[0].setValue({name: ''});
-  }
-  getMobileOperatingSystem() {
-    const userAgent = navigator.userAgent || navigator.vendor;
-
-    // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-      return 'Windows Phone';
-    }
-
-    if (/android/i.test(userAgent)) {
-      return 'Android';
-    }
-
-    // @ts-ignore
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      return 'iOS';
-    }
-
-    return 'unknown';
-  }
-  // enableSpeech() {
-  //   const flag = environment.production;
-  //   if (!flag) {
-  //     const synth = window.speechSynthesis;
-  //     const voices = synth.getVoices();
-  //
-  //     const utterThis = new SpeechSynthesisUtterance('please say the ingredient');
-  //     utterThis.voice = voices[10];
-  //     synth.speak(utterThis);
-  //     utterThis.onend = (evt) => {
-  //       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-  //       recognition.lang = 'en-US';
-  //       recognition.interimResults = false;
-  //       recognition.maxAlternatives = 5;
-  //       recognition.start();
-  //       this.voiceStarted = true;
-  //
-  //       recognition.onresult = function(event) {
-  //         const transcript = event.results[0][0].transcript;
-  //         if (transcript) {
-  //           transcript.split(' ').forEach(elem => {
-  //             this.imageSearchData.push({description: elem, score: 100});
-  //             this.voiceStarted = false;
-  //           });
-  //         } else {
-  //           this.voiceStarted = false;
-  //         }
-  //       }.bind(this);
-  //     };
-  //   } else {
-  //     const url = environment.fileUrl[this.getMobileOperatingSystem()];
-  //     // @ts-ignore
-  //     const myMedia = new Media(url,
-  //       // success callback
-  //       () => {
-  //         console.log(' playAudio():Audio Success');
-  //       },
-  //       // error callback
-  //       (err) => {
-  //         console.log('playAudio():Audio Error: ' + err);
-  //       }
-  //     );
-  //     myMedia.startRecord();
-  //     this.voiceStarted = true;
-  //     setTimeout(() => {
-  //       this.voiceStarted = false;
-  //       myMedia.stopRecord();
-  //     }, 3000);
-  //   }
-  // }
 }

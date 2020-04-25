@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {RecipeService} from '../../recipe.service';
-import {RecipeModel} from '../../Models/recipeModel';
-import {Inject, HostListener } from '@angular/core';
 import {AppGlobal} from '../../Content/AppGlobal';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute} from '@angular/router';
 import * as firebase from 'firebase/app';
 import {UserModel} from '../../Models/UserModel';
 import {AuthService} from '../../services/auth.service';
-import { environment } from '../../../environments/environment';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-search',
@@ -20,9 +16,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class RecipeSearchComponent implements OnInit {
   public recipe;
-  hideHeader = false;
-  appleImagePath: string =  environment.appleImagePath;
-  opened: boolean;
   isXs = false;
   language;
   loginActive;
@@ -32,7 +25,6 @@ export class RecipeSearchComponent implements OnInit {
   notifications: any;
   constructor(private recipeService: RecipeService,
               public appGlobal: AppGlobal,
-              public dialog: MatDialog,
               private translate: TranslateService,
               private route: ActivatedRoute,
               private activatedRoute: ActivatedRoute,
@@ -78,32 +70,10 @@ export class RecipeSearchComponent implements OnInit {
           });
     });
     }
-    // Check whether SiriKit extension activates the test service
-    // @ts-ignore
-    // const prefs = plugins.appPreferences;
-    // const suitePrefs = prefs.suite('group.recipesearch');
     this.route.params.forEach(param => {
       this.language = param.language;
     });
     this.translate.setDefaultLang(this.language || this.appGlobal.defaultContent);
-    // suitePrefs.fetch(
-    //   function(value) {
-    //     // Activated by voice control
-    //     console.log(value);
-    //     if (value === 'Test') {
-    //       // Clear the auto start
-    //       suitePrefs.remove(function() {}, function() {}, 'start');
-    //       console.log('worked');
-    //       // Run a test service
-    //       // runTest();
-    //     }
-    //   },
-    //   // Error
-    //   function(error) {
-    //
-    //   },
-    //   'start'
-    // );
   }
   updateUserData(result){
     let user;
@@ -119,7 +89,7 @@ export class RecipeSearchComponent implements OnInit {
         uid: result.user.uid
       };
 
-      const user = new UserModel(resultObj);
+      user = new UserModel(resultObj);
       // this.userInfo.emit(resultObj);
       // this.userEmail = resultObj.email;
       this.displayName = resultObj.displayName;
@@ -173,7 +143,6 @@ export class RecipeSearchComponent implements OnInit {
       }
     });
   }
-
   clearRecipes(){
     delete this.recipe;
   }
