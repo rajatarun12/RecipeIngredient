@@ -185,6 +185,19 @@ mat-icon.icon-clear > svg {
     margin-right: $margin-lg;
   }
 }
+@media (max-width: #{$breakpoint-lg-mobile}){
+  .border-round{
+    border-top: 0;
+    padding-left: $padding-lg;
+    margin-left: 0;
+  }
+  .mar-right {
+    margin-right: $margin-lg;
+  }
+  .recipeCard{
+    padding: 0 5em;
+  }
+}
 @media(min-width: 1090px) {
   .pad-left{
     padding-left: 2 * $padding-lg;

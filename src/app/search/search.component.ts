@@ -140,8 +140,7 @@ export class SearchComponent implements OnInit {
   search(event: any) {
     if (event.x) {
       if (!this.values.length){
-        this.itemsGroup = this.myForm.get('search') as FormArray;
-        const val = this.itemsGroup.value[0].name;
+        const val = this.myForm.value.search;
         this.values.push(val);
       }
       const values = this.myForm;
